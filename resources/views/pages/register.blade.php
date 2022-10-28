@@ -20,11 +20,69 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+    {{-- <script src="{{asset('js/jquery.form-validator.min.js')}}"></script> --}}
+    <!--  jquery script  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!--  validation script  -->
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+
+
+    <!--  jsrender script  -->
+    <script src="http://cdn.syncfusion.com/js/assets/external/jsrender.min.js"></script>
+
+    <!-- Essential JS UI widget -->
+    <script src="http://cdn.syncfusion.com/16.4.0.52/js/web/ej.web.all.min.js"></script>
+<!--Add custom scripts here -->
+
+    <style type="text/css">
+        label.error {
+            color:red;
+            font-size: 12px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#registerForm").validate({
+                rules: {
+                    name: "required",
+                    account: {
+                        required: true,
+                        minlength: 3
+                    },
+                    password: {
+                        required: true,
+                        minlength: 1
+                    },
+                    repassword: {
+                        required: true,
+                        minlength: 1,
+                        equalTo: "#password"
+                    },
+					},
+					messages: {
+						name: "Please enter name",
+						account: {
+							required: "Please enter a username",
+							minlength: "Username must be at least 3 charaters"
+						},
+						password: {
+							required: "Please provide a password",
+							minlength: ""
+						},
+						repassword: {
+							required: 'Please repeat your password',
+							equalTo: 'Repassword not match'
+						}
+					}
+                }
+            )
+        })
+    </script>
 
 </head>
 
 <body class="bg-gradient-primary">
-
     <div class="container">
 
         <div class="card o-hidden border-0 shadow-lg my-5">
@@ -37,48 +95,43 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form class="user">
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="First Name">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Last Name">
-                                    </div>
+                            <form class="user" id="registerForm" {{URL::to('/register')}} method="POST">
+                                {{ csrf_field() }} <!--token tránh lỗi injection-->
+                                {{ method_field('POST') }}
+                                <div class="form-group">
+                                    <input id="name" name="name" type="text" class="form-control form-control-user" id="exampleInputEmail"
+                                        placeholder="Full Name" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address">
+                                    <input id="account" name="account" type="text" class="form-control form-control-user" id="exampleInputEmail"
+                                        placeholder="Account Name" required>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password">
+                                        <input id="password" name="password" type="password" class="form-control form-control-user"
+                                            id="exampleInputPassword" placeholder="Password" required>
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password">
+                                        <input id="repassword" name="repassword" type="password" class="form-control form-control-user"
+                                            id="exampleRepeatPassword" placeholder="Repeat Password" required>
+
                                     </div>
                                 </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                    Register Account
-                                </a>
-                                <hr>
-                                <a href="index.html" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Register with Google
-                                </a>
-                                <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                                </a>
+                                <?php
+                                    $message = Session::get('message');
+                                    if ($message) {
+                                        echo '<span class="small" style = "color: red;">'.$message.'</span>';
+                                        Session::put('message', NULL);
+                                    }
+                                ?>
+                                <input type="submit" value="Register Account"  class="btn btn-primary btn-user btn-block">
                             </form>
                             <hr>
                             <div class="text-center">
                                 <a class="small" href="forgot-password.html">Forgot Password?</a>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="login.html">Already have an account? Login!</a>
+                                <a class="small" href="{{URL::to('/login')}}">Already have an account? Login!</a>
                             </div>
                         </div>
                     </div>
@@ -88,8 +141,10 @@
 
     </div>
 
+
+
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
+    {{-- <script src="vendor/jquery/jquery.min.js"></script> --}}
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
