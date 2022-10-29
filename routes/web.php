@@ -1,16 +1,16 @@
 <?php
 
-use App\Http\Controllers\AdminAccountController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 
-//admin route
-Route::get('/login', [AdminController::class, 'login']);
-Route::get('/index', [AdminController::class, 'show_index']);
-Route::get('/logout', [AdminController::class, 'logout']);
-Route::post('/admin-index', [AdminController::class, 'admin_index']);
+//admin login
+Route::get('/login', [LoginController::class, 'show']);
+Route::get('/index', [LoginController::class, 'show_index']);
+Route::get('/logout', [LoginController::class, 'logout']);
+Route::post('/postLogin', [LoginController::class, 'postLogin']);
 
 //admin register
-Route::get('/register', [AdminAccountController::class, 'create']);
-Route::post('/register', [AdminAccountController::class, 'store']);
+Route::get('/register', [RegisterController::class, 'create']);
+Route::post('/register', [RegisterController::class, 'store']);

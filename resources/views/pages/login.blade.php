@@ -20,7 +20,6 @@
 
      <!-- Custom styles for this template-->
      <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
-
 </head>
 
 <body class="bg-gradient-primary">
@@ -42,16 +41,22 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome To Admin!</h1>
                                     </div>
-                                    <form class="user" action="{{URL::to('/admin-index')}}" method="POST">
+                                    <form class="user" action="{{URL::to('/postLogin')}}" method="POST">
                                         {{ csrf_field() }} <!--token tránh lỗi injection-->
                                         <div class="form-group">
-                                            <input name="admin_account" type="text" class="form-control form-control-user"
+                                            <input name="account" type="text" class="form-control form-control-user"
                                                 id="exampleInputEmail"
-                                                placeholder="Enter UserAccount...">
+                                                placeholder="Enter UserAccount..." value="{{ old('account') }}" required >
+                                            @if ($errors->has('account'))
+                                                <span class="text-danger small">{{ $errors->first('account') }}</span>
+                                            @endif
                                         </div>
                                         <div class="form-group">
-                                            <input name="admin_password" type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
+                                            <input name="password" type="password" class="form-control form-control-user"
+                                                id="exampleInputPassword" placeholder="Password" required>
+                                            @if ($errors->has('password'))
+                                                <span class="text-danger small">{{ $errors->first('password') }}</span>
+                                            @endif
                                         </div>
                                         <?php
                                             $message = Session::get('message');
@@ -90,7 +95,6 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->

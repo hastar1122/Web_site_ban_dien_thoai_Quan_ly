@@ -28,13 +28,13 @@
 
 
     <!--  jsrender script  -->
-    <script src="http://cdn.syncfusion.com/js/assets/external/jsrender.min.js"></script>
+    {{-- <script src="http://cdn.syncfusion.com/js/assets/external/jsrender.min.js"></script>
 
     <!-- Essential JS UI widget -->
-    <script src="http://cdn.syncfusion.com/16.4.0.52/js/web/ej.web.all.min.js"></script>
+    <script src="http://cdn.syncfusion.com/16.4.0.52/js/web/ej.web.all.min.js"></script> --}}
 <!--Add custom scripts here -->
 
-    <style type="text/css">
+    {{-- <style type="text/css">
         label.error {
             color:red;
             font-size: 12px;
@@ -78,7 +78,7 @@
                 }
             )
         })
-    </script>
+    </script> --}}
 
 </head>
 
@@ -95,26 +95,38 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
+                            {{-- @include('errors/note') --}}
                             <form class="user" id="registerForm" {{URL::to('/register')}} method="POST">
                                 {{ csrf_field() }} <!--token tránh lỗi injection-->
                                 {{ method_field('POST') }}
                                 <div class="form-group">
                                     <input id="name" name="name" type="text" class="form-control form-control-user" id="exampleInputEmail"
                                         placeholder="Full Name" required>
+                                    @if ($errors->has('name'))
+                                        <span class="text-danger small">{{ $errors->first('name') }}</span>
+                                    @endif
                                 </div>
                                 <div class="form-group">
                                     <input id="account" name="account" type="text" class="form-control form-control-user" id="exampleInputEmail"
                                         placeholder="Account Name" required>
+                                    @if ($errors->has('account'))
+                                        <span class="text-danger small">{{ $errors->first('account') }}</span>
+                                    @endif
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input id="password" name="password" type="password" class="form-control form-control-user"
                                             id="exampleInputPassword" placeholder="Password" required>
+                                        @if ($errors->has('password'))
+                                            <span class="text-danger small">{{ $errors->first('password') }}</span>
+                                        @endif
                                     </div>
                                     <div class="col-sm-6">
                                         <input id="repassword" name="repassword" type="password" class="form-control form-control-user"
                                             id="exampleRepeatPassword" placeholder="Repeat Password" required>
-
+                                        @if ($errors->has('repassword'))
+                                            <span class="text-danger small">{{ $errors->first('repassword') }}</span>
+                                        @endif
                                     </div>
                                 </div>
                                 <?php

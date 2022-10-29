@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -9,7 +10,7 @@ use App\Models\User;
 session_start();
 
 
-class AdminAccountController extends Controller
+class RegisterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -38,9 +39,9 @@ class AdminAccountController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
-        //
+
         $account = $request->account;
         $result = DB::table('user')->where('UserAccount', $account)->first();
         if ($result) {
