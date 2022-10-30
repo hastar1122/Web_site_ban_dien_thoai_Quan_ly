@@ -319,23 +319,19 @@
                                         }
                                     ?>
                                 </span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="<?php echo $image = 'http://127.0.0.1:8000/img/'.''.Session::get('admin_image');?>">
+
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#infUserModal">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
+                                <a class="dropdown-item" href="{{url('/changePassword')}}">
+                                    <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Changes Password
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -394,6 +390,137 @@
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-primary" href="{{URL::to('/logout')}}">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- Changes pasword Modal -->
+    <div class="modal fade" id="changePassword">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <form method="POST">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title text-info">Change Your Passowrd</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class = "control-label col-md">Current password</label>
+                            <div class="col-md">
+                                <input type="password" name="oldpassword" type="text" class="form-control form-control-user">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class = "control-label col-md">New password</label>
+                            <div class="col-md">
+                                <input type="password" name="newpassword" type="text" class="form-control form-control-user">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class = "control-label col-md">Comfirm password</label>
+                            <div class="col-md">
+                                <input type="password" name="confirm_newpassword" type="text" class="form-control form-control-user">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <div class="">
+                            <a href="{{URL::to('/changePassword')}}" method="POST" class="change btn btn-outline-success">Update</a>
+                            {{-- <input type="submit" class="change btn btn-outline-success" value="Update"> --}}
+                            <button type="button" class="change btn btn-outline-success"><i class="far fa-edit"></i> Update</button>
+                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div class="modal fade" id="infUserModal">
+        <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title text-info">Profile Info</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label class = "control-label col-md">Fullname</label>
+                                    <div class="col-md">
+                                        <input type="text" name="oldpassword" type="text" class="form-control form-control-user">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label class = "control-label col-md">Address</label>
+                                    <div class="col-md">
+                                        <input type="text" name="oldpassword" type="text" class="form-control form-control-user">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label class = "control-label col-md">Email</label>
+                                    <div class="col-md">
+                                        <input type="email" name="oldpassword" type="text" class="form-control form-control-user">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label class = "control-label col-md">Phone number</label>
+                                    <div class="col-md">
+                                        <input type="text" name="oldpassword" type="text" class="form-control form-control-user">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class = "control-label col-md">Image</label>
+                                <div class="card border-info shadow-sm">
+                                    <div class="card-header">Update image</div>
+                                    <div class="card-body">
+                                        <div class="text-center">
+                                            <img height="50"  src="<?php echo $image = 'http://127.0.0.1:8000/img/'.''.Session::get('admin_image');?>" class="img-profile rounded-circle" alt="avatar" />
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="custom-file">
+                                            <input type="file" name="ImageFile" id="customFile3" class="text-center center-block file-upload3 custom-file-input">
+                                            <label class="custom-file-label loadtext3" for="customFile3">Choose file</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="">
+                        <button type="button" class="update2 btn btn-outline-success"><i class="far fa-edit"></i> Update</button>
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
+                    </div>
                 </div>
             </div>
         </div>

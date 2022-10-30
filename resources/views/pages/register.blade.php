@@ -101,14 +101,14 @@
                                 {{ method_field('POST') }}
                                 <div class="form-group">
                                     <input id="name" name="name" type="text" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Full Name" required>
+                                        placeholder="Full Name" required value="{{old('name')}}">
                                     @if ($errors->has('name'))
                                         <span class="text-danger small">{{ $errors->first('name') }}</span>
                                     @endif
                                 </div>
                                 <div class="form-group">
                                     <input id="account" name="account" type="text" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Account Name" required>
+                                        placeholder="Account Name" required value="{{old('account')}}">
                                     @if ($errors->has('account'))
                                         <span class="text-danger small">{{ $errors->first('account') }}</span>
                                     @endif
@@ -116,14 +116,14 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input id="password" name="password" type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password" required>
+                                            id="exampleInputPassword" placeholder="Password" required >
                                         @if ($errors->has('password'))
                                             <span class="text-danger small">{{ $errors->first('password') }}</span>
                                         @endif
                                     </div>
                                     <div class="col-sm-6">
                                         <input id="repassword" name="repassword" type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password" required>
+                                            id="exampleRepeatPassword" placeholder="Repeat Password" required value="{{old('repassword')}}">
                                         @if ($errors->has('repassword'))
                                             <span class="text-danger small">{{ $errors->first('repassword') }}</span>
                                         @endif

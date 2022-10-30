@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 session_start();
@@ -12,9 +13,15 @@ session_start();
 class LoginController extends Controller
 {
 
+    public function username()
+    {
+        return 'UserAccount';
+    }
+
     public function AuthLogin() {
         $admin_id = Session::get('admin_id');
-        if ($admin_id) {
+        $remember = Session::get('remember');
+        if ($admin_id){
             return Redirect::to('index');
         } else {
             return Redirect::to('login')->send();
@@ -27,7 +34,7 @@ class LoginController extends Controller
     }
 
     public function show_index() {
-        $this->AuthLogin();
+        //$this->AuthLogin();
         return view('index');
     }
 
@@ -39,10 +46,10 @@ class LoginController extends Controller
         if ($result) {
             Session::put('admin_name', $result->UserName);
             Session::put('admin_id', $result->UserID);
-            return Redirect::to('/index');
+            Session::put('admin_image', $result->Image);
+            return Redirect::to('index');
         } else {
-            Session::put('message', 'Incorrect acccount or password');
-            return Redirect::to('/login');
+            return redirect('/login')->withInput()->with('message', 'Incorrect acccount or password');
         }
     }
 

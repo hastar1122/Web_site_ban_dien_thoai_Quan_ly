@@ -27,7 +27,7 @@ class RegisterRequest extends FormRequest
             'name' => 'required',
             'account' => 'required|alpha_num',
             'password'  => 'required|alpha_num',
-            'repassword'  => 'required|same:password|alpha_dash',
+            'repassword'  => 'required|same:password|alpha_num',
         ];
     }
 

@@ -41,8 +41,8 @@ class RegisterController extends Controller
      */
     public function store(RegisterRequest $request)
     {
-
         $account = $request->account;
+        $request->flash();
         $result = DB::table('user')->where('UserAccount', $account)->first();
         if ($result) {
             Session::put('message', 'Username already exists');
@@ -53,10 +53,12 @@ class RegisterController extends Controller
             $new_user['Password'] = $request->password;
             $new_user['Username'] = $request->name;
             $new_user['RoleID'] = 1;
+            $new_user['Image'] = 'avt.png';
 
             //$new_user->save();
             DB::table('user')->insert($new_user);
-            return Redirect::to('/login');
+            //return Redirect::to('/login');
+            return redirect('/login')->with('status', 'Registration successfull');
         }
     }
 

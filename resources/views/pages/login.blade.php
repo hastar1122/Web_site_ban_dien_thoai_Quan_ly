@@ -41,6 +41,11 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome To Admin!</h1>
                                     </div>
+                                    @if (session('status'))
+                                        <div class="alert alert-success">
+                                            {{ session('status') }}
+                                        </div>
+                                    @endif
                                     <form class="user" action="{{URL::to('/postLogin')}}" method="POST">
                                         {{ csrf_field() }} <!--token tránh lỗi injection-->
                                         <div class="form-group">
@@ -53,7 +58,7 @@
                                         </div>
                                         <div class="form-group">
                                             <input name="password" type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password" required>
+                                                id="exampleInputPassword" placeholder="Password" value="{{ old('password') }}" required>
                                             @if ($errors->has('password'))
                                                 <span class="text-danger small">{{ $errors->first('password') }}</span>
                                             @endif
@@ -62,12 +67,11 @@
                                             $message = Session::get('message');
                                             if ($message) {
                                                 echo '<span class="small" style = "color: red;">'.$message.'</span>';
-                                                Session::put('message', NULL);
                                             }
                                         ?>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                <input name="remember" type="checkbox" class="custom-control-input" id="customCheck">
                                                 <label class="custom-control-label" for="customCheck">Remember
                                                     Me</label>
                                             </div>
