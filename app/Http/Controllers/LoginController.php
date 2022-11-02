@@ -18,35 +18,30 @@ class LoginController extends Controller
         return 'UserAccount';
     }
 
-    public function AuthLogin() {
-        $admin_id = Session::get('admin_id');
-        $remember = Session::get('remember');
-        if ($admin_id){
-            return Redirect::to('index');
-        } else {
-            return Redirect::to('login')->send();
-        }
-    }
-
     //login
     public function show() {
         return view('pages.login');
     }
 
     public function show_index() {
-        //$this->AuthLogin();
-        return view('index');
+        if(Auth::check())
+            return view('index');
+        else
+            return view('pages.login');
     }
 
     public function postLogin(Request $request) {
+
         $admin_account = $request->account;
         $admin_password = $request->password;
-        $request->flashOnly('account');
-        $result = DB::table('user')->where('UserAccount', $admin_account)->where('Password', $admin_password)->where('RoleID', 1)->first();
-        if ($result) {
-            Session::put('admin_name', $result->UserName);
-            Session::put('admin_id', $result->UserID);
-            Session::put('admin_image', $result->Image);
+        $credentials = [
+            'UserAccount' => $request['account'],
+            'password' => $request['password'],
+            'RoleID' => 1,
+        ];
+        //$remember = $request->has('remember') ? true:false;
+
+        if (Auth::attempt($credentials)) {
             return Redirect::to('index');
         } else {
             return redirect('/login')->withInput()->with('message', 'Incorrect acccount or password');
@@ -55,9 +50,7 @@ class LoginController extends Controller
 
     //logout
     public function logout() {
-        $this->AuthLogin();
-        Session::put('admin_name', null);
-        Session::put('admin_id', null);
+        Auth::logout();
         return Redirect::to('/login');
     }
 

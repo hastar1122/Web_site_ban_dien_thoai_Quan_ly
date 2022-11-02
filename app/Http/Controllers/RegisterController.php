@@ -50,14 +50,12 @@ class RegisterController extends Controller
         } else {
             $new_user = array();
             $new_user['UserAccount'] = $request->account;
-            $new_user['Password'] = $request->password;
-            $new_user['Username'] = $request->name;
-            $new_user['RoleID'] = 1;
+            $new_user['Password'] =bcrypt($request->password);
+            $new_user['UserName'] = $request->name;
             $new_user['Image'] = 'avt.png';
+            $new_user['RoleID'] = 1;
 
-            //$new_user->save();
-            DB::table('user')->insert($new_user);
-            //return Redirect::to('/login');
+            User::create($new_user);
             return redirect('/login')->with('status', 'Registration successfull');
         }
     }
