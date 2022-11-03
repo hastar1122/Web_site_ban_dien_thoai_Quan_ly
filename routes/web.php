@@ -5,6 +5,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\VariationsController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PagesController;
+use App\Http\Controllers\OrderController;
 
 
 //admin login
@@ -23,3 +25,8 @@ Route::post('/changePassword', [ChangePasswordController::class, 'changePassword
 
 // Variation
 Route::resource('/variations', VariationsController::class);
+
+// gọi hàm index trong PagesController
+Route::get('/', [PagesController::class, 'index']);
+Route::get('/manager-order',[OrderController::class, 'manager_order']);
+Route::get('/view-order/{OrderID}',[OrderController::class, 'view_order']);
