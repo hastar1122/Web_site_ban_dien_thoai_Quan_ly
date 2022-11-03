@@ -1,15 +1,11 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Session;
-use App\Models\User;
+use App\Models\Variation;
 
-
-class RegisterController extends Controller
+class VariationsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +14,10 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        //
+        $variations = Variation::all();
+        return view('variations.index', [
+            'variations' => $variations
+        ]);
     }
 
     /**
@@ -29,7 +28,6 @@ class RegisterController extends Controller
     public function create()
     {
         //
-        return view('pages.register');
     }
 
     /**
@@ -38,25 +36,9 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RegisterRequest $request)
+    public function store(Request $request)
     {
-        $account = $request->account;
-        $request->flash();
-        $result = DB::table('user')->where('UserAccount', $account)->first();
-        if ($result) {
-            Session::put('message', 'Username already exists');
-            return Redirect::to('/register');
-        } else {
-            $new_user = array();
-            $new_user['UserAccount'] = $request->account;
-            $new_user['Password'] =bcrypt($request->password);
-            $new_user['UserName'] = $request->name;
-            $new_user['Image'] = 'avt.png';
-            $new_user['RoleID'] = 1;
-
-            User::create($new_user);
-            return redirect('/login')->with('status', 'Registration successfull');
-        }
+        //
     }
 
     /**
