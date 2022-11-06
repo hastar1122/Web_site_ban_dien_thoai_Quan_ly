@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>SB Admin 2 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
@@ -20,6 +20,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
+<<<<<<< HEAD
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">​
 
@@ -29,6 +30,15 @@
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+=======
+    <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript" charset="utf-8" async defer></script>
+    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+     <!-- Custom scripts for all pages-->
+    <script type="text/javascript" src="{{asset('public/js/sb-admin-2.min.js"')}}"></script>
+>>>>>>> 322d67230f0f5d05ad09ad9d5529621d8262e878
 
 
 
@@ -42,6 +52,7 @@
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
+<<<<<<< HEAD
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/view/index.php">
                 <div class="sidebar-brand-icon rotate-n-15">
@@ -49,6 +60,15 @@
                 </div>
                 <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
             </a>
+=======
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/view/index.php">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3" id="x">SB Admin <sup>2</sup></div>
+        </a>
+>>>>>>> 322d67230f0f5d05ad09ad9d5529621d8262e878
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
@@ -131,8 +151,40 @@
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
+<<<<<<< HEAD
             <!-- Sidebar Message -->
             <!-- <div class="sidebar-card d-none d-lg-flex">
+=======
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+
+
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+            <a class="nav-link" href="{{ URL::to('/manager-order')}}">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Đơn hàng</span></a>
+        </li>
+
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+            <a class="nav-link" href="pages/tables.php">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Báo cáo doanh thu</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+        <!-- Sidebar Message -->
+        <!-- <div class="sidebar-card d-none d-lg-flex">
+>>>>>>> 322d67230f0f5d05ad09ad9d5529621d8262e878
             <img class="sidebar-card-illustration mb-2" src="../../img/undraw_rocket.svg" alt="...">
             <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
             <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
@@ -168,6 +220,14 @@
                             </div>
                         </div>
                     </form>
+
+                    {{-- message here --}}
+                    @if(session()->has('message'))
+                        <div class="alert alert-success">
+                            {{ session()->get('message') }}
+                        </div>
+                    @endif
+
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -248,7 +308,6 @@
                                     Alerts</a>
                             </div>
                         </li>
-
                         <!-- Nav Item - Messages -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
@@ -322,6 +381,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     <?php
+<<<<<<< HEAD
                                     $name = Session::get('admin_name');
                                     if ($name) {
                                         echo $name;
@@ -329,6 +389,12 @@
                                     ?>
                                 </span>
                                 <img class="img-profile rounded-circle" src="<?php echo $image = 'http://127.0.0.1:8000/img/' . '' . Session::get('admin_image'); ?>">
+=======
+                                        echo Auth::user()->UserName;
+                                    ?>
+                                </span>
+                                <img class="img-profile rounded-circle" src="<?php echo $image = 'http://127.0.0.1:8000/img/'.''.Auth::user()->Image;?>">
+>>>>>>> 322d67230f0f5d05ad09ad9d5529621d8262e878
 
                             </a>
                             <!-- Dropdown - User Information -->
@@ -339,7 +405,11 @@
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
+<<<<<<< HEAD
                                 <a class="dropdown-item" href="{{ url('/changePassword') }}">
+=======
+                                <a class="dropdown-item" data-toggle="modal" data-target="#changePassword">
+>>>>>>> 322d67230f0f5d05ad09ad9d5529621d8262e878
                                     <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Changes Password
                                 </a>
@@ -358,8 +428,15 @@
                 <!-- End of Topbar -->
                 <!-- CLOSE HEADER-->
 
+<<<<<<< HEAD
                 {{-- Phần content là phần chứa nội dung riêng --}}
                 @yield('content')
+=======
+{{-- Phần content là phần chứa nội dung riêng--}}
+                <div class="container-fluid">
+               @yield('content')
+               </div>
+>>>>>>> 322d67230f0f5d05ad09ad9d5529621d8262e878
 
             </div>
             <!-- End of Main Content -->
@@ -369,7 +446,11 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
+<<<<<<< HEAD
                         <span>Copyright &copy; Your Website 2022</span>
+=======
+                        <span>Copyright &copy; My Website 2022</span>
+>>>>>>> 322d67230f0f5d05ad09ad9d5529621d8262e878
                     </div>
                 </div>
             </footer>
@@ -386,6 +467,7 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
+<<<<<<< HEAD
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -455,22 +537,100 @@
                         </div>
                     </div>
                 </form>
+=======
+    @include('modals.logout-modal')
+    @include('modals.password-modal')
+    @include('modals.profile-modal')
+    {{-- Render script --}}
+    @yield('scripts')
+    {{-- Update profile js --}}
+    <script>
+        $(document).ready(function(){
+            // image preview
+            $("#imageid").change(function(){
+                let reader = new FileReader();
 
-            </div>
-        </div>
-    </div>
+                reader.onload = (e) => {
+                    $("#image_preview_container").attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            })
 
-    <!-- Profile Modal -->
-    <div class="modal fade" id="infUserModal">
-        <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
-            <div class="modal-content">
+            //update
+            $(".btn-update-profile").click(function () {
+                var input = document.getElementById('imageid');
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                var formdata = new FormData();
+                formdata.append("name", $("#nameid").val());
+                formdata.append("address", $("#addressid").val());
+                formdata.append("email", $("#emailid").val());
+                formdata.append("phone", $("#phoneid").val());
 
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title text-info">Profile Info</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
+                // fake image
+                if ($("#imageid").get(0).files[0])
+                    formdata.append("image", $("#imageid").get(0).files[0]);
+                else
+                    formdata.append("image", $("#fakeimageid").val());
+                formdata.append("fakeimage", $("#fakeimageid").val());
+                for (const value of formdata.values()) {
+                console.log(value);
+                }
+                formdata.append("_method", "PUT");
+                var url = "{{route('Account.update', Auth::user()->UserID )}}";
+                $.ajax({
+                    url: url,
+                    contentType: false,
+                    processData: false,
+                    cache :false,
+                    data: formdata,
+                    dataType: 'json',
+                    type: 'POST',
+>>>>>>> 322d67230f0f5d05ad09ad9d5529621d8262e878
 
+                    success: function (data) {
+                        toastr.success("Updated Successfull");
+                        setTimeout(function () {
+                            location.reload(true);
+                        }, 1000);
+                    },
+                    error: function (data) {
+                        console.log(data);
+                        toastr.error('Update Fail');
+                    }
+
+                });
+            });
+        })
+    </script>
+
+    {{-- Changes password js --}}
+    <script>
+        $(document).ready(function(){
+            //change
+            $(".btn-change-pass").click(function () {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                if ($("#newpassword").val() == '' || $("#confirm_newpassword").val() == '' || $("#confirm_newpassword").val() == '') {
+                    toastr.error("Input is not empty", "Error");
+                    return;
+                }
+                if ($("#newpassword").val() != $("#confirm_newpassword").val()) {
+                    toastr.error("Confirm password not match", "Error");
+                    return;
+                }
+                var formdata = new FormData();
+                formdata.append("oldpassword", $("#oldpassword").val());
+                formdata.append("newpassword", $("#newpassword").val());
+                formdata.append("confirm_newpassword", $("#confirm_newpassword").val());
+
+<<<<<<< HEAD
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-8">
@@ -490,9 +650,61 @@
                                             class="form-control form-control-user">
                                     </div>
                                 </div>
+=======
+                for (const value of formdata.values()) {
+                console.log(value);
+                }
+                var url = "{{route('Password.update', Auth::user()->UserID )}}";
+                formdata.append("_method", "PUT");
+                $.ajax({
+                    url: url,
+                    data: formdata,
+                    contentType: false,
+                    processData: false,
+                    cache:false,
+                    dataType: 'json',
+                    type: 'POST',
+                    success: function (data) {
+                        console.log(data);
+                        toastr.success("Changed password successfull", "Success");
+                        setTimeout(function () {
+                            location.reload(true);
+                        }, 1000);
+                    },
+                    error: function (response) {
+                        var respArray = JSON.parse(response.responseText).errors;
+                        if (respArray == null) {
+                            toastr.error('Incorrect current password', "Error");
+                        } else {
+                            // $('#errorlist').html("");
+                            // $('#errorlist').addClass('alert alert-danger');
+                            $.each(respArray, function(key, error_val){
+                                //$('#errorlist').append('<li>' + error_val + '</li>')
+                                toastr.error(error_val);
+                            });
+                        }
+                    }
 
-                            </div>
+                });
+            });
+        })
+    </script>
+>>>>>>> 322d67230f0f5d05ad09ad9d5529621d8262e878
 
+    {{-- show password --}}
+    <script>
+        $(".toggle-password").click(function() {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $($(this).attr("toggle"));
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+        });
+    </script>
+
+<<<<<<< HEAD
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label class="control-label col-md">Email</label>
@@ -555,10 +767,19 @@
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+=======
+
+    <!-- Bootstrap core JavaScript-->
+
+    
+    <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+>>>>>>> 322d67230f0f5d05ad09ad9d5529621d8262e878
     <!-- Core plugin JavaScript-->
     <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
     <!-- Custom scripts for all pages-->
+<<<<<<< HEAD
     <script src="{{ asset('js/sb-admin-2.min.js"') }}"></script>
 
     <!-- Page level plugins -->
@@ -580,8 +801,27 @@
         });
     </script>
 
+=======
+    <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
 
+    <!-- Page level plugins -->
+    {{-- <script src="{{asset('vendor/chart.js/Chart.min.js')}}"></script> --}}
 
+    <!-- Page level custom scripts -->
+    
+>>>>>>> 322d67230f0f5d05ad09ad9d5529621d8262e878
+
+    <!-- Page level custom scripts -->
+    <script src="{{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('js/demo/datatables-demo.js')}}"></script>
+    <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
+
+    <!-- Core plugin JavaScript-->
+
+    <!-- Page level plugins -->
+
+    <!-- Bootstrap core JavaScript-->
 </body>
 
 </html>
