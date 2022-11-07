@@ -36,16 +36,21 @@
                             <td>{{ $ord -> OrderCode}}</td>
                             <td>{{ $ord -> OrderDate}}</td>
                             <td>
-                                @if($ord -> OrderStatus==1)
-                                    Đơn hàng mới
-                                @else
-                                    Đang xử lí
+                                @if($ord -> OrderStatusID==1)
+                                <p class="text-warning">Đang xử lí</p>
+                                @else   
+                                    @if($ord -> OrderStatusID==2)
+                                    <p class="text-success">Thành công</p>
+                                    @else
+                                    <p class="text-danger">Đã hủy</p>
+                                    @endif
                                 @endif                         
+                               {{-- {{ $status -> OrderStatus }} --}}
                             </td>
                             <td>{{ $ord -> TotalPrice }}</td>
                             <td>
                                 <a class="information btn btn-sm btn-primary" href="{{ URL::to('/view-order/'.$ord->OrderID)}}" title="Xem chi tiết"><i class="far fa-edit"></i></a>
-                                <a class="information btn btn-sm btn-danger" href="" title="Xem chi tiết"><i class="fas fa-trash"></i></a>
+                                <a onclick="return confirm('Bạn có chắc là muốn xóa đơn hàng này không?')" class="information btn btn-sm btn-danger" href="{{ URL::to('/manager-order')}}" title="Xóa đơn hàng"><i class="fas fa-trash"></i></a>
                                 
                             </td>
                         </tr>

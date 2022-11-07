@@ -14,6 +14,7 @@ use App\Http\Controllers\OrderController;
 
 //test
 Route::get('/getClient', [PagesController::class, 'index']);
+use App\Http\Controllers\UpdateStatusController;
 
 //admin login
 Route::get('/login', [LoginController::class, 'show']);
@@ -63,3 +64,4 @@ Route::resource('/variations', VariationsController::class);
 Route::get('/', [PagesController::class, 'index']);
 Route::get('/manager-order',[OrderController::class, 'manager_order']);
 Route::get('/view-order/{OrderID}',[OrderController::class, 'view_order']);
+Route::post('/update/{OrderID}',[OrderController::class, 'updatestatus']);
