@@ -4,6 +4,53 @@
 <div class="container-fluid">
     <div class="card shadow border-left-info mb-4">
         <div class="card-header">
+            <h4 class="text-info m-0">Thông tin chung</h4>       
+        </div>    
+        <div class="card-body pb-0">
+            <dl class="row dl-horizontal mb-0">
+                @foreach($order as $key => $ord)
+                <dt class="col-md-3">
+                    Mã hóa đơn: 
+                </dt>
+
+                <dd class="col-md-9">
+                    {{$ord -> OrderCode}}
+                </dd>
+                
+                <dt class="col-md-3">
+                    Tên nhân viên:
+                </dt>
+
+                <dd class="col-md-9">
+                    {{$employee -> UserName}}
+                </dd>
+                <dt class="col-md-3">
+                    Trạng thái đơn hàng:
+                </dt>
+
+                <dd class="col-md-9">
+                    {{$status2 -> OrderStatus}}
+                </dd>
+                @endforeach
+            </dl>         
+        </div>
+        {{-- @foreach($order as $key => $ord)
+        <form action="/update/{{ $ord-> OrderID  }}" style="text-align: right">
+            {{ csrf_field() }}
+            <label for="cars">Trạng thái đơn hàng:</label>
+            <select name="cars" id="">
+                @foreach($status as $key => $sts )
+                    <option value="{{ $sts->    OrderStatus }}">{{ $sts->    OrderStatus }}</option>
+                @endforeach
+            </select>
+            <button type="submit" value="Submit" class="btn btn-primary" style="width: 10%"> Update</button>
+        </form>
+        @endforeach --}}
+       
+         
+    </div>
+    <div class="card shadow border-left-info mb-4">
+        <div class="card-header">
             <h4 class="text-info m-0">Thông tin khách hàng</h4>
         </div>
 
@@ -40,15 +87,11 @@
                 <dd class="col-md-9">
                     {{$customer -> Email}}
                 </dd>
-                <dt class="col-md-3">
-                    Tên nhân viên giao hàng:
-                </dt>
-
-                <dd class="col-md-9">
-                    {{$employee -> UserName}}
-                </dd>
+              
             </dl>
         </div>
+      
+
     </div>
     <div class="card shadow mb-4 border-left-info">
         <div class="card-header py-3">
@@ -72,10 +115,14 @@
                     <tbody>
                         @php
                             $i = 0;
+                            $total = 0;
                         @endphp
                         @foreach($order_detail as $key => $detail)
+                      
                         @php
                             $i++;   
+                            $subtotal =  $detail -> Amount*$product -> Price;
+                            $total += $subtotal;
                         @endphp
                          <tr>
                             <td><i>{{ $i }}</i></td>
@@ -83,24 +130,28 @@
                             <td>{{ $product -> Image}}</td>
                             <td>{{ $detail -> Amount}}</td>
                             <td>{{ $product -> Price}}</td>
-                            <td>{{ $detail -> Amount*$product -> Price}}</td>
+                            <td>{{ number_format($subtotal,0,',','.')}}đ</td>
                          </tr>
                         @endforeach
+                        <tr>
+                            <td style="text-align: right">Thanh toán: {{ number_format($total,0,',','.')}}đ </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="card-footer">
-
-        </div>
+        @foreach($order as $key => $ord)
+        <form action="/update/{{ $ord -> OrderID }}" method="post" tyle="text-align: right" >
+            {{ csrf_field() }}
+            <label for="">Cập nhật:</label>
+            <select name="status" id="status">
+                @foreach($status as $key => $sts )
+                    <option value="{{ $sts->    OrderStatusID }}" name ="order_status" >{{ $sts->    OrderStatus }}</option>
+                @endforeach
+            </select>
+                    <button type="submit" class="btn btn-primary" name="update">Cập nhật</button>
+        </form>
+        @endforeach
     </div>
-    <div class="card-body">
-            <div class="panel-heading>">
-                <h3 class="panel-title" style="color: #0099FF ;"></h3>
-            </div>
-            <div class="panel-body">
-                
-            </div>
-        </div>
 </div>
 @endsection
