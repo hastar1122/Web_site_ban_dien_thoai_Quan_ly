@@ -24,7 +24,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">​
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="{{ asset('js/toastr.min.js') }}"></script>
+    <script src="{{ asset('admin/js/toastr.min.js') }}"></script>
 
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -35,7 +35,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript" charset="utf-8" async defer></script>
     <script src="{{asset('admin/vendor/jquery/jquery.min.js')}}"></script>
      <!-- Custom scripts for all pages-->
-    <script type="text/javascript" src="{{asset('public/admin/js/sb-admin-2.min.js"')}}"></script>
+    <script type="text/javascript" src="{{asset('admin/js/sb-admin-2.min.js"')}}"></script>
 
 
 

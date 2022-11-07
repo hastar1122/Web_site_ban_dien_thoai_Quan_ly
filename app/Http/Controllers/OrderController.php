@@ -32,7 +32,7 @@ class OrderController extends Controller
 
         foreach($order_detail as $key => $ord_detail){
             $productID = $ord_detail->ProductID;
-          
+
         }
         $product = Product::where('ProductID',$productID)->first();
         // $order_detail = Orderdetail::with('product')->where('OrderCode',$ordercode)->get();
