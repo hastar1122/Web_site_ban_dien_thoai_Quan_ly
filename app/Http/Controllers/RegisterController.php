@@ -29,7 +29,7 @@ class RegisterController extends Controller
     public function create()
     {
         //
-        return view('pages.register');
+        return view('admin.pages.register');
     }
 
     /**

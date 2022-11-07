@@ -75,7 +75,7 @@
                                         <div class="card-header">Update image</div>
                                         <div class="card-body">
                                             <div class="text-center">
-                                                <img height="50"  src="<?php echo $image = 'http://127.0.0.1:8000/img/'.''.Auth::user()->Image;?>" id="image_preview_container" class="img-profile rounded-circle" alt="avatar" />
+                                                <img height="100" width="150" src="<?php echo $image = 'http://127.0.0.1:8000/admin/img/'.''.Auth::user()->Image;?>" id="image_preview_container" class="img-profile" alt="avatar" />
                                             </div>
                                         </div>
                                         <div class="card-footer">

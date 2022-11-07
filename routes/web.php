@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\OrderController;
 
+//test
+Route::get('/getClient', [PagesController::class, 'index']);
 
 //admin login
 Route::get('/login', [LoginController::class, 'show']);
@@ -27,7 +29,7 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/changePassword', [ChangePasswordController::class, 'show']);
 Route::post('/changePassword', [ChangePasswordController::class, 'changePassword']);
 
-//Brand 
+//Brand
 Route::get('/all-brand', [BrandController::class, 'all_brand']);
 Route::get('/delete-brand/{brand_id}', [BrandController::class, 'delete_brand']);
 Route::get('/edit-brand/{brand_id}', [BrandController::class, 'edit_brand']);

@@ -20,14 +20,14 @@ class LoginController extends Controller
 
     //login
     public function show() {
-        return view('pages.login');
+        return view('admin.pages.login');
     }
 
     public function show_index() {
         if(Auth::check())
-            return view('index');
+            return view('admin.index');
         else
-            return view('pages.login');
+            return view('admin.pages.login');
     }
 
     public function postLogin(Request $request) {

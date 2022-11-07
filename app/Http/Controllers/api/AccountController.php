@@ -67,7 +67,7 @@ class AccountController extends Controller
 
         if ($request->image != $request->fakeimage){
             $profile_image = 'image'.time().'.'.$request->file('image')->getClientOriginalExtension();
-            $request->image->move(public_path('img'),$profile_image);
+            $request->image->move(public_path('admin/img'),$profile_image);
             $info['Image'] = $profile_image;
         }
 

@@ -28,14 +28,14 @@
 
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    
-    <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+
+    <link href="{{asset('admin/css/sb-admin-2.min.css')}}" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript" charset="utf-8" async defer></script>
-    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('admin/vendor/jquery/jquery.min.js')}}"></script>
      <!-- Custom scripts for all pages-->
-    <script type="text/javascript" src="{{asset('public/js/sb-admin-2.min.js"')}}"></script>
+    <script type="text/javascript" src="{{asset('public/admin/js/sb-admin-2.min.js"')}}"></script>
 
 
 
@@ -366,7 +366,7 @@
                                         echo Auth::user()->UserName;
                                     ?>
                                 </span>
-                                <img class="img-profile rounded-circle" src="<?php echo $image = 'http://127.0.0.1:8000/img/'.''.Auth::user()->Image;?>">
+                                <img class="img-profile rounded-circle" src="<?php echo $image = 'http://127.0.0.1:8000/admin/img/'.''.Auth::user()->Image;?>">
 
                             </a>
                             <!-- Dropdown - User Information -->
@@ -426,9 +426,9 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    @include('modals.logout-modal')
-    @include('modals.password-modal')
-    @include('modals.profile-modal')
+    @include('admin.modals.logout-modal')
+    @include('admin.modals.password-modal')
+    @include('admin.modals.profile-modal')
     {{-- Render script --}}
     @yield('scripts')
     {{-- Update profile js --}}
@@ -485,8 +485,17 @@
                         }, 1000);
                     },
                     error: function (data) {
-                        console.log(data);
-                        toastr.error('Update Fail');
+                        var respArray = JSON.parse(response.responseText).errors;
+                        if (respArray == null) {
+                            toastr.error('Update fail', "Error");
+                        } else {
+                            // $('#errorlist').html("");
+                            // $('#errorlist').addClass('alert alert-danger');
+                            $.each(respArray, function(key, error_val){
+                                //$('#errorlist').append('<li>' + error_val + '</li>')
+                                toastr.error(error_val);
+                            });
+                        }
                     }
 
                 });
@@ -572,26 +581,26 @@
 
     <!-- Bootstrap core JavaScript-->
 
-    
-    <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+    <script src="{{asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('admin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
+    <script src="{{asset('admin/js/sb-admin-2.min.js')}}"></script>
 
     <!-- Page level plugins -->
     {{-- <script src="{{asset('vendor/chart.js/Chart.min.js')}}"></script> --}}
 
     <!-- Page level custom scripts -->
-    
+
 
     <!-- Page level custom scripts -->
-    <script src="{{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('js/demo/datatables-demo.js')}}"></script>
-    <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
+    <script src="{{asset('admin/vendor/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('admin/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('admin/js/demo/datatables-demo.js')}}"></script>
+    <link href="{{asset('admin/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
 
     <!-- Core plugin JavaScript-->
 
