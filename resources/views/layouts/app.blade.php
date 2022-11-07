@@ -20,7 +20,6 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-<<<<<<< HEAD
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">​
 
@@ -29,8 +28,7 @@
 
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-=======
+    
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
@@ -38,7 +36,6 @@
     <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
      <!-- Custom scripts for all pages-->
     <script type="text/javascript" src="{{asset('public/js/sb-admin-2.min.js"')}}"></script>
->>>>>>> 322d67230f0f5d05ad09ad9d5529621d8262e878
 
 
 
@@ -52,15 +49,6 @@
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-<<<<<<< HEAD
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/view/index.php">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
-            </a>
-=======
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/view/index.php">
             <div class="sidebar-brand-icon rotate-n-15">
@@ -68,7 +56,6 @@
             </div>
             <div class="sidebar-brand-text mx-3" id="x">SB Admin <sup>2</sup></div>
         </a>
->>>>>>> 322d67230f0f5d05ad09ad9d5529621d8262e878
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
@@ -151,10 +138,6 @@
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
-<<<<<<< HEAD
-            <!-- Sidebar Message -->
-            <!-- <div class="sidebar-card d-none d-lg-flex">
-=======
         <!-- Divider -->
         <hr class="sidebar-divider">
 
@@ -184,7 +167,6 @@
 
         <!-- Sidebar Message -->
         <!-- <div class="sidebar-card d-none d-lg-flex">
->>>>>>> 322d67230f0f5d05ad09ad9d5529621d8262e878
             <img class="sidebar-card-illustration mb-2" src="../../img/undraw_rocket.svg" alt="...">
             <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
             <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
@@ -381,20 +363,10 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     <?php
-<<<<<<< HEAD
-                                    $name = Session::get('admin_name');
-                                    if ($name) {
-                                        echo $name;
-                                    }
-                                    ?>
-                                </span>
-                                <img class="img-profile rounded-circle" src="<?php echo $image = 'http://127.0.0.1:8000/img/' . '' . Session::get('admin_image'); ?>">
-=======
                                         echo Auth::user()->UserName;
                                     ?>
                                 </span>
                                 <img class="img-profile rounded-circle" src="<?php echo $image = 'http://127.0.0.1:8000/img/'.''.Auth::user()->Image;?>">
->>>>>>> 322d67230f0f5d05ad09ad9d5529621d8262e878
 
                             </a>
                             <!-- Dropdown - User Information -->
@@ -405,11 +377,7 @@
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
-<<<<<<< HEAD
-                                <a class="dropdown-item" href="{{ url('/changePassword') }}">
-=======
                                 <a class="dropdown-item" data-toggle="modal" data-target="#changePassword">
->>>>>>> 322d67230f0f5d05ad09ad9d5529621d8262e878
                                     <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Changes Password
                                 </a>
@@ -428,15 +396,10 @@
                 <!-- End of Topbar -->
                 <!-- CLOSE HEADER-->
 
-<<<<<<< HEAD
-                {{-- Phần content là phần chứa nội dung riêng --}}
-                @yield('content')
-=======
 {{-- Phần content là phần chứa nội dung riêng--}}
                 <div class="container-fluid">
                @yield('content')
                </div>
->>>>>>> 322d67230f0f5d05ad09ad9d5529621d8262e878
 
             </div>
             <!-- End of Main Content -->
@@ -446,11 +409,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-<<<<<<< HEAD
-                        <span>Copyright &copy; Your Website 2022</span>
-=======
                         <span>Copyright &copy; My Website 2022</span>
->>>>>>> 322d67230f0f5d05ad09ad9d5529621d8262e878
                     </div>
                 </div>
             </footer>
@@ -467,77 +426,6 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-<<<<<<< HEAD
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{ URL::to('/logout') }}">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Changes pasword Modal -->
-    <div class="modal fade" id="changePassword">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-
-                <form method="POST">
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title text-info">Change Your Passowrd</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label class="control-label col-md">Current password</label>
-                            <div class="col-md">
-                                <input type="password" name="oldpassword" type="text"
-                                    class="form-control form-control-user">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md">New password</label>
-                            <div class="col-md">
-                                <input type="password" name="newpassword" type="text"
-                                    class="form-control form-control-user">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md">Comfirm password</label>
-                            <div class="col-md">
-                                <input type="password" name="confirm_newpassword" type="text"
-                                    class="form-control form-control-user">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <div class="">
-                            <a href="{{ URL::to('/changePassword') }}" method="POST"
-                                class="change btn btn-outline-success">Update</a>
-                            {{-- <input type="submit" class="change btn btn-outline-success" value="Update"> --}}
-                            <button type="button" class="change btn btn-outline-success"><i class="far fa-edit"></i>
-                                Update</button>
-                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal"><i
-                                    class="fas fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </form>
-=======
     @include('modals.logout-modal')
     @include('modals.password-modal')
     @include('modals.profile-modal')
@@ -589,7 +477,6 @@
                     data: formdata,
                     dataType: 'json',
                     type: 'POST',
->>>>>>> 322d67230f0f5d05ad09ad9d5529621d8262e878
 
                     success: function (data) {
                         toastr.success("Updated Successfull");
@@ -630,27 +517,6 @@
                 formdata.append("newpassword", $("#newpassword").val());
                 formdata.append("confirm_newpassword", $("#confirm_newpassword").val());
 
-<<<<<<< HEAD
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label class="control-label col-md">Fullname</label>
-                                    <div class="col-md">
-                                        <input type="text" name="oldpassword" type="text"
-                                            class="form-control form-control-user">
-                                    </div>
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label class="control-label col-md">Address</label>
-                                    <div class="col-md">
-                                        <input type="text" name="oldpassword" type="text"
-                                            class="form-control form-control-user">
-                                    </div>
-                                </div>
-=======
                 for (const value of formdata.values()) {
                 console.log(value);
                 }
@@ -689,7 +555,6 @@
             });
         })
     </script>
->>>>>>> 322d67230f0f5d05ad09ad9d5529621d8262e878
 
     {{-- show password --}}
     <script>
@@ -704,104 +569,16 @@
         });
     </script>
 
-<<<<<<< HEAD
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label class="control-label col-md">Email</label>
-                                    <div class="col-md">
-                                        <input type="email" name="oldpassword" type="text"
-                                            class="form-control form-control-user">
-                                    </div>
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label class="control-label col-md">Phone number</label>
-                                    <div class="col-md">
-                                        <input type="text" name="oldpassword" type="text"
-                                            class="form-control form-control-user">
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="control-label col-md">Image</label>
-                                <div class="card border-info shadow-sm">
-                                    <div class="card-header">Update image</div>
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            <img height="50" src="<?php echo $image = 'http://127.0.0.1:8000/img/' . '' . Session::get('admin_image'); ?>"
-                                                class="img-profile rounded-circle" alt="avatar" />
-                                        </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="custom-file">
-                                            <input type="file" name="ImageFile" id="customFile3"
-                                                class="text-center center-block file-upload3 custom-file-input">
-                                            <label class="custom-file-label loadtext3" for="customFile3">Choose
-                                                file</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <div class="">
-                        <button type="button" class="update2 btn btn-outline-success"><i class="far fa-edit"></i>
-                            Update</button>
-                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal"><i
-                                class="fas fa-times"></i> Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-=======
 
     <!-- Bootstrap core JavaScript-->
 
     
     <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
->>>>>>> 322d67230f0f5d05ad09ad9d5529621d8262e878
     <!-- Core plugin JavaScript-->
     <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
     <!-- Custom scripts for all pages-->
-<<<<<<< HEAD
-    <script src="{{ asset('js/sb-admin-2.min.js"') }}"></script>
-
-    <!-- Page level plugins -->
-    <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="{{ asset('js/demo/chart-area-demo.js"') }}"></script>
-    <script src="{{ asset('js/demo/chart-pie-demo.js"') }}"></script>
-
-
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-
-
-    <script type="text/javascript" charset="utf-8">
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-    </script>
-
-=======
     <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
 
     <!-- Page level plugins -->
@@ -809,7 +586,6 @@
 
     <!-- Page level custom scripts -->
     
->>>>>>> 322d67230f0f5d05ad09ad9d5529621d8262e878
 
     <!-- Page level custom scripts -->
     <script src="{{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
