@@ -37,7 +37,7 @@ class OrderController extends Controller
         $product = Product::where('ProductID',$productID)->first();
         // $order_detail = Orderdetail::with('product')->where('OrderCode',$ordercode)->get();
 
-        return view('pages.view_order')->with(compact('order_detail','customer','employee','product','order','status','status2'));
+        return view('admin.pages.view_order')->with(compact('order_detail','customer','employee','product','order','status','status2'));
     }
 
     public function manager_order(){
@@ -48,7 +48,7 @@ class OrderController extends Controller
         }
         $status =   Status::where('OrderStatusID',$orderstatusID)->first();
        
-        return view('pages.manager_order')->with(compact('order','status'));
+        return view('admin.pages.manager_order')->with(compact('order','status'));
     }
 
     public function updatestatus(Request $request,$orderid){
