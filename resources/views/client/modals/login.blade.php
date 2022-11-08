@@ -3,36 +3,63 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-center">Log In</h5>
+                <h5 class="modal-title text-center">Đăng nhập</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="#" method="post">
+                <form action="" id="form-client-login" method="post" client-login-url="{{ URL::to('/loginClient') }}">
                     <div class="form-group">
-                        <label class="col-form-label">Username</label>
-                        <input type="text" class="form-control" placeholder=" " name="Name" required="">
+                        <label class="col-form-label">Tài khoản</label>
+                        <input type="text" class="form-control" placeholder=" " id="username" name="username" required="">
                     </div>
                     <div class="form-group">
-                        <label class="col-form-label">Password</label>
-                        <input type="password" class="form-control" placeholder=" " name="Password" required="">
+                        <label class="col-form-label">Mật khẩu</label>
+                        <input type="password" class="form-control" placeholder=" " id="password" name="password" required="">
                     </div>
                     <div class="right-w3l">
-                        <input type="submit" class="form-control" value="Log in">
+                        <input type="submit" class="form-control" value="Đăng nhập">
                     </div>
                     <div class="sub-w3l">
                         <div class="custom-control custom-checkbox mr-sm-2">
                             <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-                            <label class="custom-control-label" for="customControlAutosizing">Remember me?</label>
+                            <label class="custom-control-label" for="customControlAutosizing">Ghi nhớ</label>
                         </div>
                     </div>
-                    <p class="text-center dont-do mt-3">Don't have an account?
+                    <p class="text-center dont-do mt-3">Bạn chưa có tài khoản?
                         <a href="#" data-toggle="modal" data-target="#exampleModal2">
-                            Register Now</a>
+                            Đăng kí ngay</a>
                     </p>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#form-client-login").submit(function(e) {
+            e.preventDefault();
+            var url = $(this).attr("client-login-url");
+            $.ajax({
+                type: "post",
+                url: url,
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    username: $("#username").val(),
+                    password: $("#password").val(),
+                },
+                success: function(data) {
+                    toastr.success("Đăng nhập thành công", "Thành công");
+                    $("#exampleModal").modal('hide');
+                    location.reload();
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    toastr.error("Đăng nhập thất bại", "Thất bại");
+                },
+            });
+        });
+    });
+</script>

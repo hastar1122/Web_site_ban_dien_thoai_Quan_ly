@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Register</h5>
+                <h5 class="modal-title">Đăng kí</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -11,29 +11,23 @@
             <div class="modal-body">
                 <form action="#" method="post">
                     <div class="form-group">
-                        <label class="col-form-label">Your Name</label>
-                        <input type="text" class="form-control" placeholder=" " name="Name" required="">
+                        <label class="col-form-label">Họ tên</label>
+                        <input type="text" class="form-control" placeholder=" " name="name" required="">
                     </div>
                     <div class="form-group">
-                        <label class="col-form-label">Email</label>
-                        <input type="email" class="form-control" placeholder=" " name="Email" required="">
+                        <label class="col-form-label">Tài khoản</label>
+                        <input type="text" class="form-control" placeholder=" " name="username" required="">
                     </div>
                     <div class="form-group">
-                        <label class="col-form-label">Password</label>
-                        <input type="password" class="form-control" placeholder=" " name="Password" id="password1" required="">
+                        <label class="col-form-label">Mật khẩu</label>
+                        <input type="password" class="form-control" placeholder=" " name="password" id="password1" required="">
                     </div>
                     <div class="form-group">
-                        <label class="col-form-label">Confirm Password</label>
-                        <input type="password" class="form-control" placeholder=" " name="Confirm Password" id="password2" required="">
+                        <label class="col-form-label">Xác nhận mật khẩu</label>
+                        <input type="password" class="form-control" placeholder=" " name="repassword" id="password2" required="">
                     </div>
                     <div class="right-w3l">
-                        <input type="submit" class="form-control" value="Register">
-                    </div>
-                    <div class="sub-w3l">
-                        <div class="custom-control custom-checkbox mr-sm-2">
-                            <input type="checkbox" class="custom-control-input" id="customControlAutosizing2">
-                            <label class="custom-control-label" for="customControlAutosizing2">I Accept to the Terms & Conditions</label>
-                        </div>
+                        <input type="submit" class="form-control" value="Đăng kí">
                     </div>
                 </form>
             </div>

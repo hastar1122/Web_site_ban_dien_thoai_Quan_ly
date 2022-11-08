@@ -39,6 +39,12 @@
 	    rel="stylesheet">
 	<!-- //web fonts -->
 
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript" charset="utf-8" async defer></script>
+    <script src="{{asset('admin/vendor/jquery/jquery.min.js')}}"></script>
+
 </head>
 
 <body>
@@ -67,11 +73,11 @@
 						</li>
 						<li class="text-center border-right text-white">
 							<a href="#" data-toggle="modal" data-target="#exampleModal" class="text-white">
-								<i class="fas fa-sign-in-alt mr-2"></i> Log In </a>
+								<i class="fas fa-sign-in-alt mr-2"></i> Đăng nhập </a>
 						</li>
 						<li class="text-center text-white">
 							<a href="#" data-toggle="modal" data-target="#exampleModal2" class="text-white">
-								<i class="fas fa-sign-out-alt mr-2"></i>Register </a>
+								<i class="fas fa-sign-out-alt mr-2"></i>Đăng kí </a>
 						</li>
 					</ul>
 					<!-- //header lists -->
