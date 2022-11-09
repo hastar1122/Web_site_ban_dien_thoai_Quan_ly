@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <title>Admin - Đăng nhập</title>
 
      <!-- Custom fonts for this template-->
      <link href="{{asset('admin/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -39,7 +39,7 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome To Admin!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Đăng nhập</h1>
                                     </div>
                                     @if (session('status'))
                                         <div class="alert alert-success">
@@ -51,14 +51,14 @@
                                         <div class="form-group">
                                             <input name="account" type="text" class="form-control form-control-user"
                                                 id="exampleInputEmail"
-                                                placeholder="Enter UserAccount..." value="{{ old('account') }}" required >
+                                                placeholder="Nhập tài khoản" value="{{ old('account') }}" required >
                                             @if ($errors->has('account'))
                                                 <span class="text-danger small">{{ $errors->first('account') }}</span>
                                             @endif
                                         </div>
                                         <div class="form-group">
                                             <input name="password" type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password" value="{{ old('password') }}" required>
+                                                id="exampleInputPassword" placeholder="Nhập mật khẩu" value="{{ old('password') }}" required>
                                             @if ($errors->has('password'))
                                                 <span class="text-danger small">{{ $errors->first('password') }}</span>
                                             @endif
@@ -72,19 +72,15 @@
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input name="remember" type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
+                                                <label class="custom-control-label" for="customCheck">Ghi nhớ</label>
                                             </div>
                                         </div>
-                                        <input type="submit" class="btn btn-primary btn-user btn-block" value="Login">
+                                        <input type="submit" class="btn btn-primary btn-user btn-block" value="Đăng nhập">
                                         <hr>
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" href="{{URL::to('/register')}}">Create an Account!</a>
+                                        <a class="small" href="{{URL::to('/register')}}">Tạo tài khoản!</a>
                                     </div>
                                 </div>
                             </div>
@@ -97,6 +93,7 @@
         </div>
 
     </div>
+
 
 
     <!-- Bootstrap core JavaScript-->

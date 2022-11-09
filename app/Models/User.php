@@ -57,4 +57,9 @@ class User extends Authenticatable
     {
         return $this->Password;
     }
+
+    public function hasRole($roleID) {
+        return null !== $this->table('user')->where('RoleID', $roleID)->first();
+    }
+
 }

@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Register</title>
+    <title>Admin - Đăng ký</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('admin/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -94,7 +94,7 @@
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Đăng ký</h1>
                             </div>
                             {{-- @include('errors/note') --}}
                             <form class="user" id="registerForm" {{URL::to('/register')}} method="POST">
@@ -102,14 +102,14 @@
                                 {{ method_field('POST') }}
                                 <div class="form-group">
                                     <input id="name" name="name" type="text" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Full Name" required value="{{old('name')}}">
+                                        placeholder="Nhập họ tên" required value="{{old('name')}}">
                                     @if ($errors->has('name'))
                                         <span class="text-danger small">{{ $errors->first('name') }}</span>
                                     @endif
                                 </div>
                                 <div class="form-group">
                                     <input id="account" name="account" type="text" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Account Name" required value="{{old('account')}}">
+                                        placeholder="Nhập tài khoản" required value="{{old('account')}}">
                                     @if ($errors->has('account'))
                                         <span class="text-danger small">{{ $errors->first('account') }}</span>
                                     @endif
@@ -117,18 +117,19 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input id="password" name="password" type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password" required >
+                                            id="exampleInputPassword" placeholder="Nhập mật khẩu" required >
                                         @if ($errors->has('password'))
                                             <span class="text-danger small">{{ $errors->first('password') }}</span>
                                         @endif
                                     </div>
                                     <div class="col-sm-6">
                                         <input id="repassword" name="repassword" type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password" required value="{{old('repassword')}}">
+                                            id="exampleRepeatPassword" placeholder="Xác nhận mật khẩu" required value="{{old('repassword')}}">
                                         @if ($errors->has('repassword'))
                                             <span class="text-danger small">{{ $errors->first('repassword') }}</span>
                                         @endif
                                     </div>
+                                    <input id="role" name="role" type="number" value="1" class="form-control form-control-user" hidden>
                                 </div>
                                 <?php
                                     $message = Session::get('message');
@@ -137,14 +138,12 @@
                                         Session::put('message', NULL);
                                     }
                                 ?>
-                                <input type="submit" value="Register Account"  class="btn btn-primary btn-user btn-block">
+                                <input type="submit" value="Đăng ký"  class="btn btn-primary btn-user btn-block">
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
                             <div class="text-center">
-                                <a class="small" href="{{URL::to('/login')}}">Already have an account? Login!</a>
+                                <a class="small" href="{{URL::to('/login')}}">Tôi đã có tài khoản? Đăng nhập!</a>
                             </div>
                         </div>
                     </div>

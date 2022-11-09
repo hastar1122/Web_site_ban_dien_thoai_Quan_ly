@@ -31,20 +31,25 @@ class LoginController extends Controller
     }
 
     public function postLogin(Request $request) {
-
-        $admin_account = $request->account;
-        $admin_password = $request->password;
-        $credentials = [
+        $admin = [
             'UserAccount' => $request['account'],
             'password' => $request['password'],
             'RoleID' => 1,
         ];
-        //$remember = $request->has('remember') ? true:false;
 
-        if (Auth::attempt($credentials)) {
+        $customer = [
+            'UserAccount' => $request['username'],
+            'password' => $request['password1'],
+            'RoleID' => 4,
+        ];
+        if (Auth::attempt($admin)) {
             return Redirect::to('index');
-        } else {
-            return redirect('/login')->withInput()->with('message', 'Incorrect acccount or password');
+        } else if (Auth::attempt($customer)){
+            return Redirect::to('logClient');
+        } else if (!$request['account']) {
+            return response()->json(null, 400);
+        } else if (!$request['username']) {
+            return redirect()->back()->withInput()->with('message', 'Sai tên tài khoản hoặc mật khẩu');
         }
     }
 
@@ -52,6 +57,11 @@ class LoginController extends Controller
     public function logout() {
         Auth::logout();
         return Redirect::to('/login');
+    }
+
+    public function logoutClient() {
+        Auth::logout();
+        return Redirect::to('/showClient');
     }
 
 }

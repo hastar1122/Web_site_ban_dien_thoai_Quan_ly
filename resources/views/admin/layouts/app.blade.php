@@ -54,7 +54,7 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
-            <div class="sidebar-brand-text mx-3" id="x">SB Admin <sup>2</sup></div>
+            <div class="sidebar-brand-text mx-3" id="x">Admin <sup>2</sup></div>
         </a>
 
             <!-- Divider -->
@@ -375,17 +375,17 @@
                                 <a class="dropdown-item" href="#" data-toggle="modal"
                                     data-target="#infUserModal">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
+                                    Hồ sơ
                                 </a>
                                 <a class="dropdown-item" data-toggle="modal" data-target="#changePassword">
                                     <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Changes Password
+                                    Đổi mật khẩu
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal"
                                     data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    Đăng xuất
                                 </a>
                             </div>
                         </li>
@@ -431,153 +431,6 @@
     @include('admin.modals.profile-modal')
     {{-- Render script --}}
     @yield('scripts')
-    {{-- Update profile js --}}
-    <script>
-        $(document).ready(function(){
-            // image preview
-            $("#imageid").change(function(){
-                let reader = new FileReader();
-
-                reader.onload = (e) => {
-                    $("#image_preview_container").attr('src', e.target.result);
-                }
-                reader.readAsDataURL(this.files[0]);
-            })
-
-            //update
-            $(".btn-update-profile").click(function () {
-                var input = document.getElementById('imageid');
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                var formdata = new FormData();
-                formdata.append("name", $("#nameid").val());
-                formdata.append("address", $("#addressid").val());
-                formdata.append("email", $("#emailid").val());
-                formdata.append("phone", $("#phoneid").val());
-
-                // fake image
-                if ($("#imageid").get(0).files[0])
-                    formdata.append("image", $("#imageid").get(0).files[0]);
-                else
-                    formdata.append("image", $("#fakeimageid").val());
-                formdata.append("fakeimage", $("#fakeimageid").val());
-                for (const value of formdata.values()) {
-                console.log(value);
-                }
-                formdata.append("_method", "PUT");
-                var url = "{{route('Account.update', Auth::user()->UserID )}}";
-                $.ajax({
-                    url: url,
-                    contentType: false,
-                    processData: false,
-                    cache :false,
-                    data: formdata,
-                    dataType: 'json',
-                    type: 'POST',
-
-                    success: function (data) {
-                        toastr.success("Updated Successfull");
-                        setTimeout(function () {
-                            location.reload(true);
-                        }, 1000);
-                    },
-                    error: function (data) {
-                        var respArray = JSON.parse(response.responseText).errors;
-                        if (respArray == null) {
-                            toastr.error('Update fail', "Error");
-                        } else {
-                            // $('#errorlist').html("");
-                            // $('#errorlist').addClass('alert alert-danger');
-                            $.each(respArray, function(key, error_val){
-                                //$('#errorlist').append('<li>' + error_val + '</li>')
-                                toastr.error(error_val);
-                            });
-                        }
-                    }
-
-                });
-            });
-        })
-    </script>
-
-    {{-- Changes password js --}}
-    <script>
-        $(document).ready(function(){
-            //change
-            $(".btn-change-pass").click(function () {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                if ($("#newpassword").val() == '' || $("#confirm_newpassword").val() == '' || $("#confirm_newpassword").val() == '') {
-                    toastr.error("Input is not empty", "Error");
-                    return;
-                }
-                if ($("#newpassword").val() != $("#confirm_newpassword").val()) {
-                    toastr.error("Confirm password not match", "Error");
-                    return;
-                }
-                var formdata = new FormData();
-                formdata.append("oldpassword", $("#oldpassword").val());
-                formdata.append("newpassword", $("#newpassword").val());
-                formdata.append("confirm_newpassword", $("#confirm_newpassword").val());
-
-                for (const value of formdata.values()) {
-                console.log(value);
-                }
-                var url = "{{route('Password.update', Auth::user()->UserID )}}";
-                formdata.append("_method", "PUT");
-                $.ajax({
-                    url: url,
-                    data: formdata,
-                    contentType: false,
-                    processData: false,
-                    cache:false,
-                    dataType: 'json',
-                    type: 'POST',
-                    success: function (data) {
-                        console.log(data);
-                        toastr.success("Changed password successfull", "Success");
-                        setTimeout(function () {
-                            location.reload(true);
-                        }, 1000);
-                    },
-                    error: function (response) {
-                        var respArray = JSON.parse(response.responseText).errors;
-                        if (respArray == null) {
-                            toastr.error('Incorrect current password', "Error");
-                        } else {
-                            // $('#errorlist').html("");
-                            // $('#errorlist').addClass('alert alert-danger');
-                            $.each(respArray, function(key, error_val){
-                                //$('#errorlist').append('<li>' + error_val + '</li>')
-                                toastr.error(error_val);
-                            });
-                        }
-                    }
-
-                });
-            });
-        })
-    </script>
-
-    {{-- show password --}}
-    <script>
-        $(".toggle-password").click(function() {
-        $(this).toggleClass("fa-eye fa-eye-slash");
-            var input = $($(this).attr("toggle"));
-            if (input.attr("type") == "password") {
-                input.attr("type", "text");
-            } else {
-                input.attr("type", "password");
-            }
-        });
-    </script>
-
 
     <!-- Bootstrap core JavaScript-->
 

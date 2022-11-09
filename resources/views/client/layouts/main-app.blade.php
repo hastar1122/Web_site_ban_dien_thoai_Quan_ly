@@ -73,33 +73,13 @@
 							<i class="fas fa-phone mr-2"></i> 001 234 5678
 						</li>
 
-                        <li class="nav-item dropdown no-arrow text-center">
-                            <a class="dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-white">
-                                    {{Auth::user()->UserName}}
-                                </span>
-                                <img height="30rem" width="30rem" class="img-profile rounded-circle" src="<?php echo $image = 'http://127.0.0.1:8000/admin/img/'.''.Auth::user()->Image;?>">
-
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#" data-toggle="modal"
-                                    data-target="#infUserModal">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" data-toggle="modal" data-target="#changePassword">
-                                    <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Changes Password
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal"
-                                    data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                            </div>
+                        <li class="text-center border-right text-white" id="log-hidden">
+                            <a href="#" data-toggle="modal" data-target="#exampleModal" class="text-white">
+                                <i class="fas fa-sign-in-alt mr-2"></i> Đăng nhập </a>
+                        </li>
+                        <li class="text-center text-white" id="log-hidden">
+                            <a href="#" data-toggle="modal" data-target="#exampleModal2" class="text-white">
+                                <i class="fas fa-sign-out-alt mr-2"></i>Đăng kí </a>
                         </li>
 					</ul>
 					<!-- //header lists -->
@@ -113,9 +93,6 @@
 	<!-- modals -->
     @include('client.modals.login')
     @include('client.modals.register')
-
-    @include('client.modals.password-modal')
-    @include('client.modals.profile-modal')
 	<!-- //modal -->
 	<!-- //top-header -->
 

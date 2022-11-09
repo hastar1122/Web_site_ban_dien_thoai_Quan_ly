@@ -12,24 +12,27 @@ use App\Http\Controllers\VariationsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UpdateStatusController;
 
 //test
-Route::get('/getClient', [PagesController::class, 'index']);
-use App\Http\Controllers\UpdateStatusController;
+Route::get('/showClient', [PagesController::class, 'index']);
+Route::get('/logClient', [PagesController::class, 'indexLogged'])->middleware('auth.rolesclient');
+
 
 //admin login
 Route::get('/login', [LoginController::class, 'show']);
-Route::get('/index', [LoginController::class, 'show_index']);
 Route::get('/logout', [LoginController::class, 'logout']);
 Route::post('/postLogin', [LoginController::class, 'postLogin']);
+Route::get('/index', [LoginController::class, 'show_index'])->middleware('auth.rolesadmin');
 
 //admin register
 Route::get('/register', [RegisterController::class, 'create']);
 Route::post('/register', [RegisterController::class, 'store']);
 
-//admin change password
-Route::get('/changePassword', [ChangePasswordController::class, 'show']);
-Route::post('/changePassword', [ChangePasswordController::class, 'changePassword']);
+//phan quyen trang
+Route::group(['middleware' => 'auth.roles'], function() {
+
+});
 
 //Brand
 Route::get('/all-brand', [BrandController::class, 'all_brand']);
@@ -70,3 +73,6 @@ Route::post('/update/{OrderID}',[OrderController::class, 'updatestatus']);
 
 //client login
 Route::post('/loginClient', [LoginClientController::class, 'index']);
+
+//client logout
+Route::get('/logoutClient', [LoginController::class, 'logoutClient']);

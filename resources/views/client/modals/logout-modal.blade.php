@@ -12,7 +12,7 @@
          <div class="modal-body">Bạn có muốn đăng xuất không?</div>
          <div class="modal-footer">
              <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
-             <a class="btn btn-primary" href="{{URL::to('/logout')}}">Đăng xuất</a>
+             <a class="btn btn-primary" href="{{URL::to('/logoutClient')}}">Đăng xuất</a>
          </div>
      </div>
  </div>

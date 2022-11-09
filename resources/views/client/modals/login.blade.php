@@ -9,14 +9,14 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="" id="form-client-login" method="post" client-login-url="{{ URL::to('/loginClient') }}">
+                <form action="" id="form-client-login" method="post" client-login-url="{{ URL::to('/postLogin') }}">
                     <div class="form-group">
                         <label class="col-form-label">Tài khoản</label>
                         <input type="text" class="form-control" placeholder=" " id="username" name="username" required="">
                     </div>
                     <div class="form-group">
                         <label class="col-form-label">Mật khẩu</label>
-                        <input type="password" class="form-control" placeholder=" " id="password" name="password" required="">
+                        <input type="password" class="form-control" placeholder=" " id="password1" name="password1" required="">
                     </div>
                     <div class="right-w3l">
                         <input type="submit" class="form-control" value="Đăng nhập">
@@ -49,12 +49,13 @@
                 data: {
                     _token: "{{ csrf_token() }}",
                     username: $("#username").val(),
-                    password: $("#password").val(),
+                    password1: $("#password1").val(),
                 },
                 success: function(data) {
                     toastr.success("Đăng nhập thành công", "Thành công");
                     $("#exampleModal").modal('hide');
-                    location.reload();
+                    //location.reload();
+                    window.location.href = "{{ URL::to('/logClient') }}";
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     toastr.error("Đăng nhập thất bại", "Thất bại");

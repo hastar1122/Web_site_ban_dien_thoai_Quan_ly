@@ -28,7 +28,6 @@ class UpdateAccountRequest extends FormRequest
             // 'address' => 'required',
             // 'email'  => 'required|email',
             // 'phone' => 'required'
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg'
         ];
     }
 }
