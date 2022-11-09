@@ -58,7 +58,7 @@
                     window.location.href = "{{ URL::to('/logClient') }}";
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
-                    toastr.error("Đăng nhập thất bại", "Thất bại");
+                    toastr.error("Sai tên tài khoản hoặc mật khẩu", "Thất bại");
                 },
             });
         });
