@@ -34,10 +34,10 @@ class RegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            // 'name.required' => 'Name is required!',
-            // 'password.required' => 'Password is required',
-            // 'account.required' => 'Username is required',
-            //'repassword.same'  => 'Not match',
+            'name.required' => 'Không được bỏ trống họ tên !',
+            'password.required' => 'Không được bỏ trống mật khẩu !',
+            'account.required' => 'Không được bỏ trống tài khoản !',
+            'repassword.same'  => 'Mật khẩu không khớp !',
         ];
     }
 }

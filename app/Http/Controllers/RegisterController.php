@@ -29,7 +29,7 @@ class RegisterController extends Controller
     public function create()
     {
         //
-        return view('pages.register');
+        return view('admin.pages.register');
     }
 
     /**
@@ -40,23 +40,42 @@ class RegisterController extends Controller
      */
     public function store(RegisterRequest $request)
     {
-        $account = $request->account;
+        //dd($request);
+        $account = $request['account'];
         $request->flash();
         $result = DB::table('user')->where('UserAccount', $account)->first();
-        if ($result) {
-            Session::put('message', 'Username already exists');
-            return Redirect::to('/register');
-        } else {
-            $new_user = array();
-            $new_user['UserAccount'] = $request->account;
-            $new_user['Password'] =bcrypt($request->password);
-            $new_user['UserName'] = $request->name;
-            $new_user['Image'] = 'avt.png';
-            $new_user['RoleID'] = 1;
+        if ($request['role'] == 1) {
+            if ($result) {
+                Session::put('message', 'Tài khoản đã tồn tại');
+                return Redirect::to('/register');
+            } else {
+                $new_user = array();
+                $new_user['UserAccount'] = $request->account;
+                $new_user['Password'] =bcrypt($request->password);
+                $new_user['UserName'] = $request->name;
+                $new_user['Image'] = 'avt.png';
+                $new_user['RoleID'] = $request->role;
 
-            User::create($new_user);
-            return redirect('/login')->with('status', 'Registration successfull');
+                User::create($new_user);
+                return redirect('/login')->with('status', 'Đăng ký thành công');
+            }
         }
+        if ($request['role'] == 4){
+            if ($result) {
+                return response()->json(null, 400);
+            } else {
+                $new_user = array();
+                $new_user['UserAccount'] = $request['account'];
+                $new_user['Password'] =bcrypt($request['password']);
+                $new_user['UserName'] = $request['name'];
+                $new_user['Image'] = 'avt.png';
+                $new_user['RoleID'] = $request['role'];
+
+                User::create($new_user);
+                return response()->json(null, 200);
+            }
+        }
+
     }
 
     /**

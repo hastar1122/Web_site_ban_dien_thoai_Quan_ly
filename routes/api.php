@@ -22,7 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 //Route::post('updateAccount/{id}',[AccountController::class,'update']);
+//admin update profile and changes password
 Route::resource('Account','App\Http\Controllers\api\AccountController');
 Route::resource('Password','App\Http\Controllers\api\ChangePasswordController');
 
+//client login
+Route::resource('ClientLogin','App\Http\Controllers\api\ClientLoginController');
 

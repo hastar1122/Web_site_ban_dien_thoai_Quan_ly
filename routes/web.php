@@ -5,29 +5,36 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\LoginClientController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\VariationsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UpdateStatusController;
+
+//test
+Route::get('/showClient', [PagesController::class, 'index']);
+Route::get('/logClient', [PagesController::class, 'indexLogged'])->middleware('auth.rolesclient');
 
 
 //admin login
 Route::get('/login', [LoginController::class, 'show']);
-Route::get('/index', [LoginController::class, 'show_index']);
 Route::get('/logout', [LoginController::class, 'logout']);
 Route::post('/postLogin', [LoginController::class, 'postLogin']);
+Route::get('/index', [LoginController::class, 'show_index'])->middleware('auth.rolesadmin');
 
 //admin register
 Route::get('/register', [RegisterController::class, 'create']);
 Route::post('/register', [RegisterController::class, 'store']);
 
-//admin change password
-Route::get('/changePassword', [ChangePasswordController::class, 'show']);
-Route::post('/changePassword', [ChangePasswordController::class, 'changePassword']);
+//phan quyen trang
+Route::group(['middleware' => 'auth.roles'], function() {
 
-//Brand 
+});
+
+//Brand
 Route::get('/all-brand', [BrandController::class, 'all_brand']);
 Route::get('/delete-brand/{brand_id}', [BrandController::class, 'delete_brand']);
 Route::get('/edit-brand/{brand_id}', [BrandController::class, 'edit_brand']);
@@ -61,3 +68,11 @@ Route::resource('/variations', VariationsController::class);
 Route::get('/', [PagesController::class, 'index']);
 Route::get('/manager-order',[OrderController::class, 'manager_order']);
 Route::get('/view-order/{OrderID}',[OrderController::class, 'view_order']);
+Route::post('/update/{OrderID}',[OrderController::class, 'updatestatus']);
+
+
+//client login
+Route::post('/loginClient', [LoginClientController::class, 'index']);
+
+//client logout
+Route::get('/logoutClient', [LoginController::class, 'logoutClient']);
