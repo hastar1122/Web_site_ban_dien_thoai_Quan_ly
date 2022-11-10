@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid">
+    <div class="">
 
         <h1 class="h3 mb-2 text-gray-800">Danh Mục Tài Khoản</h1>
 
@@ -50,7 +50,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-sm table-bordered" id="dataTable" style="font-size:14px;" width="100%"
+                    <table class="table table-sm table-bordered" id="" style="font-size:14px;" width="100%"
                         cellspacing="0">
                         <thead>
                             <tr>

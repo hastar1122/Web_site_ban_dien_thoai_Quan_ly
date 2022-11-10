@@ -25,13 +25,13 @@ class BrandController extends Controller
         $all_brand_get = DB::table('brand as b')
             ->select(DB::raw('b.BrandID,b.BrandName,m.BrandName as BrandParentID'))
             ->leftJoin('brand as m', 'b.BrandParentID', '=', 'm.BrandID')
-            ->paginate(6);
+            ->paginate(5);
         if ($key = request()->brand_search) {
             $all_brand_get = DB::table('brand as b')
                 ->select(DB::raw('b.BrandID,b.BrandName,m.BrandName as BrandParentID'))
                 ->leftJoin('brand as m', 'b.BrandParentID', '=', 'm.BrandID')
                 ->where('b.BrandName', 'like', '%' . $key . '%')
-                ->paginate(6);
+                ->paginate(5);
         }
         return view('pages.all_brand', compact('all_brand_get'));
     }

@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Begin Page Content -->
-    <div class="container-fluid">
+    <div class="">
 
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Danh Mục Thương Hiệu</h1>
@@ -26,7 +26,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>Mã thương hiệu</th>
@@ -102,6 +102,7 @@
                     error: function(jqXHR, textStatus, errorThrown) {
                         toastr.error("Tên thương hiệu không được trùng nhau",
                             "Thêm mới thương hiệu thất bại!");
+                            
                     },
                 });
             });
