@@ -72,7 +72,7 @@
             for (const value of formdata.values()) {
             console.log(value);
             }
-            var url = "{{route('Password.update', Auth::user()->UserID )}}";
+            var url = "{{route('Password.update', Auth::check()?(Auth::user()->UserID):0 )}}";
             formdata.append("_method", "PUT");
             $.ajax({
                 url: url,

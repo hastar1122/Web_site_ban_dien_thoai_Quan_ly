@@ -37,16 +37,23 @@ class LoginController extends Controller
             'RoleID' => 1,
         ];
 
+        $employee = [
+            'UserAccount' => $request['account'],
+            'password' => $request['password'],
+            'RoleID' => 2,
+        ];
+
         $customer = [
             'UserAccount' => $request['username'],
             'password' => $request['password1'],
             'RoleID' => 4,
         ];
-        if (Auth::attempt($admin)) {
+        if (Auth::attempt($admin) || Auth::attempt($employee)) {
             return Redirect::to('index');
         } else if (Auth::attempt($customer)){
-            return Redirect::to('logClient');
+            return Redirect::to('showClient');
         } else if (!$request['account']) {
+            dd($customer);
             return response()->json(null, 400);
         } else if (!$request['username']) {
             return redirect()->back()->withInput()->with('message', 'Sai tên tài khoản hoặc mật khẩu');

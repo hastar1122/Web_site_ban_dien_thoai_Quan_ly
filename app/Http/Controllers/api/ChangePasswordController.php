@@ -61,7 +61,7 @@ class ChangePasswordController extends Controller
             $user->update($info);
             return response()->json($user);
         } else {
-            return response()->json('status', 'Incorrect current password');
+            return response()->json('status', 'Nhập sai mật khẩu');
         }
 
     }

@@ -1,7 +1,7 @@
     <!-- Profile Modal -->
     <div class="modal fade" id="infUserModal">
         <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
-            <div class="modal-content" form-url="{{route('Account.update', Auth::user()->UserID )}}">
+            <div class="modal-content" form-url="{{route('Account.update', Auth::check()?(Auth::user()->UserID):0 )}}">
 
                 {{--  --}}
                 {{-- <form method="POST" enctype="multipart/form-data" id="form-profile" action="{{route('Account.update')}}">
@@ -22,7 +22,7 @@
                                     <div class="form-group col-md-6">
                                         <label class = "control-label col-md">Họ tên</label>
                                         <div class="col-md">
-                                            <input type="text" id="nameid" name="name" type="text" required class="form-control form-control-user" value="<?php echo Auth::user()->UserName; ?>">
+                                            <input type="text" id="nameid" name="name" type="text" required class="form-control form-control-user" value="<?php if(Auth::check()) echo Auth::user()->UserName; ?>">
                                             @if ($errors->has('name'))
                                                 <span class="text-danger small">{{ $errors->first('name') }}</span>
                                             @endif
@@ -32,7 +32,7 @@
                                     <div class="form-group col-md-6">
                                         <label class = "control-label col-md">Địa chỉ</label>
                                         <div class="col-md">
-                                            <input type="text" id="addressid" name="address" type="text" class="form-control form-control-user" value="<?php echo Auth::user()->Address; ?>">
+                                            <input type="text" id="addressid" name="address" type="text" class="form-control form-control-user" value="<?php  if(Auth::check()) echo Auth::user()->Address; ?>">
                                             @if ($errors->has('address'))
                                                 <span class="text-danger small">{{ $errors->first('address') }}</span>
                                             @endif
@@ -45,7 +45,7 @@
                                     <div class="form-group col-md-6">
                                         <label class = "control-label col-md">Email</label>
                                         <div class="col-md">
-                                            <input type="email" id="emailid" name="email" type="text" required class="form-control form-control-user" value="<?php echo Auth::user()->Email; ?>">
+                                            <input type="email" id="emailid" name="email" type="text" required class="form-control form-control-user" value="<?php  if(Auth::check()) echo Auth::user()->Email; ?>">
                                             @if ($errors->has('email'))
                                                 <span class="text-danger small">{{ $errors->first('email') }}</span>
                                             @endif
@@ -55,7 +55,7 @@
                                     <div class="form-group col-md-6">
                                         <label class = "control-label col-md">Số điện thoại</label>
                                         <div class="col-md">
-                                            <input type="text" id="phoneid" name="phone" type="text" required class="form-control form-control-user" value="<?php echo Auth::user()->PhoneNumber; ?>">
+                                            <input type="text" id="phoneid" name="phone" type="text" required class="form-control form-control-user" value="<?php  if(Auth::check()) echo Auth::user()->PhoneNumber; ?>">
                                             @if ($errors->has('phone'))
                                                 <span class="text-danger small">{{ $errors->first('phone') }}</span>
                                             @endif
@@ -75,12 +75,12 @@
                                         <div class="card-header">Ảnh cập nhật</div>
                                         <div class="card-body">
                                             <div class="text-center">
-                                                <img height="100" width="150" src="<?php echo $image = 'http://127.0.0.1:8000/admin/img/'.''.Auth::user()->Image;?>" id="image_preview_container" class="img-profile" alt="avatar" />
+                                                <img height="100" width="150" src="<?php  if(Auth::check()) echo $image = 'http://127.0.0.1:8000/admin/img/'.''.Auth::user()->Image;?>" id="image_preview_container" class="img-profile" alt="avatar" />
                                             </div>
                                         </div>
                                         <div class="card-footer">
                                             <div class="custom-file">
-                                            <input hidden type="text" id="fakeimageid" name="fakeimage" value="<?php echo Auth::user()->Image; ?>">
+                                            <input hidden type="text" id="fakeimageid" name="fakeimage" value="<?php  if(Auth::check()) echo Auth::user()->Image; ?>">
                                             <input type="file" id="imageid" name="image" value="cc">
                                             </div>
                                         </div>
@@ -132,7 +132,7 @@
             console.log(value);
             }
             formdata.append("_method", "PUT");
-            var url = "{{route('Account.update', Auth::user()->UserID )}}";
+            var url = "{{route('Account.update', Auth::check()?Auth::user()->UserID:0 )}}";
             $.ajax({
                 url: url,
                 contentType: false,

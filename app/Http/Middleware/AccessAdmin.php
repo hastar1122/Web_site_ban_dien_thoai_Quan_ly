@@ -18,7 +18,7 @@ class AccessAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->RoleID == 1) {
+        if (Auth::check() && (Auth::user()->RoleID == 1 || Auth::user()->RoleID == 2)) {
             return $next($request);
         } else {
             return redirect('/login');

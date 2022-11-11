@@ -14,9 +14,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UpdateStatusController;
 
-//test
-Route::get('/showClient', [PagesController::class, 'index']);
-Route::get('/logClient', [PagesController::class, 'indexLogged'])->middleware('auth.rolesclient');
+
 
 
 //admin login
@@ -72,7 +70,6 @@ Route::post('/update/{OrderID}',[OrderController::class, 'updatestatus']);
 
 
 //client login
-Route::post('/loginClient', [LoginClientController::class, 'index']);
-
+Route::get('/showClient', [PagesController::class, 'index']);
 //client logout
 Route::get('/logoutClient', [LoginController::class, 'logoutClient']);

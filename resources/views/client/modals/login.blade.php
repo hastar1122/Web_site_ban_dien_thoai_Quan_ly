@@ -61,8 +61,8 @@
                 success: function(data) {
                     toastr.success("Đăng nhập thành công", "Thành công");
                     $("#exampleModal").modal('hide');
-                    //location.reload();
-                    window.location.href = "{{ URL::to('/logClient') }}";
+                    location.reload();
+                    // window.location.href = "{{ URL::to('/logClient') }}";
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     toastr.error("Sai tên tài khoản hoặc mật khẩu", "Thất bại");
