@@ -24,7 +24,7 @@ class ProductsController extends Controller
         ->get();
         // Lấy ra danh sách loại sản phẩm
         $categorys = DB::table('category')->get();
-        return view('products.index', compact('products','categorys'));
+        return view('admin.products.index', compact('products','categorys'));
     }
 
     /**
@@ -45,7 +45,7 @@ class ProductsController extends Controller
         $brands = DB::table('brand')->get();
         // Lấy ra danh sách loại sản phẩm
         $categorys = DB::table('category')->get();
-        return view('products.create2', compact('variations','brands','categorys'));
+        return view('admin.products.create2', compact('variations','brands','categorys'));
     }
 
 
@@ -62,7 +62,7 @@ class ProductsController extends Controller
         $brands = DB::table('brand')->get();
         // Lấy ra danh sách loại sản phẩm
         $categorys = DB::table('category')->get();
-        return view('products.create2', compact('variations','brands','categorys'));
+        return view('admin.products.create2', compact('variations','brands','categorys'));
     }
 
     /**

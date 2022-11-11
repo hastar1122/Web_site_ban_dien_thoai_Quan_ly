@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
     <form method="POST" novalidate action="/products" enctype="multipart/form-data">
@@ -111,7 +111,7 @@
                                         <div class="card-header">Cập nhật hình ảnh cho sản phẩm</div>
                                         <div class="card-body">
                                             <div class="text-center">
-                                                <img width="250" height="250" src="http://127.0.0.1:8000/img/productDefaut.png" class="avatar  img-thumbnail " alt="avatar">
+                                                <img width="250" height="250" src="http://127.0.0.1:8000/admin/img/productDefaut.png" class="avatar  img-thumbnail " alt="avatar">
                                             </div>
                                         </div>
                                         <div class="card-footer">
