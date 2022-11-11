@@ -15,7 +15,7 @@
                             <label class="control-label col-md">Tên loại sản phẩm</label>
                             <div class="col-md">
                                 <input type="text" name="category_name" id="category-name-edit" type="text"
-                                    class="form-control form-control-user">
+                                    class="form-control form-control-user" required>
                             </div>
                         </div>
                         <div class="col-sm-6">

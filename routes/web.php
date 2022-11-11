@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CategoryController;
@@ -48,7 +49,6 @@ Route::post('/add-category', [CategoryController::class, 'add_category']);
 Route::get('/show-category', [CategoryController::class, 'show_category']);
 Route::post('/update-category/{category_id}', [CategoryController::class, 'update_category']);
 
-
 //User
 Route::get('/all-user', [UserController::class, 'all_user']);
 Route::get('/delete-user/{user_id}', [UserController::class, 'delete_user']);
@@ -56,6 +56,14 @@ Route::get('/edit-user/{user_id}', [UserController::class, 'edit_user']);
 Route::get('/all-user/{user_id}', [UserController::class, 'all_user_by_role']);
 Route::post('/add-user', [UserController::class, 'add_user']);
 Route::post('/update-user/{user_id}', [UserController::class, 'update_user']);
+
+//Supplier
+Route::get('/all-supplier', [SupplierController::class, 'all_supplier']);
+Route::get('/delete-supplier/{supplier_id}', [SupplierController::class, 'delete_supplier']);
+Route::get('/edit-supplier/{supplier_id}', [SupplierController::class, 'edit_supplier']);
+Route::post('/add-supplier', [SupplierController::class, 'add_supplier']);
+Route::get('/show-supplier', [SupplierController::class, 'show_supplier']);
+Route::post('/update-supplier/{supplier_id}', [SupplierController::class, 'update_supplier']);
 
 //Role
 Route::get('/show-role', [RoleController::class, 'show_role']);
