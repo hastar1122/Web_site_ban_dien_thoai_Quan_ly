@@ -1,9 +1,6 @@
 @extends('admin.layouts.app')
 
 @section('content')
-<!-- Begin Page Content -->
-<div class="container-fluid">
-
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800" style="color: #0099FF;">Quản lí đơn hàng</h1>
    
@@ -62,10 +59,6 @@
             </div>
         </div>
     </div>
-
-</div>
-<!-- /.container-fluid -->
-<!-- /.container-fluid -->
 @endsection
 
 

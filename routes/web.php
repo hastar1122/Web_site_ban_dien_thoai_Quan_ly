@@ -15,6 +15,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UpdateStatusController;
 
 
+use App\Http\Controllers\ProductsController;
 
 
 //admin login
@@ -73,3 +74,7 @@ Route::post('/update/{OrderID}',[OrderController::class, 'updatestatus']);
 Route::get('/showClient', [PagesController::class, 'index']);
 //client logout
 Route::get('/logoutClient', [LoginController::class, 'logoutClient']);
+
+
+Route::resource('/products', ProductsController::class);
+Route::post('configCreate',[ProductsController::class, 'config_create'] );
