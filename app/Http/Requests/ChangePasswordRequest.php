@@ -28,7 +28,9 @@ class ChangePasswordRequest extends FormRequest
             'newpassword' => 'required|alpha_num',
             'confirm_newpassword'  => 'required|alpha_num|same:newpassword',
         ];
-
+    }
+    public function messages()
+    {
         return [
             'oldpassword.required' => 'Không được bỏ trống !',
             'newpassword.required' => 'Không được bỏ trống !',
@@ -36,4 +38,5 @@ class ChangePasswordRequest extends FormRequest
             'confirm_newpassword.same'  => 'Mật khẩu không khớp !',
         ];
     }
+    
 }
