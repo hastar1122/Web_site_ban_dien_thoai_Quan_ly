@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
     <div class="">
@@ -96,8 +96,10 @@
             </div>
         </div>
     </div>
-    @include('pages.user.add')
-    @include('pages.user.edit')
+    
+    @include('admin.pages.user.add')
+    @include('admin.pages.user.edit')
+
     <script type="text/javascript">
         $(document).ready(function() {
             $(".btn-delete").click(function() {

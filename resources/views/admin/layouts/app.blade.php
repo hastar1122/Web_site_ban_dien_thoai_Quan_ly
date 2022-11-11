@@ -120,7 +120,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ URL::to('/manager-order') }}">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Đơn hàng</span></a>
+                    <span>Đơn hàng</span>
             </li>
 
             <!-- Nav Item - Tables -->

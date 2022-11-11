@@ -33,7 +33,7 @@ class BrandController extends Controller
                 ->where('b.BrandName', 'like', '%' . $key . '%')
                 ->paginate(5);
         }
-        return view('pages.all_brand', compact('all_brand_get'));
+        return view('admin.pages.all_brand', compact('all_brand_get'));
     }
     public function delete_brand($brand_id)
     {

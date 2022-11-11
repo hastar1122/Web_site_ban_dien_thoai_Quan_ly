@@ -36,7 +36,7 @@ class UserController extends Controller
         $all_role_get = DB::table('role')
             ->select('role.RoleID', 'role.RoleName')
             ->get();
-        return view('pages.all_user', compact('all_user_get', 'all_role_get'));
+        return view('admin.pages.all_user', compact('all_user_get', 'all_role_get'));
     }
     public function delete_user($user_id)
     {

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
     <!-- Begin Page Content -->
@@ -60,8 +60,8 @@
 
     </div>
 
-    @include('pages.brand.add')
-    @include('pages.brand.edit')
+    @include('admin.pages.brand.add')
+    @include('admin.pages.brand.edit')
 
     <script type="text/javascript">
         $(document).ready(function() {

@@ -34,7 +34,7 @@ class CategoryController extends Controller
                 ->where('b.ProductCategoryName', 'like', '%' . $key . '%')
                 ->paginate(6);
         }
-        return view('pages.all_category', compact('all_category_get'));
+        return view('admin.pages.all_category', compact('all_category_get'));
     }
     public function delete_category($category_id)
     {
