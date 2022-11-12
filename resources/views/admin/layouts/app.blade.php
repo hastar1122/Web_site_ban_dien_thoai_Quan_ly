@@ -108,12 +108,11 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
-                        <a class="collapse-item" href="../pages/utilities-color.php">Danh sách sản phẩm</a>
-                        <a class="collapse-item" href="../pages/utilities-border.php">Thêm mới sản phẩm</a>
+                        <a class="collapse-item" href="{{ URL::to('/products') }}">Danh sách sản phẩm</a>
+                        <a class="collapse-item" href="{{ URL::to('products/create') }}">Thêm mới sản phẩm</a>
                         <a class="collapse-item" href="../pages/utilities-animation.php">Nhập kho</a>
                         <a class="collapse-item" href="../pages/utilities-other.php">Other</a>
                     </div>
-                </div>
             </li>
 
             <!-- Divider -->
