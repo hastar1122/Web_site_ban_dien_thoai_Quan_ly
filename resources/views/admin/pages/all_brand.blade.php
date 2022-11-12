@@ -31,7 +31,6 @@
                             <tr>
                                 <th>Mã thương hiệu</th>
                                 <th>Tên thương hiệu</th>
-                                <th>Của thương hiệu</th>
                                 <th>Hành động</th>
                             </tr>
                         </thead>
@@ -40,7 +39,6 @@
                                 <tr>
                                     <td>{{ $brand->BrandID }}</td>
                                     <td>{{ $brand->BrandName }}</td>
-                                    <td>{{ $brand->BrandParentID }}</td>
                                     <td>
                                         <a data-url="{{ URL::to('/edit-brand/' . $brand->BrandID) }}" type="button"
                                             class="btn btn-info btn-edit"><i class="fas fa-edit"></i></a>
@@ -73,12 +71,6 @@
                     type: 'get',
                     url: url,
                     success: function(response) {
-                        $("#brand-parent-add").empty();
-                        $("#brand-parent-add").append('<option value="">Không có</option>');
-                        for (var i = 0; i < response.data.length; i++) {
-                            $("#brand-parent-add").append('<option value=' + response.data[i]
-                                .BrandID + '>' + response.data[i].BrandName + '</option>');
-                        }
                     },
                     error: function(jqXHR, textStatus, errorThrown) {}
                 })
@@ -92,7 +84,6 @@
                     url: url,
                     data: {
                         brandname: $("#brand-name-add").val(),
-                        brandparent: $("#brand-parent-add").val(),
                     },
                     success: function(response) {
                         toastr.success("Thêm mới thương hiệu thành công!");
@@ -115,7 +106,6 @@
                     url: url,
                     data: {
                         brand_name: $("#brand-name-edit").val(),
-                        brand_parent: $("#brand-parent-edit").val(),
                     },
                     success: function(response) {
                         toastr.success("Cập nhật thương hiệu thành công!");
@@ -156,17 +146,7 @@
                     url: url,
                     success: function(response) {
                         $("#brand-name-edit").val(response.brand_get[0].BrandName);
-                        $("#brand-parent-edit").empty();
-                        $("#brand-parent-edit").append(
-                            '<option value="">Không có</option>');
-                        for (var i = 0; i < response.data.length; i++) {
-                            $("#brand-parent-edit").append('<option value=' + response.data[
-                                    i]
-                                .BrandID + '>' + response.data[i].BrandName +
-                                '</option>');
-                        }
-                        $('#brand-parent-edit').val(response.brand_get[0].BrandParentID).attr(
-                            "selected", "selected");
+
                         $('#form-brand-edit').attr('action',
                             '{{ asset('update-brand/') }}/' + response.brand_get[0].BrandID);
                     },

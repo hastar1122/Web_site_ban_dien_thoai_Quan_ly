@@ -38,7 +38,7 @@
                         <div class="col-sm-6">
                             <label class="control-label col-md">Số điện thoại</label>
                             <div class="col-md">
-                                <input type="text" name="phone_number" id="phone-number-edit" type="text"
+                                <input type="text" name="phone_number" id="phone-number-edit" type="text" tpattern="[0-9]"
                                     class="form-control form-control-user" required>
                             </div>
                         </div>

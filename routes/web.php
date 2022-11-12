@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
@@ -49,21 +51,29 @@ Route::post('/add-category', [CategoryController::class, 'add_category']);
 Route::get('/show-category', [CategoryController::class, 'show_category']);
 Route::post('/update-category/{category_id}', [CategoryController::class, 'update_category']);
 
-//User
-Route::get('/all-user', [UserController::class, 'all_user']);
-Route::get('/delete-user/{user_id}', [UserController::class, 'delete_user']);
-Route::get('/edit-user/{user_id}', [UserController::class, 'edit_user']);
-Route::get('/all-user/{user_id}', [UserController::class, 'all_user_by_role']);
-Route::post('/add-user', [UserController::class, 'add_user']);
-Route::post('/update-user/{user_id}', [UserController::class, 'update_user']);
 
 //Supplier
 Route::get('/all-supplier', [SupplierController::class, 'all_supplier']);
 Route::get('/delete-supplier/{supplier_id}', [SupplierController::class, 'delete_supplier']);
 Route::get('/edit-supplier/{supplier_id}', [SupplierController::class, 'edit_supplier']);
 Route::post('/add-supplier', [SupplierController::class, 'add_supplier']);
-Route::get('/show-supplier', [SupplierController::class, 'show_supplier']);
 Route::post('/update-supplier/{supplier_id}', [SupplierController::class, 'update_supplier']);
+
+//Employee
+Route::get('/all-employee', [EmployeeController::class, 'all_employee']);
+Route::get('/delete-employee/{employee_id}', [EmployeeController::class, 'delete_employee']);
+Route::get('/edit-employee/{employee_id}', [EmployeeController::class, 'edit_employee']);
+Route::post('/add-employee', [EmployeeController::class, 'add_employee']);
+Route::post('/update-employee/{employee_id}', [EmployeeController::class, 'update_employee']);
+
+
+//Customer
+Route::get('/all-customer', [CustomerController::class, 'all_customer']);
+Route::get('/delete-customer/{customer_id}', [CustomerController::class, 'delete_customer']);
+Route::get('/edit-customer/{customer_id}', [CustomerController::class, 'edit_customer']);
+Route::post('/add-customer', [CustomerController::class, 'add_customer']);
+Route::post('/update-customer/{customer_id}', [CustomerController::class, 'update_customer']);
+
 
 //Role
 Route::get('/show-role', [RoleController::class, 'show_role']);

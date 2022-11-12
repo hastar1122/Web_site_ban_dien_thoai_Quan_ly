@@ -92,6 +92,7 @@
                             <a class="collapse-item" href="{{ URL::to('/all-employee') }}">Nhân viên</a>
                         @endif
                         <a class="collapse-item" href="{{ URL::to('/all-supplier') }}">Nhà cung cấp</a>
+                        <a class="collapse-item" href="{{ URL::to('/all-customer') }}">Khách hàng</a>
                     </div>
                 </div>
             </li>
@@ -117,34 +118,6 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider">
-
-
-
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ URL::to('/manager-order') }}">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Đơn hàng</span>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="pages/tables.php">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Báo cáo doanh thu</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
 
 
             <!-- Nav Item - Charts -->
