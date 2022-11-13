@@ -8,6 +8,6 @@ use Illuminate\Support\Facades\Auth;
 class PagesController extends Controller
 {
     public function index() {
-        return view('client.layouts.app');
+        return view('client.index');
     }
 }

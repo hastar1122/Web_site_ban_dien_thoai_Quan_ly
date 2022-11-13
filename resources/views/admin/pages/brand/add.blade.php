@@ -11,7 +11,7 @@
                     </div>
 
                     <div class="modal-body">
-                        <div class="row">
+                       
                             <div class="form-group ">
                                 <label class="control-label col-md">Tên thương hiệu</label>
                                 <div class="col-md">
@@ -19,16 +19,7 @@
                                         class="form-control form-control-user" required>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="" class="control-label col-md">Của thương hiệu</label>
-                                    <div class="col-md">
-                                        <select name="brand_parent" id="brand-parent-add" class="form-control" onmousedown="if(this.options.length>4){this.size=4;}"  onchange='this.size=0;' onblur="this.size=0;"  >
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                           
                        
                     </div>
 

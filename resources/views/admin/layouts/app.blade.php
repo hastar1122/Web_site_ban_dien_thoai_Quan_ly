@@ -30,13 +30,15 @@
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-    <link href="{{asset('admin/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript" charset="utf-8" async defer></script>
-    <script src="{{asset('admin/vendor/jquery/jquery.min.js')}}"></script>
-     <!-- Custom scripts for all pages-->
-    <script type="text/javascript" src="{{asset('admin/js/sb-admin-2.min.js"')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript"
+        charset="utf-8" async defer></script>
+    <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
+    <!-- Custom scripts for all pages-->
+    <script type="text/javascript" src="{{ asset('admin/js/sb-admin-2.min.js"') }}"></script>
+
 
 
 
@@ -50,13 +52,13 @@
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-        <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/view/index.php">
-            <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
-            </div>
-            <div class="sidebar-brand-text mx-3" id="x">Admin <sup>2</sup></div>
-        </a>
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/view/index.php">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3" id="x">Admin <sup>2</sup></div>
+            </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
@@ -88,39 +90,43 @@
                         <!-- <h6 class="collapse-header">Custom Components:</h6> -->
                         <a class="collapse-item" href="{{ URL::to('/all-brand') }}">Thương hiệu</a>
                         <a class="collapse-item" href="{{ URL::to('/all-category') }}">Loại sản phẩm</a>
-                        <a class="collapse-item" href="{{ URL::to('/all-user') }}">Tài khoản</a>
+                        @if (Auth::user()->RoleID == 1)
+                            <a class="collapse-item" href="{{ URL::to('/all-employee') }}">Nhân viên</a>
+                        @endif
+                        <a class="collapse-item" href="{{ URL::to('/all-supplier') }}">Nhà cung cấp</a>
+                        <a class="collapse-item" href="{{ URL::to('/all-customer') }}">Khách hàng</a>
                     </div>
                 </div>
             </li>
 
-        <!-- Nav Item - Utilities Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link nav-link-2 collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                aria-expanded="true" aria-controls="collapseUtilities">
-                <i class="fas fa-fw fa-wrench"></i>
-                <span>Quản lý sản phẩm</span>
-            </a>
-            <div id="collapseUtilities" class="collapse nav-2" aria-labelledby="headingUtilities"
-                data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
-                    <a class="collapse-item" href="{{URL::to('/products') }}">Danh sách sản phẩm</a>
-                    <a class="collapse-item" href="{{URL::to('products/create') }}">Thêm mới sản phẩm</a>
-                    <a class="collapse-item" href="{{URL::to('/attributes')}}">Danh sách thuộc tính</a>
-                    <a class="collapse-item" href="../pages/utilities-animation.php">Nhập kho</a>
-                </div>
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Quản lý sản phẩm</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
+                        <a class="collapse-item" href="{{ URL::to('/products') }}">Danh sách sản phẩm</a>
+                        <a class="collapse-item" href="{{ URL::to('products/create') }}">Thêm mới sản phẩm</a>
+                        <a class="collapse-item" href="{{ URL::to('/show-attribute-product-all/1') }}">Đặc trưng sản phẩm</a>
+                        <a class="collapse-item" href="../pages/utilities-animation.php">Nhập kho</a>
+                        <a class="collapse-item" href="../pages/utilities-other.php">Other</a>
+                    </div>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
 
-
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ URL::to('/manager-order') }}">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Đơn hàng</span>
+                    <span>Đơn hàng</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
@@ -138,35 +144,8 @@
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-
-
-
-        <!-- Nav Item - Charts -->
-        <li class="nav-item">
-            <a class="nav-link" href="{{ URL::to('/manager-order')}}">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Đơn hàng</span></a>
-        </li>
-
-        <!-- Nav Item - Tables -->
-        <li class="nav-item">
-            <a class="nav-link" href="pages/tables.php">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Báo cáo doanh thu</span></a>
-        </li>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
-
-        <!-- Sidebar Toggler (Sidebar) -->
-        <div class="text-center d-none d-md-inline">
-            <button class="rounded-circle border-0" id="sidebarToggle"></button>
-        </div>
-
-        <!-- Sidebar Message -->
-        <!-- <div class="sidebar-card d-none d-lg-flex">
+            <!-- Sidebar Message -->
+            <!-- <div class="sidebar-card d-none d-lg-flex">
             <img class="sidebar-card-illustration mb-2" src="../../img/undraw_rocket.svg" alt="...">
             <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
             <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
@@ -204,7 +183,7 @@
                     </form>
 
                     {{-- message here --}}
-                    @if(session()->has('message'))
+                    @if (session()->has('message'))
                         <div class="alert alert-success">
                             {{ session()->get('message') }}
                         </div>
@@ -363,10 +342,11 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     <?php
-                                        echo Auth::user()->UserName;
+                                    echo Auth::user()->UserName;
                                     ?>
                                 </span>
-                                <img class="img-profile rounded-circle" src="<?php echo $image = 'http://127.0.0.1:8000/admin/img/'.''.Auth::user()->Image;?>">
+
+                                <img class="img-profile rounded-circle" src="{{asset('admin/img/'.Auth::user()->Image)}}">
 
                             </a>
                             <!-- Dropdown - User Information -->
@@ -396,10 +376,10 @@
                 <!-- End of Topbar -->
                 <!-- CLOSE HEADER-->
 
-{{-- Phần content là phần chứa nội dung riêng--}}
+                {{-- Phần content là phần chứa nội dung riêng --}}
                 <div class="container-fluid">
                     @yield('content')
-               </div>
+                </div>
 
             </div>
             <!-- End of Main Content -->
@@ -434,14 +414,20 @@
 
     <!-- Bootstrap core JavaScript-->
 
-
-    <script src="{{asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
+    <script src="{{ asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="{{ asset('admin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="{{asset('admin/js/sb-admin-2.min.js')}}"></script>
+    <script src="{{ asset('admin/js/sb-admin-2.min.js') }}"></script>
 
     <!-- Page level plugins -->
     {{-- <script src="{{asset('vendor/chart.js/Chart.min.js')}}"></script> --}}
@@ -450,10 +436,11 @@
 
 
     <!-- Page level custom scripts -->
-    <script src="{{asset('admin/vendor/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('admin/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('admin/js/demo/datatables-demo.js')}}"></script>
-    <link href="{{asset('admin/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
+    <script src="{{ asset('admin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('admin/js/demo/datatables-demo.js') }}"></script>
+    <link href="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet"
+        type="text/css">
 
     <!-- Core plugin JavaScript-->
 

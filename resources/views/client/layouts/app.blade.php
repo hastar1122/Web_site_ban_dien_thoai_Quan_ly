@@ -81,7 +81,7 @@
                                     <span class="mr-2 d-none d-lg-inline text-white">
                                         {{Auth::user()->UserName}}
                                     </span>
-                                    <img height="30rem" width="30rem" class="img-profile rounded-circle" src="<?php echo $image = 'http://127.0.0.1:8000/admin/img/'.''.Auth::user()->Image;?>">
+                                    <img height="30rem" width="30rem" class="img-profile rounded-circle" src="{{asset('admin/img/'.Auth::user()->Image)}}">
 
                                 </a>
                                 <!-- Dropdown - User Information -->
