@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UpdateStatusController;
+use App\Http\Controllers\AttributesController;
 
 
 use App\Http\Controllers\ProductsController;
@@ -75,6 +76,10 @@ Route::get('/showClient', [PagesController::class, 'index']);
 //client logout
 Route::get('/logoutClient', [LoginController::class, 'logoutClient']);
 
-
+// Product
 Route::resource('/products', ProductsController::class);
-Route::post('configCreate',[ProductsController::class, 'config_create'] );
+Route::get('/loadProducts', [ProductsController::class, 'loadProducts']);
+Route::resource('/products2', ProductsController::class);
+
+// Thuộc tính sản phẩm
+Route::resource('/attributes', AttributesController::class);

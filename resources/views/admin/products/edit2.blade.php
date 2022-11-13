@@ -1,9 +1,9 @@
-@extends('admin.layouts.app')
+@extends('layouts.app')
 
 @section('content')
-    <form method="POST" novalidate action="/products" enctype="multipart/form-data">
+    <form method="PUT" novalidate action="/products" enctype="multipart/form-data">
         @csrf
-        <h2 class="text-info">Thêm mới sản phẩm</h2>
+        <h2 class="text-info">Cập nhật sản phẩm</h2>
         <hr>
             <ul class="nav nav-tabs">
             <li class="nav-item">
@@ -35,14 +35,14 @@
                                     <div class="form-group col-md-6">
                                         <label class="control-label col-md">Mã sản phẩm</label>
                                         <div class="col-md">
-                                            <input name="ProductCode" class="form-control">
+                                            <input name="ProductCode" class="form-control" value="{{ $product->ProductCode }}">
                                         </div>
                                     </div>
                 
                                     <div class="form-group col-md-6">
                                         <label class="control-label col-md">Tên sản phẩm</label>
                                         <div class="col-md">
-                                            <input name="ProductName" class="form-control">
+                                            <input name="ProductName" class="form-control" value="{{ $product->ProductName }}">
                                         </div>
                                     </div>
                                     
@@ -54,7 +54,7 @@
                                         <div class="col-md">
                                             <select name="CategoryID" class="form-control">
                                                 @foreach ($categorys as $item)
-                                                    <option value="{{ $item->CategoryID }}">{{ $item->ProductCategoryName }}</option>
+                                                    <option value="{{ $item->CategoryID }}" @selected($item->CategoryID == $product->CategoryID)>{{ $item->ProductCategoryName }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -65,7 +65,7 @@
                                         <div class="col-md">
                                             <select name="BrandID" class="form-control">
                                                 @foreach ($brands as $item)
-                                                    <option value="{{ $item->BrandID }}">{{ $item->BrandName }}</option>
+                                                    <option value="{{ $item->BrandID }}" @selected($item->BrandID == $product->BrandID)>{{ $item->BrandName }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -76,14 +76,14 @@
                                     <div class="form-group col-md-6">
                                         <label class="control-label col-md">Giá bán</label>
                                         <div class="col-md">
-                                            <input name="Price" type="number" name="Price" class="form-control">
+                                            <input value="{{ $product->Price }}" name="Price" type="number" name="Price" class="form-control">
                                         </div>
                                     </div>
                 
                                     <div class="form-group col-md-6">
                                         <label class="control-label col-md">Giá nhập</label>
                                         <div class="col-md">
-                                            <input name="OutwardPrice" type="number" name="PriceOutWard" class="form-control">
+                                            <input value="{{ $product->OutwardPrice }}" name="OutwardPrice" type="number" name="PriceOutWard" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -91,14 +91,14 @@
                                 <div class="form-group">
                                     <label class="control-label col-md">Miêu tả</label>
                                     <div class="col-md">
-                                        <textarea name="ProductDescription" class="form-control"></textarea>
+                                        <textarea name="ProductDescription" class="form-control">{{ $product->ProductDescription }}</textarea>
                                     </div>
                                 </div>
                 
                                 <div class="form-group" id="product_price">
                                     <label class="control-label col-md">Số lượng</label>
                                     <div class="col-md">
-                                        <input name="Amount" min="0" type="number" class="form-control">
+                                        <input value="{{ $product->Amount }}" name="Amount" min="0" type="number" class="form-control">
                                     </div>
                                     <b class="text-warning col-md">Nếu sản phẩm có phân loại số lượng sẽ được lấy theo số lượng của từng sản phẩm</b>
                                 </div>
@@ -111,7 +111,11 @@
                                         <div class="card-header">Cập nhật hình ảnh cho sản phẩm</div>
                                         <div class="card-body">
                                             <div class="text-center">
-                                                <img width="250" height="250" src="http://127.0.0.1:8000/admin/img/productDefaut.png" class="avatar  img-thumbnail " alt="avatar">
+                                                @if ($product->Image)
+                                                    <img width="250" height="250" src="http://127.0.0.1:8000/imgProduct/{{$product->Image}}" class="avatar  img-thumbnail " alt="avatar">
+                                                @else
+                                                    <img width="250" height="250" src="http://127.0.0.1:8000/img/productDefaut.png" class="avatar  img-thumbnail " alt="avatar">
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="card-footer">
@@ -139,14 +143,14 @@
                     </div>
                 
                     <div class="card-body">
-                        @foreach ($attributes as $item)
+                        @for ($i = 0; $i < count($variations); $i++)
                             <div class="form-group">
-                                <label class="control-label col-md">{{ $item->AttributeName }}</label>
+                                <label class="control-label col-md">{{ $variations[$i]->VariationName }}</label>
                                 <div class="col-md">
-                                    <input class = "form-control" type="text" name="AttributeValue[]" type="text" required>
+                                    <input value="{{$attributevalues[$i]->Value}}" class = "form-control" type="text" name="AttributeValue[]" type="text" required>
                                 </div>
                             </div>
-                        @endforeach
+                        @endfor
                     </div>
                 </div>
             </div>
@@ -290,12 +294,6 @@
      * Upload ảnh lên giao diện khi chọn file
     **/
     $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip();
-
-        $(".nav-2").addClass("show");
-
-        $('.nav-link-2').removeClass('collapsed');
-        
         $(".custom-file-input").on("change", function () {
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);

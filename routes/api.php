@@ -26,6 +26,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('Account','App\Http\Controllers\api\AccountController');
 Route::resource('Password','App\Http\Controllers\api\ChangePasswordController');
 
-//client login
-Route::resource('ClientLogin','App\Http\Controllers\api\ClientLoginController');
-

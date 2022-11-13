@@ -18,6 +18,7 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+    <script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
@@ -94,19 +95,19 @@
 
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+            <a class="nav-link nav-link-2 collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                 aria-expanded="true" aria-controls="collapseUtilities">
                 <i class="fas fa-fw fa-wrench"></i>
                 <span>Quản lý sản phẩm</span>
             </a>
-            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+            <div id="collapseUtilities" class="collapse nav-2" aria-labelledby="headingUtilities"
                 data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
                     <a class="collapse-item" href="{{URL::to('/products') }}">Danh sách sản phẩm</a>
                     <a class="collapse-item" href="{{URL::to('products/create') }}">Thêm mới sản phẩm</a>
+                    <a class="collapse-item" href="{{URL::to('/attributes')}}">Danh sách thuộc tính</a>
                     <a class="collapse-item" href="../pages/utilities-animation.php">Nhập kho</a>
-                    <a class="collapse-item" href="../pages/utilities-other.php">Other</a>
                 </div>
             </li>
 
