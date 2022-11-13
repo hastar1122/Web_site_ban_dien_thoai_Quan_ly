@@ -165,11 +165,6 @@
 
 @section('scripts')
 <script>
-    ClassicEditor
-        .create( document.querySelector( '#editor' ) )
-        .catch( error => {
-            console.error( error );
-        } );
     /**
      * Upload ảnh lên giao diện khi chọn file
     **/
@@ -201,16 +196,12 @@
         $(".file-upload").on('change', function () {
             readURL(this);
         });
-    });
-
-    $(document).on('change', '.img-upload', function () {
-        var i = $(this).attr('data-id');
-        let reader = new FileReader();
-
-        reader.onload = (e) => {
-            $(`.product_img_${i}`).attr('src', e.target.result);
-        }
-        reader.readAsDataURL(this.files[0]);
-    });    
+    }); 
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+    
 </script>
 @endsection
