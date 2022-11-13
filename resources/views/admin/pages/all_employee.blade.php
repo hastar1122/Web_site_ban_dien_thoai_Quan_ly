@@ -159,8 +159,8 @@
                         $("#employee-address-edit").val(response.employee_get[0].Address);
                         $("#employee-email-edit").val(response.employee_get[0].Email);
             //             $("#avatar").html(
-            //   `<img src="public/admin/img/1668227924.jpg" width="100" class="img-fluid img-thumbnail">`);
-                    //    $("#image_preview_container").attr('src','public/admin/img/'+response.employee_get[0].Image);
+            //   `<img src="http://127.0.0.1:8000/admin/img/1668227924.jpg" width="100" class="img-fluid img-thumbnail">`);
+                  $("#image_preview_container").attr('src',"{{ asset('public/admin/img/') }}"+response.employee_get[0].Image);
                         $('#form-employee-edit').attr('action',
                             '{{ asset('update-employee/') }}/' + response.employee_get[0]
                             .UserID); 

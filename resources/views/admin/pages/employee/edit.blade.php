@@ -55,7 +55,7 @@
                                     <div class="card-header">Tải ảnh lên</div>
                                     <div class="card-body">
                                         <div class="text-center">
-                                            <img height="150" width="150"  style="object-fit:cover;"
+                                            <img height="150" width="150" src="" style="object-fit:cover;"
                                                 id="image_preview_container" class="img-profile" alt="avatar" />
                                         </div>
                                     </div>
