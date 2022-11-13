@@ -53,27 +53,6 @@
                     error: function(jqXHR, textStatus, errorThrown) {}
                 })
             });
-            // $('.btn-them-dac-trung').click(function(e) {
-            //     var value = $('#dropdownProduct').val();
-            //     url = "{{ URL::to('/add-attribute-product/')}}" +'/'+ value;
-            //     console.log(url);
-            //     console.log( $("#dropdownProductAttribute").val());
-            //     $.ajax({
-            //         type: 'post',
-            //         url: url,
-            //         data: {
-            //             attr_id: $("#dropdownProductAttribute").val(),
-            //         },
-            //         success: function(response) {
-            //             toastr.success('Thêm thành công', "Thành công");
-            //             location.reload();
-            //         },
-            //         error: function(jqXHR, textStatus, errorThrown) {
-            //             toastr.error('Thêm thất bại', "Thất bại");
-            //         }
-            //     })
-            // });
-
         });
     </script>
 @endsection
