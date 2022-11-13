@@ -15,6 +15,7 @@ use App\Http\Controllers\VariationsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductAttributeController;
 use App\Http\Controllers\UpdateStatusController;
 
 
@@ -75,6 +76,10 @@ Route::get('/edit-customer/{customer_id}', [CustomerController::class, 'edit_cus
 Route::post('/add-customer', [CustomerController::class, 'add_customer']);
 Route::post('/update-customer/{customer_id}', [CustomerController::class, 'update_customer']);
 
+//Category Attribute Product
+Route::get('/show-attribute-product-all/{ProductID}', [ProductAttributeController::class, 'show_catogory_product']);
+Route::post('/add-attribute-product/{ProductID}', [ProductAttributeController::class, 'update_product_attr']);
+Route::get('/delete-attribute-product/{ProductID}', [ProductAttributeController::class, 'delete_product_attr']);
 
 //Role
 Route::get('/show-role', [RoleController::class, 'show_role']);

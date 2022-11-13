@@ -40,6 +40,7 @@
 
 
 
+
 </head>
 
 <body id="page-top">
@@ -110,6 +111,7 @@
                         <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
                         <a class="collapse-item" href="{{ URL::to('/products') }}">Danh sách sản phẩm</a>
                         <a class="collapse-item" href="{{ URL::to('products/create') }}">Thêm mới sản phẩm</a>
+                        <a class="collapse-item" href="{{ URL::to('/show-attribute-product-all/1') }}">Đặc trưng sản phẩm</a>
                         <a class="collapse-item" href="../pages/utilities-animation.php">Nhập kho</a>
                         <a class="collapse-item" href="../pages/utilities-other.php">Other</a>
                     </div>
@@ -340,10 +342,10 @@
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     <?php
                                     echo Auth::user()->UserName;
-                                    
                                     ?>
                                 </span>
-                                <img class="img-profile rounded-circle" src="<?php echo $image = 'http://127.0.0.1:8000/admin/img/' . '' . Auth::user()->Image; ?>">
+
+                                <img class="img-profile rounded-circle" src="{{asset('admin/img/'.Auth::user()->Image)}}">
 
                             </a>
                             <!-- Dropdown - User Information -->
