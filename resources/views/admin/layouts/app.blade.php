@@ -18,6 +18,7 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+    <script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
@@ -37,6 +38,7 @@
     <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
     <!-- Custom scripts for all pages-->
     <script type="text/javascript" src="{{ asset('admin/js/sb-admin-2.min.js"') }}"></script>
+
 
 
 
@@ -110,6 +112,7 @@
                         <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
                         <a class="collapse-item" href="{{ URL::to('/products') }}">Danh sách sản phẩm</a>
                         <a class="collapse-item" href="{{ URL::to('products/create') }}">Thêm mới sản phẩm</a>
+                        <a class="collapse-item" href="{{ URL::to('/show-attribute-product-all/1') }}">Đặc trưng sản phẩm</a>
                         <a class="collapse-item" href="../pages/utilities-animation.php">Nhập kho</a>
                         <a class="collapse-item" href="../pages/utilities-other.php">Other</a>
                     </div>
@@ -340,10 +343,10 @@
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     <?php
                                     echo Auth::user()->UserName;
-                                    
                                     ?>
                                 </span>
-                                <img class="img-profile rounded-circle" src="<?php echo $image = 'http://127.0.0.1:8000/admin/img/' . '' . Auth::user()->Image; ?>">
+
+                                <img class="img-profile rounded-circle" src="{{asset('admin/img/'.Auth::user()->Image)}}">
 
                             </a>
                             <!-- Dropdown - User Information -->

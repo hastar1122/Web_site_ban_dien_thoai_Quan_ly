@@ -41,13 +41,13 @@ class OrderController extends Controller
     }
 
     public function manager_order(){
-        
+
         $order =    Order::orderby('OrderDate','DESC')->get();
         foreach($order as $key => $ord){
             $orderstatusID = $ord->OrderStatusID;
         }
         $status =   Status::where('OrderStatusID',$orderstatusID)->first();
-       
+
         return view('admin.pages.manager_order')->with(compact('order','status'));
     }
 

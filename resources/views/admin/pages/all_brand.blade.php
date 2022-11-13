@@ -93,7 +93,7 @@
                     error: function(jqXHR, textStatus, errorThrown) {
                         toastr.error(
                             "Thêm mới thương hiệu thất bại!");
-                            
+
                     },
                 });
             });

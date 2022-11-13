@@ -81,24 +81,24 @@
                 $('#modal-employee-add').modal('show');
             });
 
-          
+
             $("#form-employee-add").submit(function(e) {
                 e.preventDefault();
-                const fd=new FormData(this);
+                const fd = new FormData(this);
                 var url = $(this).attr("data-url");
                 $.ajax({
                     type: "post",
                     url: url,
-                    data:fd,
-                    cache:false,
-                    processData:false,
-                    contentType:false,
+                    data: fd,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
                     success: function(response) {
                         console.log(response);
                         toastr.success("Thêm mới nhà cung cấp thành công!");
                         $("#modal-supplier-add").modal('hide');
                         location.reload();
-                      
+
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         toastr.error("Thêm mới nhà cung cấp thất bại!");
@@ -108,15 +108,15 @@
 
             $("#form-employee-edit").submit(function(e) {
                 e.preventDefault();
-                const fd=new FormData(this);
+                const fd = new FormData(this);
                 var url = $(this).attr("data-url");
                 $.ajax({
                     type: "post",
                     url: url,
-                    data:fd,
-                    cache:false,
-                    processData:false,
-                    contentType:false,
+                    data: fd,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
                     success: function(response) {
                         toastr.success("Cập nhật nhân viên thành công!");
                         $("#modal-employee-edit").modal('hide');
@@ -155,15 +155,15 @@
                     url: url,
                     success: function(response) {
                         $("#employee-name-edit").val(response.employee_get[0].UserName);
-                        $("#employee-phone-edit").val(response.employee_get[0].PhoneNumber);    
+                        $("#employee-phone-edit").val(response.employee_get[0].PhoneNumber);
                         $("#employee-address-edit").val(response.employee_get[0].Address);
                         $("#employee-email-edit").val(response.employee_get[0].Email);
-            //             $("#avatar").html(
-            //   `<img src="http://127.0.0.1:8000/admin/img/1668227924.jpg" width="100" class="img-fluid img-thumbnail">`);
-                  $("#image_preview_container").attr('src',"{{ asset('public/admin/img/') }}"+response.employee_get[0].Image);
+                        $("#image_preview_container1").attr('src',
+                            'http://127.0.0.1:8000/admin/img/' + response.employee_get[0]
+                            .Image);
                         $('#form-employee-edit').attr('action',
                             '{{ asset('update-employee/') }}/' + response.employee_get[0]
-                            .UserID); 
+                            .UserID);
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
 

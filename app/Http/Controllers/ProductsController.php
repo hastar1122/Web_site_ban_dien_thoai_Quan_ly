@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 
 class ProductsController extends Controller
 {
@@ -18,13 +20,58 @@ class ProductsController extends Controller
     {
         // Lấy ra danh sách sản phẩm
         $products = DB::table('product')
-        ->join('brand', 'brand.BrandID', '=', 'product.BrandID')
-        ->join('category','category.CategoryID', '=', 'product.CategoryID')
-        // ->where('product.ProductParentID', '=', null)
-        ->get();
-        // Lấy ra danh sách loại sản phẩm
+            ->join('brand', 'brand.BrandID', '=', 'product.BrandID')
+            ->join('category','category.CategoryID', '=', 'product.CategoryID')
+            ->orderByDesc('CreatedDate')
+            ->get();
+        // Lấy ra danh sách phân loại sản phẩm
         $categorys = DB::table('category')->get();
-        return view('admin.products.index', compact('products','categorys'));
+        // Lấy ra danh sách thương hiệu
+        $brands = DB::table('brand')->get();
+        return view('admin.products.index', compact('products','categorys','brands'));
+    }
+
+    /**
+     * Hàm load danh sách sản phẩm
+     */
+    public function loadProducts(Request $request) {
+        $categoryID = $request['category'];
+        $brandID = $request['brand'];
+        $products = null;
+        // Lấy ra danh sách sản phẩm
+        if ($categoryID && $brandID) {
+            $products = DB::table('product')
+            ->join('brand', 'brand.BrandID', '=', 'product.BrandID')
+            ->join('category','category.CategoryID', '=', 'product.CategoryID')
+            ->where('category.CategoryID', '=', $categoryID)
+            ->where('brand.BrandID', '=', $brandID)
+            ->orderByDesc('CreatedDate')
+            ->get();
+        }
+        elseif ($categoryID) {
+            $products = DB::table('product')
+            ->join('brand', 'brand.BrandID', '=', 'product.BrandID')
+            ->join('category','category.CategoryID', '=', 'product.CategoryID')
+            ->where('category.CategoryID', '=', $categoryID)
+            ->orderByDesc('CreatedDate')
+            ->get();
+        }
+        elseif ($brandID) {
+            $products = DB::table('product')
+            ->join('brand', 'brand.BrandID', '=', 'product.BrandID')
+            ->join('category','category.CategoryID', '=', 'product.CategoryID')
+            ->where('brand.BrandID', '=', $brandID)
+            ->orderByDesc('CreatedDate')
+            ->get();
+        }
+        else {
+            $products = DB::table('product')
+            ->join('brand', 'brand.BrandID', '=', 'product.BrandID')
+            ->join('category','category.CategoryID', '=', 'product.CategoryID')
+            ->orderByDesc('CreatedDate')
+            ->get();
+        }
+        return view('admin.products.listProduct')->with('products', $products);
     }
 
     /**
@@ -32,37 +79,75 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        $categoryID = $request['CategoryID'];
+        $type = $request['Type'];
         // Lấy ra danh sách các thuộc tính theo từng loại sản phẩm
-        $variations = DB::table('variation')
-            ->join('categoryvariation', 'variation.VariationID', '=', 'categoryvariation.VariationID')
-            ->join('category', 'category.CategoryID', '=', 'categoryvariation.CategoryID')
-            ->where('category.CategoryID', '=', 1)
-            ->select('VariationName', 'variation.VariationID')
+        $attributes = DB::table('attribute')
+            ->join('categoryattribute', 'categoryattribute.AttributeID', '=', 'attribute.AttributeID')
+            ->join('category', 'category.CategoryID', '=', 'categoryattribute.CategoryID')
+            ->where('category.CategoryID', '=',$categoryID)
+            ->select('AttributeName', 'attribute.AttributeID')
             ->get();
         // Lấy ra danh sách thương hiệu
         $brands = DB::table('brand')->get();
         // Lấy ra danh sách loại sản phẩm
         $categorys = DB::table('category')->get();
-        return view('admin.products.create2', compact('variations','brands','categorys'));
+        if ($type == 1) {
+            return view('admin.products.create', compact('attributes','brands','categorys'));
+        }
+        return view('admin.products.create2', compact('attributes','brands','categorys'));
     }
 
+    public function store(Request $request)
+    {
+        // Biến lưu hình ảnh của sản phẩm
+        $imgParentProduct = null;
+        if ($request->file('ImageFile')) {
+            $imgParentProduct = 'imgProduct'.time().'-.'.$request->file('ImageFile')->extension();
+            $request->file('ImageFile')->move(public_path('imgProduct'),$imgParentProduct);
+        }
 
-    public function config_create(Request $request) {
-        $categoryID = $request['categoryID'];
+        // Insert sản phẩm và lấy ra id sản phẩm vừa được insert
+        $productId = DB::table('product')->insertGetId(
+            [ 
+                'ProductCode' => $request->input('ProductCode'),
+                'ProductName' => $request->input('ProductName'),
+                'Type' => 1,
+                'CategoryID' => $request->input('CategoryID'),
+                'BrandID' => $request->input('BrandID'),
+                'Price' => $request->input('Price'),
+                'OutwardPrice' => $request->input('OutwardPrice'),
+                'ProductDescription' => $request->input('ProductDescription'),
+                'Amount' => $request->input('Amount'),
+                'Image' => $imgParentProduct,
+                'Active' => $request->input('Active'),
+                'CreatedDate'=> Carbon::now(),
+                'ModifiedDate'=> Carbon::now(),
+            ]
+        );
+
         // Lấy ra danh sách các thuộc tính theo từng loại sản phẩm
-        $variations = DB::table('variation')
-            ->join('categoryvariation', 'variation.VariationID', '=', 'categoryvariation.VariationID')
-            ->join('category', 'category.CategoryID', '=', 'categoryvariation.CategoryID')
-            ->where('category.CategoryID', '=', $categoryID)
-            ->select('VariationName', 'variation.VariationID')
+        $attributes = DB::table('attribute')
+            ->join('categoryattribute', 'categoryattribute.AttributeID', '=', 'attribute.AttributeID')
+            ->join('category', 'category.CategoryID', '=', 'categoryattribute.CategoryID')
+            ->where('category.CategoryID', '=', $request->input('CategoryID'))
+            ->select('AttributeName', 'attribute.AttributeID')
             ->get();
-        // Lấy ra danh sách thương hiệu
-        $brands = DB::table('brand')->get();
-        // Lấy ra danh sách loại sản phẩm
-        $categorys = DB::table('category')->get();
-        return view('admin.products.create2', compact('variations','brands','categorys'));
+        
+        // Insert thông tin chi tiết của sản phẩm theo từng thuộc tính
+        for ($i = 0; $i < count($attributes) ; $i++) {
+            DB::table('productattribute')->insert(
+                [ 
+                    'ProductID' => $productId,
+                    'AttributeID' => $attributes[$i]->AttributeID,
+                    'Value' => $request->input('AttributeValue')[$i],
+                ]
+            );
+        }
+
+        return Redirect::to('products');
     }
 
     /**
@@ -71,7 +156,7 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store2(Request $request)
     {
         // Biến lưu tất cả thông tin request
         $data = $request->all();
@@ -225,13 +310,42 @@ class ProductsController extends Controller
         
     }
 
+    public function edit($id)
+    {
+        // Lấy ra thông tin sản phẩm
+        $product = DB::table('product')
+            ->join('brand', 'brand.BrandID', '=', 'product.BrandID')
+            ->join('category','category.CategoryID', '=', 'product.CategoryID')
+            ->where('ProductID', $id)
+            ->first();
+        // Lấy ra danh sách các thuộc tính theo từng loại sản phẩm
+        $attributes = DB::table('attribute')
+            ->join('categoryattribute', 'categoryattribute.AttributeID', '=', 'attribute.AttributeID')
+            ->join('category', 'category.CategoryID', '=', 'categoryattribute.CategoryID')
+            ->where('category.CategoryID', '=', $product->CategoryID)
+            ->select('AttributeName', 'attribute.AttributeID')
+            ->get();
+        // Lấy ra danh sách thương hiệu
+        $brands = DB::table('brand')->get();
+        // Lấy ra danh sách phân loại sản phẩm
+        $categorys = DB::table('category')->get();
+        // Lấy ra danh sách giá trị theo từng thuộc tính
+        $attributevalues = DB::table('product')
+            ->join('productattribute','productattribute.ProductID', '=', 'product.ProductID')
+            ->join('attribute','attribute.AttributeID', '=', 'productattribute.AttributeID')
+            ->where('product.ProductID', '=', $id)
+            ->get();
+        return view('admin.products.edit', compact('product', 'attributes', 'brands','categorys','attributevalues'));
+    }
+
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit2($id)
     {
         $product = DB::table('product')
             ->join('brand', 'brand.BrandID', '=', 'product.BrandID')
@@ -263,7 +377,60 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Lưu hình ảnh của sản phẩm
+        if ($request->file('ImageFile')) {
+            $imgParentProduct = 'imgProduct'.time().'-.'.$request->file('ImageFile')->extension();
+            $request->file('ImageFile')->move(public_path('imgProduct'), $imgParentProduct);
+            $request['Image'] = $imgParentProduct;
+            DB::table('product')
+            ->where('ProductID', $id)
+            ->update(
+                [ 
+                    'Image' => $imgParentProduct,
+                    'ModifiedDate'=> Carbon::now(),
+                ]
+            );
+        }
+
+        // Insert sản phẩm và lấy ra id sản phẩm vừa được insert
+        DB::table('product')
+        ->where('ProductID', $id)
+        ->update(
+            [ 
+                'ProductCode' => $request->input('ProductCode'),
+                'ProductName' => $request->input('ProductName'),
+                'CategoryID' => $request->input('CategoryID'),
+                'BrandID' => $request->input('BrandID'),
+                'Price' => $request->input('Price'),
+                'OutwardPrice' => $request->input('OutwardPrice'),
+                'ProductDescription' => $request->input('ProductDescription'),
+                'Amount' => $request->input('Amount'),
+                'Active' => $request->input('Active'),
+                'ModifiedDate'=> Carbon::now(),
+            ]
+        );
+
+        // Lấy ra danh sách các thuộc tính theo từng loại sản phẩm
+        $attributes = DB::table('attribute')
+            ->join('categoryattribute', 'categoryattribute.AttributeID', '=', 'attribute.AttributeID')
+            ->join('category', 'category.CategoryID', '=', 'categoryattribute.CategoryID')
+            ->where('category.CategoryID', '=', $request->input('CategoryID'))
+            ->select('AttributeName', 'attribute.AttributeID')
+            ->get();
+        
+        // Insert thông tin chi tiết của sản phẩm theo từng thuộc tính
+        for ($i = 0; $i < count($attributes) ; $i++) {
+            DB::table('productattribute')
+            ->where('ProductID', $id)
+            ->where('AttributeID', $attributes[$i]->AttributeID)
+            ->update(
+                [ 
+                    'Value' => $request->input('AttributeValue')[$i],
+                ]
+            );
+        }
+
+        return Redirect::to('products');
     }
 
     /**

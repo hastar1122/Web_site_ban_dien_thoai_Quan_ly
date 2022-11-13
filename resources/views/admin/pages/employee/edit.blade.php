@@ -55,8 +55,8 @@
                                     <div class="card-header">Tải ảnh lên</div>
                                     <div class="card-body">
                                         <div class="text-center">
-                                            <img height="150" width="150" src="" style="object-fit:cover;"
-                                                id="image_preview_container" class="img-profile" alt="avatar" />
+                                            <img height="150" width="150"  style="object-fit:cover;"
+                                                id="image_preview_container1" class="img-profile img1" alt="avatar" />
                                         </div>
                                     </div>
                                     <div class="card-footer">
@@ -71,9 +71,7 @@
                                 <label for="avatar">Select Avatar</label>
                                 <input type="file" name="avatar" class="form-control">
                               </div>
-                              <div class="mt-2" id="avatar">
-                    
-                              </div>
+                             
                             <div class="d-flex justify-content-end ">
                                 <button type="submit" class="update2 btn btn-outline-success"><i
                                         class="far fa-edit"></i>
