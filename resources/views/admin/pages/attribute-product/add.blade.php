@@ -37,3 +37,53 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $('.btn-them-dac-trung').click(function(e) {
+            var value = $('#dropdownProduct').val();
+            url = "{{ URL::to('/add-attribute-product/')}}" +'/'+ value;
+            console.log(url);
+            console.log($("#dropdownProductAttribute").val());
+            $.ajax({
+                type: 'post',
+                url: url,
+                dataType: "html",
+                data: {
+                    attr_id: $("#dropdownProductAttribute").val(),
+                },
+                success: function(data) {
+                    toastr.success("Thêm mới đặc trưng thành công!","Thành công");
+                    window.location.href = "{{ URL::to('/show-attribute-product-all/') }}" +'/'+ value;
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                }
+            })
+        });
+
+        $(".btn-delete-attr").click(function() {
+                var value = $('#dropdownProduct').val();
+                var url = $(this).attr("delete-attr-url");
+                console.log(url);
+                console.log( $("#dropdownProduct").val());
+                if (confirm("Bạn có chắc muốn xóa không?")) {
+                    $.ajax({
+                        type: "get",
+                        dataType: "html",
+                        url: url,
+                        data: {
+                            value: value,
+                        },
+                        success: function(data) {
+                            toastr.success("Xóa đặc trưng thành công!");
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            window.location.href = "{{ URL::to('/show-attribute-product-all/') }}" +'/'+ value;
+                            toastr.success("Xóa đặc trưng thành công!");
+                        },
+                    });
+                }
+            });
+    });
+</script>

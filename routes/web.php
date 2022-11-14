@@ -81,6 +81,7 @@ Route::post('/update-customer/{customer_id}', [CustomerController::class, 'updat
 Route::get('/show-attribute-product-all/{ProductID}', [ProductAttributeController::class, 'show_catogory_product']);
 Route::post('/add-attribute-product/{ProductID}', [ProductAttributeController::class, 'update_product_attr']);
 Route::get('/delete-attribute-product/{ProductID}', [ProductAttributeController::class, 'delete_product_attr']);
+Route::get('/show-table-attr', [ProductAttributeController::class, 'show_table_attr']);
 
 //Role
 Route::get('/show-role', [RoleController::class, 'show_role']);
