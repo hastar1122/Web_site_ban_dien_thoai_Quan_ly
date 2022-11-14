@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -441,6 +442,13 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            DB::table('productattribute')->where('ProductID', $id)->delete();
+            DB::table('product')->where('ProductID', $id)->delete();
+            return response()->json(true, 200);
+        }
+        catch(Exception $ex) {
+            return response()->json(false, 200);
+        }
     }
 }

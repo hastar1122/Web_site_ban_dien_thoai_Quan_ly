@@ -100,13 +100,13 @@
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title text-primary">Thông báo</h4>
+                <h4 class="modal-title text-info">Thông báo</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
-                <h6 class="text text-warning text-wr">Bạn có muốn xóa loại đặc trưng này không ?</h6>
+                <h6 class="text text-primary text-wr">Bạn có chắc chắn muốn xóa sản phẩm này không ?</h6>
             </div>
 
             <!-- Modal footer -->
@@ -134,13 +134,18 @@
 
         // Lọc danh sách sản phẩm
         $('#category, #brand').on('change', function () {
+            LoadProducts();
+        });
+
+        // Load danh sách sản phẩm
+        function LoadProducts() {
             var category = $('#category').val();
             var brand = $('#brand').val();
             var url = $(this).attr('data-url');
             $('#dataTable').DataTable().clear();
             $('.table-responsive').remove();
             $.ajax({
-                url: url,
+                url: 'http://127.0.0.1:8000/loadProducts',
                 data: { category: category, brand: brand },
                 dataType: "html",
                 type: 'GET',
@@ -153,26 +158,40 @@
                     alert("Đã có lỗi xảy ra");
                 }
             });
+        };
+
+        // Mở modal delete sản phẩm
+        $('body').on('click', '.delete', function () {
+            $('#delModal').modal();
+            $(".Xoa").val($(this).attr('data-id'));
         });
 
-        // Load danh sách sản phẩm
-        function LoadAllGiangVien() {
-            $('#dataTable').DataTable().clear();
-            $('.table-responsive').remove();
+        // Xóa sản phẩm
+        $('body').on('click', '.Xoa', function () {
+            var MaSP = $(".Xoa").val();
             $.ajax({
-                url: '@Url.Action("LoadAllGiangVien", "GiangVien")',
-                dataType: 'html',
-                type: 'GET',
+                async: true,
+                url: 'http://127.0.0.1:8000/products/'+MaSP,
+                dataType: 'json',
+                type: "DELETE",
                 success: function (data) {
-                    $('.LoadAllGiangVien').html(data);
-                    $('#dataTable').DataTable().draw();
-                    $('[data-toggle="tooltip"]').tooltip();
+                    if (data == true) {
+                        LoadProducts();
+                        toastr.options.positionClass = "toast-bottom-right";
+                        toastr.success("Xóa thành công");
+                    }
+                    if (data == false) {
+                        alert("Không thể xóa sản phẩm này");
+                        toastr.options.positionClass = "toast-bottom-right";
+                        toastr.warning("Xóa không thành công");
+                    }
                 },
                 error: function () {
-                    alert("Đã có lỗi xảy ra");
-                },
+                    toastr.options.positionClass = "toast-bottom-right";
+                    toastr.warning('Xóa không thành công');
+                }
             });
-        };
+        });
     });
 </script>
 @endsection
