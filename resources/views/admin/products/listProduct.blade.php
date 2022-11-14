@@ -73,7 +73,7 @@
                         @endif
                         
                         <a class="btn btn-sm btn-info" data-toggle="tooltip" title="Thông tin"> <i class="fas fa-info-circle"></i></a>
-                        <a class="delete btn btn-sm btn-danger" data-id="@item.MaHP" data-toggle="tooltip" title="Xóa"> <i class="far fa-trash-alt"></i></a>
+                        <a class="delete btn btn-sm btn-danger" data-id="{{$item->ProductID}}" data-toggle="tooltip" title="Xóa"> <i class="far fa-trash-alt"></i></a>
                     </td>
                 </tr>
                 @php

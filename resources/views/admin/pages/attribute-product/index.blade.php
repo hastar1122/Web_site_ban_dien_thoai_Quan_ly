@@ -34,6 +34,12 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+
+            $(".nav-2").addClass("show");
+
+            $('.nav-link-2').removeClass('collapsed');
+
             $('.btn-change-product').change(function(e) {
                 var value = $('#dropdownProduct').val();
                 console.log(value);
