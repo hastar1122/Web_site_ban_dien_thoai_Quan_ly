@@ -55,7 +55,7 @@
 <body>
     <!-- top-header -->
     <div class="agile-main-top">
-        <div class="container-fluid">
+        <div class="">
             <div class="row main-top-w3l py-2">
                 <div class="col-lg-4 header-most-top">
                     <p class="text-white text-lg-left text-center">Offer Zone Top Deals & Discounts
