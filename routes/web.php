@@ -102,6 +102,7 @@ Route::get('/logoutClient', [LoginController::class, 'logoutClient']);
 
 // Product
 Route::resource('/products', ProductsController::class);
+Route::get('/list-products', [PagesController::class,'loadAllProduct']);
 Route::get('/loadProducts', [ProductsController::class, 'loadProducts']);
 Route::resource('/products2', ProductsController::class);
 

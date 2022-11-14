@@ -118,9 +118,10 @@
                     processData: false,
                     contentType: false,
                     success: function(response) {
-                        toastr.success("Cập nhật nhân viên thành công!");
-                        $("#modal-employee-edit").modal('hide');
-                        location.reload();
+                        // toastr.success("Cập nhật nhân viên thành công!");
+                        // $("#modal-employee-edit").modal('hide');
+                        // location.reload();
+                        console.log(res);
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         toastr.error(
@@ -161,6 +162,7 @@
                         $("#image_preview_container1").attr('src',
                             'http://127.0.0.1:8000/admin/img/' + response.employee_get[0]
                             .Image);
+                        $("#emp_img").val(response.employee_get[0].Image);
                         $('#form-employee-edit').attr('action',
                             '{{ asset('update-employee/') }}/' + response.employee_get[0]
                             .UserID);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EmployeeController extends Controller
 {
@@ -58,15 +59,34 @@ class EmployeeController extends Controller
         return response()->json(['employee_get' => $employee_get_id], 200);
     }
     public function update_employee(Request $request, $employee_id)
-    {
+    {   
+        $fileName='';
         $employee = DB::table('user')
-            ->where('UserID', $employee_id)
-            ->update([
-                'UserName' => $request->name,
-                'Address' => $request->address,
-                'Email' => $request->email,
-                'PhoneNumber' => $request->phonenumber,
-            ]);
+            ->where('UserID', $employee_id);
+            // ->update([
+            //     'UserName' => $request->name,
+            //     'Address' => $request->address,
+            //     'Email' => $request->email,
+            //     'PhoneNumber' => $request->phonenumber,
+            // ]);
+        if($request->hasFile('imageemployee1')){
+            $file=$request->file('imageemployee1');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('admin/img'),$fileName);
+            if($employee->Image){
+                Storage::delete('admin/img/'.$employee->Image);
+            }
+        }else{
+            $fileName=$request->emp_img;
+        }
+        $empData=[
+                'UserName' => $request->employee_name,
+                'Address' => $request->employee_address,
+                'Email' => $request->employee_email,
+                'PhoneNumber' => $request->employee_phone,
+                'Image'=>$fileName
+        ];
+        $employee->update($empData);
         if ($employee) {
             return response()->json(null, 204);
         } else

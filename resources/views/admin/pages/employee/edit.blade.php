@@ -55,23 +55,19 @@
                                     <div class="card-header">Tải ảnh lên</div>
                                     <div class="card-body">
                                         <div class="text-center">
-                                            <img height="150" width="150"  style="object-fit:cover;"
+                                            <img height="150" width="150"  style="object-fit:cover;" 
                                                 id="image_preview_container1" class="img-profile img1" alt="avatar" />
                                         </div>
                                     </div>
                                     <div class="card-footer">
                                         <div class="custom-file">
-                                            <input type="file" id="imageid" name="imageemployee" >
+                                            <input type="file" id="imageid" name="imageemployee1" >
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <input type="hidden" name="emp_img" id="emp_img">
                             <br>
-                            <div class="my-2">
-                                <label for="avatar">Select Avatar</label>
-                                <input type="file" name="avatar" class="form-control">
-                              </div>
-                             
                             <div class="d-flex justify-content-end ">
                                 <button type="submit" class="update2 btn btn-outline-success"><i
                                         class="far fa-edit"></i>
