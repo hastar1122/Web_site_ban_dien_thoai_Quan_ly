@@ -107,3 +107,6 @@ Route::resource('/products2', ProductsController::class);
 
 // Thuộc tính sản phẩm
 Route::resource('/attributes', AttributesController::class);
+Route::get('/listAttribute', [AttributesController::class, 'listAttribute']);
+Route::post('/update_attribute', [AttributesController::class, 'update']);
+

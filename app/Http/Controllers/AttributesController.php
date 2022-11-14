@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,51 +16,48 @@ class AttributesController extends Controller
      */
     public function index()
     {
-        $attributes = DB::table('variation')->get();
+        $attributes = DB::table('attribute')->orderByDesc('ModifiedDate')->get();
         return view('admin.attributes.index', compact('attributes'));
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Hàm load danh sách thuộc tính
      */
-    public function create()
-    {
-        //
+    public function listAttribute(Request $request) {
+        $attributes = DB::table('attribute')->orderByDesc('ModifiedDate')->get();
+        return view('admin.attributes.listAttribute')->with('attributes', $attributes);
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Hàm thêm mới thuộc tính
      */
     public function store(Request $request)
     {
-        //
+        try {
+            DB::table('attribute')->insert([
+                'AttributeName' => $request->input('AttributeName'),
+                'CreatedDate'=> Carbon::now(),
+                'ModifiedDate'=> Carbon::now(),
+            ]);
+            return Response()->json(true, 200);
+        }
+        catch (Exception $ex) {
+            return Response()->json(false, 200);
+        }
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Hàm lấy thông tin thuộc tính theo ID
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        try {
+            $attribute = DB::table('attribute')->where('AttributeID', '=', $id)->first();
+            return Response()->json(['data' => $attribute], 200);
+        }
+        catch (Exception $ex) {
+            return Response()->json(false, 200);
+        }
     }
 
     /**
@@ -68,9 +67,18 @@ class AttributesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        try {
+            DB::table('attribute')->where('AttributeID', '=', $request->input('AttributeID'))->update([
+                'AttributeName' => $request->input('AttributeName'),
+                'ModifiedDate' => Carbon::now()
+            ]);
+            return Response()->json(true, 200);
+        }
+        catch (Exception $ex) {
+            return Response()->json(false, 200);
+        }
     }
 
     /**
@@ -81,6 +89,12 @@ class AttributesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            DB::table('attribute')->where('AttributeID', $id)->delete();
+            return Response()->json(true, 200);
+        }
+        catch (Exception $ex) {
+            return Response()->json(false, 200);
+        }
     }
 }

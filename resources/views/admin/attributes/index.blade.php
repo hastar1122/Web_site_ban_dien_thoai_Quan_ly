@@ -16,50 +16,42 @@
             </a>
         </div>
     </div>
-    @php
-        $i = 1;
-    @endphp
-    <div class="card-body LoadAllHocPhan">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr class="text-center">
-                        <th width="1%">
-                            STT
-                        </th>
-                        <th>
-                            Tên thuộc tính
-                        </th>
-                        <th width="90px">Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($attributes as $item)
-                        <tr>
-                            <td class="text-center">
-                                {{ $i }}
-                            </td>
-                            <td class="text-center">
-                                {{ $item->VariationName }}
-                            </td>
-                            <td>
-                                <a class="btn btn-sm btn-primary" href="/attributes/{{$item->VariationID}}/edit" data-toggle="tooltip" title="Sửa"> <i class="far fa-edit"></i></a>
-                                <a class="btn btn-sm btn-info" data-toggle="tooltip" title="Thông tin"> <i class="fas fa-info-circle"></i></a>
-                                <a class="delete btn btn-sm btn-danger" data-id="@item.MaHP" data-toggle="tooltip" title="Xóa"> <i class="far fa-trash-alt"></i></a>
-                            </td>
-                        </tr>
-                        @php
-                            $i++;
-                        @endphp
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+    <div class="card-body listAttribute">
+        @include('admin.attributes.listAttribute')
     </div>
     <div class="card-footer">
     </div>
 </div>
 
+<!-- The Modal -->
+<div class="modal fade" id="addModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title text-info">Thêm mới thuộc tính</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label col-md">Tên thuộc tính</label>
+                    <div class="col-md">
+                        <input class="form-control" id="AttributeName">
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="">
+                    <button type="button" class="create btn btn-outline-success"><i class="fas fa-plus-circle"></i> Thêm mới</button>
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal"><i class="fas fa-times"></i> Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- The Modal -->
 <div class="modal fade" id="delModal">
@@ -68,13 +60,13 @@
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title text-primary">Thông báo</h4>
+                <h4 class="modal-title text-info">Thông báo</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
-                <h6 class="text text-warning text-wr">Bạn có muốn xóa loại đặc trưng này không ?</h6>
+                <h6 class="text text-primary text-wr">Bạn có chắc chắn muốn xóa thuộc tính này không ?</h6>
             </div>
 
             <!-- Modal footer -->
@@ -89,6 +81,36 @@
     </div>
 </div>
 
+<!-- The Modal -->
+<div class="modal fade" id="infModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title text-info">Thông tin ngành học</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <input hidden id="AttributeID2">
+                <div class="form-group">
+                    <label class="control-label col-md">Tên thuộc tính</label>
+                    <div class="col-md">
+                        <input class="form-control" id="AttributeName2">
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="">
+                    <button type="button" class="update btn btn-outline-success"><i class="far fa-edit"></i> Cập nhật</button>
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal"><i class="fas fa-times"></i> Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('scripts')
@@ -96,35 +118,36 @@
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
 
-        $(".nav-1").addClass("show");
+        $(".nav-2").addClass("show");
 
+        $('.nav-link-2').removeClass('collapsed');
+
+        // Mở modal xóa thuộc tính
         $('body').on('click', '.delete', function () {
             $('#delModal').modal();
             $(".Xoa").val($(this).attr('data-id'));
         });
 
+        // Thêm mới thuộc tính
         $('body').on('click', '.create', function () {
-            var TenHP = $("#TenHP").val();
-            var SoTinChi = $("#SoTinChi").val();
-            var formData2 = new FormData;
-            formData2.append("TenHP", TenHP);
-            formData2.append("SoTinChi", SoTinChi);
+            var AttributeName = $("#AttributeName").val();
+            var formData = new FormData;
+            formData.append("AttributeName", AttributeName);
             $.ajax({
                 async: true,
-                url: '@Url.Action("Create", "HocPhan")',
-                data: formData2,
+                url: 'http://127.0.0.1:8000/attributes',
+                data: formData,
                 contentType: false,
                 processData: false,
                 dataType: 'json',
                 type: 'POST',
                 success: function (data) {
-                    if (data.status == true) {
-                        LoadAllHocPhan();
+                    if (data == true) {
+                        LoadAttributes();
                         toastr.options.positionClass = "toast-bottom-right";
                         toastr.success("Thêm mới thành công");
                         $('#addModal').modal('hide');
-                        $("#TenHP").val('');
-                        $("#SoTinChi").val('');
+                        $("#AttributeName").val('');
                     }
                     else {
                         alert(data.status);
@@ -139,22 +162,22 @@
             });
         });
 
+        // Xóa thuộc tính
         $('body').on('click', '.Xoa', function () {
-            var MaHP = $(".Xoa").val();
+            var AttributeID = $(".Xoa").val();
             $.ajax({
                 async: true,
-                url: '@Url.Action("Delete", "HocPhan")',
-                data: { id: MaHP },
+                url: 'http://127.0.0.1:8000/attributes/'+AttributeID,
                 dataType: 'json',
-                type: "POST",
+                type: "DELETE",
                 success: function (data) {
-                    if (data.status == true) {
-                        LoadAllHocPhan();
+                    if (data == true) {
+                        LoadAttributes();
                         toastr.options.positionClass = "toast-bottom-right";
                         toastr.success("Xóa thành công");
                     }
-                    if (data.status == false) {
-                        alert("Không thể xóa học phần này");
+                    if (data == false) {
+                        alert("Không thể xóa thuộc tính này");
                         toastr.options.positionClass = "toast-bottom-right";
                         toastr.warning("Xóa không thành công");
                     }
@@ -166,31 +189,30 @@
             });
         });
 
+        // Cập nhật thuộc tính
         $(".update").click(function () {
-            var MaHP = $("#MaHP2").val();
-            var TenHP = $("#TenHP2").val();
-            var SoTinChi = $("#SoTC2").val();
+            var AttributeID = $("#AttributeID2").val();
+            var AttributeName = $("#AttributeName2").val();
             var formData = new FormData;
-            formData.append("MaHP", MaHP);
-            formData.append("TenHP", TenHP);
-            formData.append("SoTinChi", SoTinChi);
+            formData.append("AttributeID", AttributeID);
+            formData.append("AttributeName", AttributeName);
             $.ajax({
                 async: true,
-                url: '@Url.Action("CapNhatHocPhan", "HocPhan")',
+                url: 'http://127.0.0.1:8000/update_attribute/',
                 contentType: false,
                 processData: false,
                 data: formData,
                 dataType: 'json',
                 type: 'POST',
                 success: function (data) {
-                    if (data.status == true) {
-                        LoadAllHocPhan();
+                    if (data == true) {
+                        LoadAttributes();
                         toastr.options.positionClass = "toast-bottom-right";
                         toastr.success("Chỉnh sửa thành công");
                         $('#infModal').modal('hide');
                     }
                     else {
-                        alert(data.status);
+                        alert(data);
                         toastr.options.positionClass = "toast-bottom-right";
                         toastr.warning('Chỉnh sửa không thành công');
                     }
@@ -203,25 +225,42 @@
             });
         });
 
-        function LoadAllHocPhan() {
+        // Mở modal edit thuộc tính
+        $('body').on('click', '.information', function () {
+            $('#infModal').modal();
+            var AttributeID = $(this).attr('data-id');
+            $.ajax({
+                url: 'http://127.0.0.1:8000/attributes/'+ AttributeID,
+                dataType: 'json',
+                type: 'GET',
+                success: function (data) {
+                    $('#AttributeID2').val(data.data.AttributeID);
+                    $('#AttributeName2').val(data.data.AttributeName);
+                },
+                error: function () {
+                    alert("Đã có lỗi xảy ra");
+                }
+            });
+        });
+
+        // Load danh sách thuộc tính
+        function LoadAttributes() {
             $('#dataTable').DataTable().clear();
             $('.table-responsive').remove();
             $.ajax({
-                url: '@Url.Action("LoadAllHocPhan", "HocPhan")',
-                dataType: 'html',
+                url: 'http://127.0.0.1:8000/listAttribute',
+                dataType: "html",
                 type: 'GET',
-                contentType: false,
-                processData: false,
                 success: function (data) {
-                    $('.LoadAllHocPhan').html(data);
+                    $('.listAttribute').html(data);
                     $('#dataTable').DataTable().draw();
                     $('[data-toggle="tooltip"]').tooltip();
                 },
                 error: function () {
                     alert("Đã có lỗi xảy ra");
-                },
+                }
             });
-        }
+        };
     });
 </script>
 @endsection
