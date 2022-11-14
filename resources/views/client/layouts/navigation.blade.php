@@ -8,8 +8,6 @@
                         @foreach ($category as $key => $cate)
                             <option value="{{ $cate -> CategoryID }}">{{ $cate -> ProductCategoryName }}</option>
                         @endforeach
-                       
-                        
                     </select>
                 </form>
             </div>

@@ -21,7 +21,8 @@ class PagesController extends Controller
     }
     public function loadAllProduct()
     {
+        $cate_product = DB::table('category')->orderBy('CategoryID','DESC')->get();
         $all_product = DB::table('product')->get();
-        return view('client.pages.product')->with('allproduct', $all_product);
+        return view('client.pages.product')->with('allproduct', $all_product)->with('category',$cate_product);
     }
 }
