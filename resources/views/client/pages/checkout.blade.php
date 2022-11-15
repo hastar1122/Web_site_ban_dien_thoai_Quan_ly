@@ -26,9 +26,9 @@
 						</thead>
                         <?php
                             $content = Cart::content();
-                            echo '<pre>';
-                            print_r($content);
-                            echo '</pre>';
+                            // echo '<pre>';
+                            // print_r($content);
+                            // echo '</pre>';
                         ?>
                         @if($content)
                         @foreach ($content as $product_info)
