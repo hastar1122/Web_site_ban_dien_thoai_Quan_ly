@@ -18,7 +18,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto text-center mr-xl-5">
                     <li class="nav-item active mr-lg-2 mb-lg-0 mb-2">
-                        <a class="nav-link" href="index.html">Trang chủ
+                        <a class="nav-link" href="{{URL::to('/showClient')}}">Trang chủ
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
@@ -32,7 +32,7 @@
                                 <div class="row">
                                     <div class="col-sm-6 multi-gd-img">
                                         <ul class="multi-column-dropdown">
-                                            
+
                                             <li>
                                                 <a href="product.html">Iphone</a>
                                             </li>
@@ -70,11 +70,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ URL::to('/list-products') }}">Danh sách sản phẩm</a>
                     </li>
+
                     <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Giới thiệu
                         </a>
-                        
+
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contact.html">Liên hệ với chúng tôi</a>
