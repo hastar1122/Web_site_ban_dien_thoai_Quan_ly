@@ -265,10 +265,13 @@
                 dataType: "json",
                 url: url,
                 success: function(data) {
-                    toastr.success("Thêm mới đặc trưng thành công!","Thành công");
+                    toastr.success("Thêm giỏ hàng thành công!","Thành công");
+                    setTimeout(() => {
+                        location.reload();
+                    }, 100);
                 },
                 error: function(jqXHR, textStatus, errorThrown, response) {
-                    toastr.error("Thêm mới đặc trưng thành công!","Thất bại");
+                    toastr.error("Thêm giỏ hàng thành công!","Thất bại");
                 }
             })
         });
