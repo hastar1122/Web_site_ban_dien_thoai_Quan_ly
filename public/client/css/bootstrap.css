@@ -1950,8 +1950,16 @@ pre code {
   -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
+
+
 .table-responsive > .table-bordered {
   border: 0;
+}
+
+.table-thanhtoan table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 3px;
 }
 
 .form-control {
@@ -3147,6 +3155,10 @@ tbody.collapse.show {
   border-left: 0.3em solid transparent;
 }
 
+.drop-no-after::after{
+    border:none !important;
+}
+
 .dropdown-toggle:empty::after {
   margin-left: 0;
 }
@@ -3169,6 +3181,11 @@ tbody.collapse.show {
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
+}
+
+.dropdown-menu1 {
+    left: -300px !important;
+    right: 0 !important;
 }
 
 .dropup .dropdown-menu {
