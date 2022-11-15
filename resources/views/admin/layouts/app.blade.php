@@ -111,8 +111,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
                         <a class="collapse-item" href="{{ URL::to('/products') }}">Danh sách sản phẩm</a>
-                        <a class="collapse-item" href="{{ URL::to('/attributes') }}">Danh sách đặc trưng</a>
-                        <a class="collapse-item" href="{{ URL::to('/show-attribute-product-all/1') }}">Quản lý đặc trưng</a>
+                        <a class="collapse-item" href="{{ URL::to('/attributes') }}">Danh sách thuộc tính</a>
+                        <a class="collapse-item" href="{{ URL::to('/show-attribute-product-all/1') }}">Quản lý thuộc tính</a>
                         <a class="collapse-item" href="../pages/utilities-animation.php">Nhập kho</a>
                     </div>
             </li>
