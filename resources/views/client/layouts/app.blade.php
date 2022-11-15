@@ -55,7 +55,7 @@
 <body>
     <!-- top-header -->
     <div class="agile-main-top">
-        <div class="">
+        <div class="container-fluid" style="padding: 0px">
             <div class="row main-top-w3l py-2">
                 <div class="col-lg-4 header-most-top">
                     <p class="text-white text-lg-left text-center">Offer Zone Top Deals & Discounts
@@ -168,14 +168,43 @@
                         <!-- //search -->
                         <!-- cart details -->
                         <div class="col-2 top_nav_right text-center mt-sm-0 mt-2">
-                            <div class="wthreecartaits wthreecartaits2 cart cart box_1">
-                                <form action="#" method="post" class="last">
-                                    <input type="hidden" name="cmd" value="_cart">
-                                    <input type="hidden" name="display" value="1">
-                                    <button class="btn w3view-cart" type="submit" name="submit" value="">
+                            <div class="wthreecartaits wthreecartaits2 cart cart box_1 dropdown">
+                                <form action="{{URL::to('/show-cart')}}" method="GET">
+                                    {{-- <input type="hidden" name="cmd" value="_cart">
+                                    <input type="hidden" name="display" value="1"> --}}
+                                    <button class="btn w3view-cart drop-no-after dropdown-toggle" type="submit" value=""  data-toggle="dropdown">
                                         <i class="fas fa-cart-arrow-down"></i>
                                     </button>
                                 </form>
+                                <div class="dropdown-menu1 dropdown-menu">
+                                    <div class="agile_inner_drop_nav_info p-4">
+                                        <?php
+                                            $content = Cart::content();
+                                        ?>
+                                        <h5 class="mb-3">Sản phẩm mới thêm (<span style="color: #d60404">{{Cart::count()}}</span>)</h5>
+                                        <div class="row">
+                                            <div class="col-sm-8 multi-gd-img">
+                                                <ul class="multi-column-dropdown">
+                                                    <table class="table-cart table-borderless table-striped">
+                                                        @foreach ($content as $product_info)
+                                                            <tr class="rem1">
+                                                                <td class="invert-image1">
+                                                                    <a href="{{URL::to('/show-cart')}}">
+                                                                        <img src="{{asset('imgProduct/'.$product_info->options->image)}}" alt=" " class="img-responsive">
+                                                                    </a>
+                                                                </td>
+                                                                <td class="invert">{{$product_info->name}}</td>
+                                                                <td style="padding-left: 20px" class="invert"><span style="color: #d60404 !important">{{ number_format($product_info->price, 0, ',', '.') }} VNĐ<span></td>
+                                                                </a>
+                                                            </tr>
+                                                        @endforeach
+                                                </table>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <a href="{{URL::to('/delete-all-cart')}}">Xóa hết giỏi hàng</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- //cart details -->
@@ -230,7 +259,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- middle section --> 
+	<!-- middle section -->
 
     <!-- footer -->
     <footer>
@@ -663,7 +692,6 @@
     <!-- js-files -->
     <!-- jquery -->
 
-    <script src="{{ asset('client/js/jquery-2.2.3.min.js') }}"></script>
     <!-- //jquery -->
 
     <!-- nav smooth scroll -->
@@ -703,31 +731,6 @@
     </script>
     <!-- //popup modal (for location)-->
 
-    <!-- cart-js -->
-    <script src="{{ asset('client/js/minicart.js') }}"></script>
-    <script>
-        paypals.minicarts
-        .render(); //use only unique class names other than paypals.minicarts.Also Replace same class name in css and minicart.min.js
-
-        paypals.minicarts.cart.on('checkout', function(evt) {
-            var items = this.items(),
-                len = items.length,
-                total = 0,
-                i;
-
-            // Count the number of each item in the cart
-            for (i = 0; i < len; i++) {
-                total += items[i].get('quantity');
-            }
-
-            if (total < 3) {
-                alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
-                evt.preventDefault();
-            }
-        });
-    </script>
-    <!-- //cart-js -->
-
     <!-- password-script -->
     {{-- <script>
 		window.onload = function () {
@@ -758,6 +761,8 @@
     <!-- start-smooth-scrolling -->
     <script src="{{ asset('client/js/move-top.js') }}"></script>
     <script src="{{ asset('client/js/easing.js') }}"></script>
+    {{-- Update profile js --}}
+
     <script>
         jQuery(document).ready(function($) {
             $(".scroll").click(function(event) {

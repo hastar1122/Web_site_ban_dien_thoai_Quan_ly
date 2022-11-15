@@ -18,8 +18,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductAttributeController;
 use App\Http\Controllers\UpdateStatusController;
 use App\Http\Controllers\AttributesController;
-
-
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CartViewController;
 use App\Http\Controllers\ProductsController;
 
 
@@ -113,3 +113,11 @@ Route::post('/update_attribute', [AttributesController::class, 'update']);
 // Product customer
 Route::get('/list-products', [PagesController::class,'loadAllProduct']);
 Route::get('/productdetail/{id}', [PagesController::class,'productdetail']);
+//Giỏ hàng
+Route::get('/show-cart', [CartController::class, 'show_cart']);
+Route::get('/delete-cart/{rowId}', [CartController::class, 'delete_cart']);
+Route::get('/delete-all-cart', [CartController::class, 'delete_all_cart']);
+Route::post('/save-cart', [CartController::class, 'save_cart']);
+
+
+Route::resource('/save-cart-view', CartViewController::class);

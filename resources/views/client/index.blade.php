@@ -121,23 +121,14 @@
                                                     <del>
                                                         {{ number_format($product->Price * 0.1 + $product->Price, 0, ',', '.') }}VNĐ</del>
                                                 </div>
-                                                <div
-                                                    class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                                    <form action="#" method="post">
+                                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                                                    <form data-url="{{URL::to('/save-cart/'.$product->ProductID)}}">
+                                                        {{ csrf_field() }}
                                                         <fieldset>
-                                                            <input type="hidden" name="cmd" value="_cart" />
-                                                            <input type="hidden" name="add" value="1" />
-                                                            <input type="hidden" name="business" value=" " />
-                                                            <input type="hidden" name="item_name"
-                                                                value="{{ $product->ProductName }}" />
-                                                            <input type="hidden" name="amount"
-                                                                value="{{ $product->Price }}VNĐ" />
-                                                            <input type="hidden" name="discount_amount" value="1.00" />
-                                                            <input type="hidden" name="currency_code" value="VNĐ" />
-                                                            <input type="hidden" name="return" value=" " />
-                                                            <input type="hidden" name="cancel_return" value=" " />
-                                                            <input type="submit" name="submit" value="Thêm vào giỏ"
-                                                                class="button btn" />
+                                                            <input type="hidden" class="product_id" id="" name="product_id" value="{{ $product->ProductID }}" />
+                                                            <input type="hidden" name="amount" value="1" />
+                                                            <input data-id="{{$product->ProductID}}" type="button" value="Thêm vào giỏ"
+                                                                class="button btn btn-add-cart" />
                                                         </fieldset>
                                                     </form>
                                                 </div>
@@ -179,22 +170,13 @@
                                                 </div>
                                                 <div
                                                     class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                                    <form action="#" method="post">
+                                                    <form data-url="{{URL::to('/save-cart/'.$product->ProductID)}}">
+                                                        {{ csrf_field() }}
                                                         <fieldset>
-                                                            <input type="hidden" name="cmd" value="_cart" />
-                                                            <input type="hidden" name="add" value="1" />
-                                                            <input type="hidden" name="business" value=" " />
-                                                            <input type="hidden" name="item_name"
-                                                                value="{{ $product->ProductName }}" />
-                                                            <input type="hidden" name="amount"
-                                                                value="{{ $product->Price }}VNĐ" />
-                                                            <input type="hidden" name="discount_amount"
-                                                                value="1.00" />
-                                                            <input type="hidden" name="currency_code" value="VNĐ" />
-                                                            <input type="hidden" name="return" value=" " />
-                                                            <input type="hidden" name="cancel_return" value=" " />
-                                                            <input type="submit" name="submit" value="Thêm vào giỏ"
-                                                                class="button btn" />
+                                                            <input type="hidden" class="product_id" id="" name="product_id" value="{{ $product->ProductID }}" />
+                                                            <input type="hidden" name="amount" value="1" />
+                                                            <input data-id="{{$product->ProductID}}" type="button" value="Thêm vào giỏ"
+                                                                class="button btn btn-add-cart" />
                                                         </fieldset>
                                                     </form>
                                                 </div>
@@ -244,24 +226,14 @@
                                                     <del>
                                                         {{ number_format($product->Price * 0.1 + $product->Price, 0, ',', '.') }}VNĐ</del>
                                                 </div>
-                                                <div
-                                                    class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                                    <form action="#" method="post">
+                                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                                                    <form data-url="{{URL::to('/save-cart/'.$product->ProductID)}}">
+                                                        {{ csrf_field() }}
                                                         <fieldset>
-                                                            <input type="hidden" name="cmd" value="_cart" />
-                                                            <input type="hidden" name="add" value="1" />
-                                                            <input type="hidden" name="business" value=" " />
-                                                            <input type="hidden" name="item_name"
-                                                                value="{{ $product->ProductName }}" />
-                                                            <input type="hidden" name="amount"
-                                                                value="{{ $product->Price }}VNĐ" />
-                                                            <input type="hidden" name="discount_amount"
-                                                                value="1.00" />
-                                                            <input type="hidden" name="currency_code" value="VNĐ" />
-                                                            <input type="hidden" name="return" value=" " />
-                                                            <input type="hidden" name="cancel_return" value=" " />
-                                                            <input type="submit" name="submit" value="Thêm vào giỏ"
-                                                                class="button btn" />
+                                                            <input type="hidden" class="product_id" id="" name="product_id" value="{{ $product->ProductID }}" />
+                                                            <input type="hidden" name="amount" value="1" />
+                                                            <input data-id="{{$product->ProductID}}" type="button" value="Thêm vào giỏ"
+                                                                class="button btn btn-add-cart" />
                                                         </fieldset>
                                                     </form>
                                                 </div>
@@ -280,4 +252,26 @@
         </div>
     </div>
     <!-- //top products -->
+    <script>
+        $(document).ready(function() {
+            //add
+            $('.btn-add-cart').click(function(e) {
+            var id = $(this).attr('data-id');
+            console.log(id);
+            var url = "http://127.0.0.1:8000/save-cart-view/" + id;
+            console.log(url);
+            $.ajax({
+                type: 'GET',
+                dataType: "json",
+                url: url,
+                success: function(data) {
+                    toastr.success("Thêm mới đặc trưng thành công!","Thành công");
+                },
+                error: function(jqXHR, textStatus, errorThrown, response) {
+                    toastr.error("Thêm mới đặc trưng thành công!","Thất bại");
+                }
+            })
+        });
+        });
+    </script>
 @endsection

@@ -1555,7 +1555,19 @@ table.timetable_sub {
     font-weight: normal;
 }
 
-.timetable_sub td {
+.timetable_sub1 th {
+    width: 200px;
+    background: #000;
+    color: #fff;
+    font-size: 16px;
+    border-right: 1px solid #ded2d2;
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: normal;
+}
+
+.timetable_sub1 td {
+    width: 400px;
     text-align: center;
     padding: 7px;
     font-size: 14px;
@@ -1563,6 +1575,13 @@ table.timetable_sub {
 }
 
 .timetable_sub td {
+    text-align: center;
+    padding: 7px;
+    font-size: 14px;
+    color: #212121;
+}
+
+.timetable_sub td, th {
     border: 1px solid #CDCDCD;
 }
 
@@ -1571,8 +1590,26 @@ td.invert-image a img {
     margin: 0 auto;
 }
 
+td.invert-image1 a img {
+    width: 20%;
+    margin: 0;
+}
+
+td.invert-image1 {
+    width: 150px;
+    margin: 0;
+}
+
+td.table-cart tr.table-cart th.table-cart{
+    border: none !important;
+}
+
 .rem {
     position: relative;
+}
+
+.close1:hover{
+    background-color: #E5E5E5;
 }
 
 .close1,
@@ -2186,19 +2223,19 @@ div#testimonials h4.m-title {
 	display: inherit;
 }
 
-/*-- placeholder-color 
+/*-- placeholder-color
 
 ::-webkit-input-placeholder {
     color: #fff;
 }
 
 :-moz-placeholder {
-    /* Firefox 18- 
+    /* Firefox 18-
     color: #fff;
 }
 
 ::-moz-placeholder {
-    /* Firefox 19+ 
+    /* Firefox 19+
     color: #fff;
 }
 
