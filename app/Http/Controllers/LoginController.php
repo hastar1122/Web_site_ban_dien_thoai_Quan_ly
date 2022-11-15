@@ -24,8 +24,17 @@ class LoginController extends Controller
     }
 
     public function show_index() {
-        if(Auth::check())
-            return view('admin.index');
+        if(Auth::check()){
+            $brand = DB::table('brand')->get()->count();
+            $category = DB::table('category')->get()->count();
+            $employee = DB::table('user')->join('role', 'user.RoleID', '=', 'role.RoleID')->where('role.RoleID', '=', 2)->get()->count();
+            $supplier = DB::table('user')->join('role', 'user.RoleID', '=', 'role.RoleID')->where('role.RoleID', '=', 3)->get()->count();
+            $customer = DB::table('user')->join('role', 'user.RoleID', '=', 'role.RoleID')->where('role.RoleID', '=', 4)->get()->count();
+            $attribute = DB::table('attribute')->get()->count();
+            $product = DB::table('product')->get()->count();
+            $order = DB::table('order')->get()->count();
+            return view('admin.index', compact('brand', 'category', 'employee', 'supplier', 'customer', 'attribute', 'product', 'order'));
+        }
         else
             return view('admin.pages.login');
     }

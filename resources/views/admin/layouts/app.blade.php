@@ -53,7 +53,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/view/index.php">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ URL::to('/index') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -65,9 +65,16 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="../index.php">
+                <a class="nav-link" href="{{ URL::to('/index') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Tổng quan</span></a>
+            </li>
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="../index.php">
+                    <i class="fas fa-laptop-house"></i>
+                    <span>Website bán hàng</span></a>
             </li>
 
             <!-- Divider -->
@@ -110,8 +117,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
-                        <a class="collapse-item" href="{{ URL::to('/products') }}">Danh sách sản phẩm</a>
                         <a class="collapse-item" href="{{ URL::to('/attributes') }}">Danh sách thuộc tính</a>
+                        <a class="collapse-item" href="{{ URL::to('/products') }}">Danh sách sản phẩm</a>
                         <a class="collapse-item" href="{{ URL::to('/show-attribute-product-all/1') }}">Quản lý thuộc tính</a>
                         <a class="collapse-item" href="../pages/utilities-animation.php">Nhập kho</a>
                     </div>
