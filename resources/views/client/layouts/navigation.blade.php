@@ -2,7 +2,7 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="agileits-navi_search">
-                <form action="#" method="post">
+                <form action="{{ URL::to('/list-products') }}" method="post">
                     <select id="agileinfo-nav_search" name="agileinfo_search" class="border" required="">
                         <option value="">Danh mục sản phẩm</option>
                         @foreach ($category as $key => $cate)
@@ -66,6 +66,9 @@
                                 </div>
                             </div>
                         </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ URL::to('/list-products') }}">Danh sách sản phẩm</a>
                     </li>
 
                     <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">

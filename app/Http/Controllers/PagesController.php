@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class PagesController extends Controller
 {
     public function index()
-    {
+    {   
         $cate_product = DB::table('category')->orderBy('CategoryID','DESC')->get();
         $new_product = DB::table('product')->orderby('ProductID', 'desc')->limit(3)->get();
         $expen_product = DB::table('product')->orderby('Price', 'desc')->limit(3)->get();
@@ -23,6 +23,7 @@ class PagesController extends Controller
     {
         $cate_product = DB::table('category')->orderBy('CategoryID','DESC')->get();
         $all_product = DB::table('product')->get();
-        return view('client.pages.product')->with('allproduct', $all_product)->with('category',$cate_product);
+        $all_brand = DB::table('brand')->get();
+        return view('client.pages.product')->with('allproduct', $all_product)->with('allbrand',$all_brand)->with('category',$cate_product);
     }
 }

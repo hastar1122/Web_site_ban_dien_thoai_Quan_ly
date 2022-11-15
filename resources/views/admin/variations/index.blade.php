@@ -5,7 +5,7 @@
 <div class="card shadow mb-4 border-left-info">
     <div class="card-header py-3">
         <div class="float-left mt-2">
-            <h5 class="m-0 font-weight-bold text-primary">Danh sách các học phần</h5>
+            <h5 class="m-0 font-weight-bold text-primary">Danh sách các đặc trưng</h5>
         </div>
         <div class="float-right mb-n3">
             <a data-toggle="modal" href="#addModal" class="btn btn-primary mb-3 btn-icon-split">
