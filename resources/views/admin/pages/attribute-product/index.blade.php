@@ -5,7 +5,7 @@
     <div class="">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800" style="color: #36b9cc!important">Đặc Trưng Sản Phẩm</h1>
+        <h1 class="h3 mb-2 text-gray-800" style="color: #36b9cc!important">Quản lý thuộc tính theo phân loại sản phẩm</h1>
         <div class="d-flex row">
             <div class="col-md float-left">
                 <div class="form-inline">

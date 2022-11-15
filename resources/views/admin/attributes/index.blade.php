@@ -8,6 +8,12 @@
             <h5 class="m-0 font-weight-bold text-primary">Danh sách các thuộc tính</h5>
         </div>
         <div class="float-right mb-n3">
+            <a href="{{ URL::to('/show-attribute-product-all/1') }}" class="btn btn-info mb-3 btn-icon-split mr-3">
+                <span class="icon">
+                    <i class="fas fa-list"></i>
+                </span>
+                <span class="text">Quản lý thuộc tính theo phân loại sản phẩm</span>
+            </a>
             <a data-toggle="modal" href="#addModal" class="btn btn-primary mb-3 btn-icon-split">
                 <span class="icon text-white">
                     <i class="fas fa-plus-circle"></i>
