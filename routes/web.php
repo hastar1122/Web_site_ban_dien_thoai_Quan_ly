@@ -100,9 +100,8 @@ Route::get('/showClient', [PagesController::class, 'index']);
 //client logout
 Route::get('/logoutClient', [LoginController::class, 'logoutClient']);
 
-// Product
+// Product admin
 Route::resource('/products', ProductsController::class);
-Route::get('/list-products', [PagesController::class,'loadAllProduct']);
 Route::get('/loadProducts', [ProductsController::class, 'loadProducts']);
 Route::resource('/products2', ProductsController::class);
 
@@ -111,3 +110,6 @@ Route::resource('/attributes', AttributesController::class);
 Route::get('/listAttribute', [AttributesController::class, 'listAttribute']);
 Route::post('/update_attribute', [AttributesController::class, 'update']);
 
+// Product customer
+Route::get('/list-products', [PagesController::class,'loadAllProduct']);
+Route::get('/productdetail/{id}', [PagesController::class,'productdetail']);

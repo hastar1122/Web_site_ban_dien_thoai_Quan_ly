@@ -18,7 +18,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto text-center mr-xl-5">
                     <li class="nav-item active mr-lg-2 mb-lg-0 mb-2">
-                        <a class="nav-link" href="index.html">Trang chủ
+                        <a class="nav-link" href="{{ Url::to('/') }}">Trang chủ
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
