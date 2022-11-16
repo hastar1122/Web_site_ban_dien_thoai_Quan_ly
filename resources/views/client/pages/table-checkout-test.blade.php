@@ -32,7 +32,7 @@
                         <div class="quantity-select">
                             <div data-id="{{$product_info->rowId}}" price="{{$product_info->price}}" class="entry value-minus">&nbsp;</div>
                             <div class="entry value">
-                                <input id="input-amount" style="margin-top: -10px" class="entry value" value="{{$product_info->qty}}">
+                                <input data-id="{{$product_info->rowId}}" id="input-amount" style="margin-top: -10px" class="entry value" value="{{$product_info->qty}}">
                             </div>
                             <div data-id="{{$product_info->rowId}}" price="{{$product_info->price}}" sub-price="{{ Cart::priceTotal(0,'','') }}" class="entry value-plus active">&nbsp;</div>
                         </div>
@@ -134,5 +134,6 @@
                 }
             })
         });
+
     });
  </script>

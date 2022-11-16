@@ -16,23 +16,54 @@
 			<div class="checkout-left">
 				<div class="address_form_agile mt-sm-5 mt-4">
 					<h4 class="mb-sm-4 mb-3">Thêm địa chỉ giao hàng</h4>
-					<form action="payment.html" method="post" class="creditly-card-form agileinfo_form">
+					<div class="creditly-card-form agileinfo_form">
 						<div class="creditly-wrapper wthree, w3_agileits_wrapper">
 							<div class="information-wrapper">
+                                {{ csrf_field() }}
 								<div class="first-row">
 									<div class="controls form-group">
-										<input class="billing-address-name form-control" type="text" name="order-address" placeholder="Nhập địa chỉ giao hàng" required>
+										<input class="billing-address-name form-control" type="text" name="order-address" placeholder="Nhập địa chỉ giao hàng">
 									</div>
 								</div>
-								<button class="submit check_out btn">Đặt hàng</button>
+                                <input id="check-out" hidden value="<?php
+                                    if (Auth::check() && Auth::user()->RoleID==4) {
+                                        echo 1;
+                                    } else {
+                                        echo 0;
+                                    }
+                                ?>">
+								<button class="check_out btn btn-checkout">Đặt hàng</button>
 							</div>
 						</div>
-					</form>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- //checkout page -->
+
+
+    {{-- check nhập đủ thông tin  --}}
+    <input id="check-out-info" hidden value="<?php
+        if (Auth::check() && Auth::user()->RoleID==4) {
+            if (Auth::user()->Address && Auth::user()->Email && Auth::user()->PhoneNumber) {
+                echo 1;
+            }
+            else {
+                echo 0;
+            }
+
+        } else {
+            echo 0;
+        }
+    ?>">
+
+    {{-- check nhập đủ thông tin  --}}
+    <input id="customer-id" hidden value="<?php
+        if (Auth::check() && Auth::user()->RoleID==4) {
+            echo Auth::user()->RoleID;
+        }
+    ?>">
 
 	<!-- middle section -->
 	<div class="join-w3l1 py-sm-5 py-4">
@@ -78,6 +109,52 @@
 	<!-- //js-files -->
 
     <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('.btn-checkout').click(function () {
+                //kiểm tra đăng nhập chưa
+                var check = $('#check-out').val();
+                if (check == 0) {
+                    $("#exampleModal").modal('show');
+                    toastr.error("Bạn chưa đăng nhập", "Đặt hàng thất bại");
+                    return;
+                }
 
+                //kiểm tra đã cập nhật thông tin chưa
+                var checkinfo = $('#check-out-info').val();
+                if (checkinfo == 0) {
+                    $("#infUserModal").modal('show');
+                    toastr.error("Bạn chưa cập nhật thông tin", "Đặt hàng thất bại");
+                    return;
+                }
+
+                //lấy mã nhân viên
+                var customerid = $('#customer-id').val();
+                console.log(customerid);
+                var url = "{{route('order-product.store')}}";
+                console.log(url);
+
+                $.ajax({
+                    type: 'POST',
+                    dataType: "json",
+                    url: url,
+                    data: {
+                        customerid: customerid,
+                    },
+                    success: function(data) {
+                        toastr.success("Đặt hàng thành công", "Thành công");
+                    },
+                    error: function(jqXHR, textStatus, errorThrown, response, data) {
+                        console.log(data);
+                        toastr.error("Đặt hàng thất bại", "Thất bại");
+                    }
+                })
+            });
+
+            });
     </script>
 @endsection
