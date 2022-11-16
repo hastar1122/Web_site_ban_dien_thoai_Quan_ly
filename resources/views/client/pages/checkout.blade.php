@@ -61,7 +61,7 @@
     {{-- check nhập đủ thông tin  --}}
     <input id="customer-id" hidden value="<?php
         if (Auth::check() && Auth::user()->RoleID==4) {
-            echo Auth::user()->RoleID;
+            echo Auth::user()->UserID;
         }
     ?>">
 
