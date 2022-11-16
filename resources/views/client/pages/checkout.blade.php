@@ -15,48 +15,19 @@
 			</div>
 			<div class="checkout-left">
 				<div class="address_form_agile mt-sm-5 mt-4">
-					<h4 class="mb-sm-4 mb-3">Add a new Details</h4>
+					<h4 class="mb-sm-4 mb-3">Thêm địa chỉ giao hàng</h4>
 					<form action="payment.html" method="post" class="creditly-card-form agileinfo_form">
 						<div class="creditly-wrapper wthree, w3_agileits_wrapper">
 							<div class="information-wrapper">
 								<div class="first-row">
 									<div class="controls form-group">
-										<input class="billing-address-name form-control" type="text" name="name" placeholder="Full Name" required="">
-									</div>
-									<div class="w3_agileits_card_number_grids">
-										<div class="w3_agileits_card_number_grid_left form-group">
-											<div class="controls">
-												<input type="text" class="form-control" placeholder="Mobile Number" name="number" required="">
-											</div>
-										</div>
-										<div class="w3_agileits_card_number_grid_right form-group">
-											<div class="controls">
-												<input type="text" class="form-control" placeholder="Landmark" name="landmark" required="">
-											</div>
-										</div>
-									</div>
-									<div class="controls form-group">
-										<input type="text" class="form-control" placeholder="Town/City" name="city" required="">
-									</div>
-									<div class="controls form-group">
-										<select class="option-w3ls">
-											<option>Select Address type</option>
-											<option>Office</option>
-											<option>Home</option>
-											<option>Commercial</option>
-
-										</select>
+										<input class="billing-address-name form-control" type="text" name="order-address" placeholder="Nhập địa chỉ giao hàng" required>
 									</div>
 								</div>
-								<button class="submit check_out btn">Delivery to this Address</button>
+								<button class="submit check_out btn">Đặt hàng</button>
 							</div>
 						</div>
 					</form>
-					<div class="checkout-right-basket">
-						<a href="payment.html">Make a Payment
-							<span class="far fa-hand-point-right"></span>
-						</a>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -100,76 +71,7 @@
 	</div>
 	<!-- middle section -->
 
-    <script>
-       $(document).ready(function() {
-			$('.value-minus').click(function () {
-                var price = $(this).attr('price');
-                var rowId = $(this).attr('data-id');
-				var $input = $(this).parent().find('#input-amount');
-				var count = parseInt($input.val()) - 1;
-				count = count < 1 ? 1 : count;
-				$input.val(count);
-                var tt = price * count;
-				$input.change();
-                var url = "http://127.0.0.1:8000/change-amount-cart/" + rowId;
-                $.ajax({
-                    type: 'GET',
-                    dataType: "json",
-                    url: url,
-                    data: {
-                        count: count,
-                    },
-                    success: function(data) {
-                        $('.change-price').html(
-                            '<span class="change-price">' + new Intl.NumberFormat().format(tt) +  'VNĐ</span>'
-                        );
-                    },
-                    error: function(jqXHR, textStatus, errorThrown, response) {
-                    }
-                })
-            });
-            $('.value-plus').click(function () {
-                var subtotal =  $(this).attr('sub-price');
 
-                var total =  $(this).attr('change-price-total');
-                var rowId = $(this).attr('data-id');
-                var price = $(this).attr('price');
-                var $input = $(this).parent().find('#input-amount');
-                var count = parseInt($input.val()) + 1;
-                $input.val(count);
-                $input.change();
-                var url = "http://127.0.0.1:8000/change-amount-cart/" + rowId;
-                var tt = price * count;
-                var ttsub = parseInt(subtotal) + parseInt(price);
-                console.log(subtotal);
-                console.log(ttsub);
-                $.ajax({
-                    type: 'GET',
-                    dataType: "json",
-                    url: url,
-                    data: {
-                        count: count,
-                    },
-                    success: function(data) {
-
-                        $('.change-price').html(
-                            '<span class="change-price">' + new Intl.NumberFormat().format(tt) +  'VNĐ</span>'
-                        );
-
-                        // $('.change-price-sub').html(
-                        //     '<span class="change-price-sub">' + new Intl.NumberFormat().format(ttsub) +  'VNĐ</span>'
-                        // );
-
-                        // $('.change-price-total').html(
-                        //     '<span class="change-price-total">' + new Intl.NumberFormat().format(s) +  'VNĐ</span>'
-                        // );
-                    },
-                    error: function(jqXHR, textStatus, errorThrown, response) {
-                    }
-                })
-            });
-		});
-    </script>
 	<!-- for bootstrap working -->
 	<script src="{{ asset('client/js/bootstrap.js') }}"></script>
 	<!-- //for bootstrap working -->

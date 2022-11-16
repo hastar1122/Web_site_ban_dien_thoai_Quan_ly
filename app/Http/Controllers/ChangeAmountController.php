@@ -39,7 +39,7 @@ class ChangeAmountController extends Controller
     public function show($id, Request $request)
     {
         $check = Cart::update($id, $request->count);
-        return response()->json(true, 200);
+        return view('client.pages.table-checkout-test');
     }
 
     /**
