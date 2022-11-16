@@ -14,30 +14,20 @@ use Illuminate\Support\Facades\Redirect;
 class OrderController extends Controller
 {
     public function view_order($orderid){
+        // Lấy ra thông tin hóa đơn
+        $order = DB::table('order')->join('orderstatus', 'orderstatus.OrderStatusID', '=', 'order.OrderStatusID')->where('OrderID', $orderid)->first();
+        // Lấy ra thông tin khách hàng
+        $customer = DB::table('User')->where('UserID', $order->CustomerID)->first();
+        // Lấy ra thông tin nhân viên
+        $employee = DB::table('User')->where('UserID', $order->EmployeeID)->first();
+        // Lẩy ra danh sách sản phẩm trong hóa đơn
+        $products = DB::table('product')
+            ->join('orderdetail', 'product.ProductID', '=', 'orderdetail.ProductID')
+            ->select('orderdetail.Price','product.ProductName','product.Image','product.ProductID','orderdetail.TotalPrice','orderdetail.Amount', 'product.ProductCode')->get();
+        // Lẩy ra danh sách trạng thái hóa đơn
+        $orderStatus = DB::table('orderstatus')->get();
 
-        $order_detail =   Orderdetail::where('OrderID',$orderid)->get();
-        $order =    Order::where('OrderID',$orderid)->get();
-
-        foreach($order as $key => $ord){
-            $customerID = $ord->CustomerID;
-            $employeeID = $ord->EmployeeID;
-            $orderstatusID = $ord->OrderStatusID;
-        }
-
-        $customer = UserNamee::where('UserID',$customerID)->first();
-        $employee = UserNamee::where('UserID',$employeeID)->first();
-        $status =   Status::orderby('OrderStatusID','DESC')->get();
-        $status2 =   Status::where('OrderStatusID',$orderstatusID)->first();
-        // $order_detail =   Orderdetail::where('OrderCode',$ordercode)->get();
-
-        foreach($order_detail as $key => $ord_detail){
-            $productID = $ord_detail->ProductID;
-
-        }
-        $product = Product::where('ProductID',$productID)->first();
-        // $order_detail = Orderdetail::with('product')->where('OrderCode',$ordercode)->get();
-
-        return view('admin.pages.view_order')->with(compact('order_detail','customer','employee','product','order','status','status2'));
+        return view('admin.orders.view_order', compact('order','customer','employee','products','orderStatus'));
     }
 
     public function manager_order(){
@@ -47,20 +37,34 @@ class OrderController extends Controller
         ->orderby('OrderDate','DESC')->get();
         $orderStatus = Status::all();
 
-        return view('admin.pages.manager_order')->with(compact('orders','orderStatus'));
+        return view('admin.orders.manager_order')->with(compact('orders','orderStatus'));
     }
 
-    public function updatestatus(Request $request,$orderid){
-        // $order = Order::find($orderid);
-        // $info = array();
-        // $info['OrderStatusID'] = $request->status;
-        // $order->update($info);
-        // return redirect('/manager-oder');
+    public function updatestatus(Request $request, $orderid){
         $order = DB::table('order')
                 ->where('OrderID', $orderid)
                 ->update([
                     'OrderStatusID' => $request->status,
                 ]);
        return redirect('/manager-order');
+    }
+
+    public function list_order(Request $request)
+    {
+        if ($request->input('OrderStatusID')) {
+            $orders = Order::join('orderstatus', 'orderstatus.OrderStatusID', '=', 'order.OrderStatusID')
+            ->where('order.OrderStatusID', $request->input('OrderStatusID'))
+            ->join('user', 'user.UserID','=','order.CustomerID')
+            ->orderby('OrderDate','DESC')
+            ->get();
+        }
+        else {
+            $orders = Order::join('orderstatus', 'orderstatus.OrderStatusID', '=', 'order.OrderStatusID')
+            ->join('user', 'user.UserID','=','order.CustomerID')
+            ->orderby('OrderDate','DESC')
+            ->get();
+        }
+
+        return view('admin.orders.list_order')->with(compact('orders'));
     }
 }

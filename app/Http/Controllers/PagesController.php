@@ -15,7 +15,7 @@ class PagesController extends Controller
         $iphone_product = DB::table('product')->where('ProductName', 'like', '%Iphone%')->limit(3)->get();
         $best_sell = DB::table('product')
             ->join('orderdetail', 'product.ProductID', '=', 'orderdetail.ProductID')
-            ->select('product.Price','product.ProductName','product.Image')
+            ->select('product.Price','product.ProductName','product.Image','product.ProductID')
             ->orderby('orderdetail.amount', 'desc')->limit(4)->get();
         return view('client.index')->with('category',$cate_product)->with('newproduct', $new_product)->with('expenproduct', $expen_product)->with('iphoneproduct', $iphone_product)->with('bestsell', $best_sell);
     }
