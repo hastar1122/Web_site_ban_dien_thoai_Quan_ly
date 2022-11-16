@@ -96,17 +96,23 @@
                                     <a class="dropdown-item" href="#" data-toggle="modal"
                                         data-target="#infUserModal">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Profile
+                                        Thông tin cá nhân
                                     </a>
                                     <a class="dropdown-item" data-toggle="modal" data-target="#changePassword">
                                         <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Changes Password
+                                        Đổi mật khẩu
+                                    </a>
+
+                                    <div class="dropdown-divider"></div>
+                                    <a href="{{URL::to('/view-history/'.Auth::user()->UserID)}}" class="dropdown-item">
+                                        <i class="fas fa-check-circle fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Lịch sử mua hàng
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#" data-toggle="modal"
+                                    <a style="color: #d60404" class="dropdown-item" href="#" data-toggle="modal"
                                         data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Logout
+                                        Đăng xuất
                                     </a>
                                 </div>
                             </li>

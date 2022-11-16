@@ -23,6 +23,7 @@ use App\Http\Controllers\CartViewController;
 use App\Http\Controllers\ChangeAmountController;
 use App\Http\Controllers\ClientOrderController;
 use App\Http\Controllers\CustomerOrderController;
+use App\Http\Controllers\HistoryOrderController;
 use App\Http\Controllers\ProductsController;
 
 
@@ -96,6 +97,7 @@ Route::get('/', [PagesController::class, 'index']);
 Route::get('/manager-order',[OrderController::class, 'manager_order']);
 Route::get('/view-order/{OrderID}',[OrderController::class, 'view_order']);
 Route::post('/update/{OrderID}',[OrderController::class, 'updatestatus']);
+Route::get('/list-order', [OrderController::class,'list_order']);
 
 
 //client login
@@ -133,5 +135,11 @@ Route::resource('/change-amount-cart', ChangeAmountController::class);
 
 //order-client
 Route::resource('/order-product', ClientOrderController::class);
+<<<<<<< HEAD
 //get catergory
 // Route::get('/category/{CategoryID}', [PagesController::class, 'show']);
+=======
+
+//history
+Route::get('/view-history/{id}', [HistoryOrderController::class, 'show_history']);
+>>>>>>> 297d61e16399fc4a08a6d06450bde8ea6fdbcb27

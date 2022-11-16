@@ -44,7 +44,11 @@ class ClientOrderController extends Controller
             $insertproduct = DB::table('orderdetail')->insert($new_product);
         }
         Cart::destroy();
+<<<<<<< HEAD
         return redirect()->back( 'Đặt hàng thành công');
+=======
+        return redirect()->back();
+>>>>>>> 297d61e16399fc4a08a6d06450bde8ea6fdbcb27
     }
 
     /**

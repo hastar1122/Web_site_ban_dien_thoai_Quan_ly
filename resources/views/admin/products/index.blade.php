@@ -6,13 +6,13 @@
 
         <div class="form-inline">
             <select data-url="{{ URL::to('/loadProducts') }}" id="category" required class="form-control col-md-4">
-                <option value="">--Chọn phân loại sản phẩm</option>
+                <option value="">--Chọn phân loại sản phẩm--</option>
                 @foreach ($categorys as $item)
                     <option value="{{ $item->CategoryID }}">{{ $item->ProductCategoryName }}</option>
                 @endforeach
             </select>
             <select data-url="{{ URL::to('/loadProducts') }}" id="brand" required class="form-control col-md-4 ml-md-3">
-                <option value="">--Chọn thương hiệu</option>
+                <option value="">--Chọn thương hiệu--</option>
                 @foreach ($brands as $item)
                     <option value="{{ $item->BrandID }}">{{ $item->BrandName }}</option>
                 @endforeach
