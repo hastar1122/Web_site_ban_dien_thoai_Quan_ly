@@ -200,7 +200,9 @@
                         count: count,
                     },
                     success: function(data) {
-                        $('').html('')
+                        setTimeout(() => {
+							location.reload();
+						}, 100);
                     },
                     error: function(jqXHR, textStatus, errorThrown, response) {
                     }
@@ -221,6 +223,9 @@
                         count: count,
                     },
                     success: function(data) {
+						setTimeout(() => {
+							location.reload();
+						}, 100);
                     },
                     error: function(jqXHR, textStatus, errorThrown, response) {
                     }
@@ -230,7 +235,6 @@
     </script>
 	<!-- for bootstrap working -->
 	<script src="{{ asset('client/js/bootstrap.js') }}"></script>
-    <script src="{{ asset('client/js/minicart.js') }}"></script>
 	<!-- //for bootstrap working -->
 	<!-- //js-files -->
 

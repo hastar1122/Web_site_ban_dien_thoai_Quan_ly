@@ -18,7 +18,7 @@
         }
     </script>
     <!-- //Meta tag Keywords -->
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Custom-Files -->
     <link href="{{ asset('client/css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
     <!-- Bootstrap css -->
@@ -793,9 +793,12 @@
 
         });
     </script>
+    @yield('scripts')
+
     <!-- //smooth-scrolling-of-move-up -->
     <!-- for bootstrap working -->
     <script src="{{ asset('client/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('client/js/minicart.js') }}"></script>
     <!-- //for bootstrap working -->
     <!-- //js-files -->
 </body>

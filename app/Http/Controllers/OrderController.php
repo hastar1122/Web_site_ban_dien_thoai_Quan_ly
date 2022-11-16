@@ -42,13 +42,12 @@ class OrderController extends Controller
 
     public function manager_order(){
 
-        $order =    Order::orderby('OrderDate','DESC')->get();
-        foreach($order as $key => $ord){
-            $orderstatusID = $ord->OrderStatusID;
-        }
-        $status =   Status::where('OrderStatusID',$orderstatusID)->first();
+        $orders = Order::join('orderstatus', 'orderstatus.OrderStatusID', '=', 'order.OrderStatusID')
+        ->join('user', 'user.UserID','=','order.CustomerID')
+        ->orderby('OrderDate','DESC')->get();
+        $orderStatus = Status::all();
 
-        return view('admin.pages.manager_order')->with(compact('order','status'));
+        return view('admin.pages.manager_order')->with(compact('orders','orderStatus'));
     }
 
     public function updatestatus(Request $request,$orderid){

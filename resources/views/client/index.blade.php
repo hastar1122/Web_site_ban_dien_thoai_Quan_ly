@@ -256,25 +256,38 @@
         $(document).ready(function() {
             //add
             $('.btn-add-cart').click(function(e) {
-            var id = $(this).attr('data-id');
-            console.log(id);
-            var url = "http://127.0.0.1:8000/save-cart-view/" + id;
-            console.log(url);
+                var id = $(this).attr('data-id');
+                console.log(id);
+                var url = "http://127.0.0.1:8000/save-cart-view/" + id;
+                console.log(url);
+                $.ajax({
+                    type: 'GET',
+                    dataType: "json",
+                    url: url,
+                    success: function(data) {
+                        toastr.success("Thêm giỏ hàng thành công!","Thành công");
+                        loadCart();
+                    },
+                    error: function(jqXHR, textStatus, errorThrown, response) {
+                        toastr.error("Thêm giỏ hàng không thành công!","Thất bại");
+                    }
+                })
+            });
+
+            function loadCart() {
+			$('.dropdown-menu1').empty();
             $.ajax({
+                url: 'http://127.0.0.1:8000/view-cart',
+                dataType: "html",
                 type: 'GET',
-                dataType: "json",
-                url: url,
-                success: function(data) {
-                    toastr.success("Thêm giỏ hàng thành công!","Thành công");
-                    setTimeout(() => {
-                        location.reload();
-                    }, 100);
+                success: function (data) {
+                    $('.dropdown-menu1').html(data);
                 },
-                error: function(jqXHR, textStatus, errorThrown, response) {
-                    toastr.error("Thêm giỏ hàng thành công!","Thất bại");
+                error: function () {
+                    alert("Đã có lỗi xảy ra");
                 }
-            })
-        });
+            });
+		}
         });
     </script>
 @endsection

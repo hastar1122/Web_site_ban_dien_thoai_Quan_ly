@@ -33,4 +33,28 @@ class CartController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * Hàm trả lại view giỏ hàng
+     */
+    public function view_cart()
+    {
+        return view('client.pages.cart');
+    }
+
+    /**
+     * Hàm mua sản phẩm ở trang chi tiết sản phẩm
+     */
+    public function buy_product(Request $request)
+    {
+        $product = DB::table('product')->where('ProductID', $request->input('ProductID'))->first();
+        //thêm dữ liệu vào Cart
+        $data['id'] = $request->input('ProductID');
+        $data['name'] = $product->ProductName;
+        $data['qty'] = $request->input('Quality');
+        $data['price'] = $product->Price;
+        $data['weight'] = 1;
+        $data['options']['image'] = $product->Image;
+        $check = Cart::add($data);
+        return response()->json(true,200);
+    }
 }

@@ -114,11 +114,14 @@ Route::post('/update_attribute', [AttributesController::class, 'update']);
 // Product customer
 Route::get('/list-products', [PagesController::class,'loadAllProduct']);
 Route::get('/productdetail/{id}', [PagesController::class,'productdetail']);
+
 //Giỏ hàng
 Route::get('/show-cart', [CartController::class, 'show_cart']);
 Route::get('/delete-cart/{rowId}', [CartController::class, 'delete_cart']);
 Route::get('/delete-all-cart', [CartController::class, 'delete_all_cart']);
 Route::post('/save-cart', [CartController::class, 'save_cart']);
+Route::get('/view-cart', [CartController::class, 'view_cart']);
+Route::post('/buy-product', [CartController::class, 'buy_product']);
 
 
 Route::resource('/save-cart-view', CartViewController::class);
