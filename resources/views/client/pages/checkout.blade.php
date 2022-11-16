@@ -37,7 +37,15 @@
                                         echo 0;
                                     }
                                 ?>">
-								<button type="submit" class="check_out btn btn-checkout">Đặt hàng</button>
+
+                                <?php
+                                    if (Auth::check() && Auth::user()->RoleID==4 && Auth::user()->Address && Auth::user()->Email && Auth::user()->PhoneNumber) {
+                                        echo '<button type="submit" class="submit check_out btn btn-checkout">Đặt hàng</button>';
+                                    } else {
+                                        echo '<button type="button" class="submit check_out btn btn-checkout">Đặt hàng</button>';
+                                    }
+                                ?>
+
                                 </form>
 						</div>
 					</div>
