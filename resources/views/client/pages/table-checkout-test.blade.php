@@ -32,7 +32,7 @@
                         <div class="quantity-select">
                             <div data-id="{{$product_info->rowId}}" price="{{$product_info->price}}" class="entry value-minus">&nbsp;</div>
                             <div class="entry value">
-                                <input id="input-amount" style="margin-top: -10px" class="entry value" value="{{$product_info->qty}}">
+                                <input data-id="{{$product_info->rowId}}" id="input-amount" style="margin-top: -10px" class="entry value" value="{{$product_info->qty}}">
                             </div>
                             <div data-id="{{$product_info->rowId}}" price="{{$product_info->price}}" sub-price="{{ Cart::priceTotal(0,'','') }}" class="entry value-plus active">&nbsp;</div>
                         </div>
@@ -64,7 +64,6 @@
                     <th>Tổng tiền</th>
                     <td class="invert">
                         <span class="change-price-sub">{{ Cart::priceTotal(0) }} VNĐ</span>
-                        {{-- <span class="change-price-sub">{{ Cart::priceTotal(0,'','') }} VNĐ</span> --}}
                     </td>
                 </tr>
                 <tr class="rem1">
@@ -86,3 +85,55 @@
         </table>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+
+        $('.value-minus').click(function () {
+            var rowId = $(this).attr('data-id');
+            var $input = $(this).parent().find('#input-amount');
+            var count = parseInt($input.val()) - 1;
+            count = count < 1 ? 1 : count;
+            $input.val(count);
+            $input.change();
+            var url = "http://127.0.0.1:8000/change-amount-cart/" + rowId;
+            $.ajax({
+                type: 'GET',
+                dataType: "html",
+                url: url,
+                data: {
+                    count: count,
+                },
+                success: function(data) {
+                    $('.LoadAllCart').html(data);
+                    $('#dataTable').DataTable().draw();
+                },
+                error: function(jqXHR, textStatus, errorThrown, response) {
+                }
+            })
+        });
+        $('.value-plus').click(function () {
+            var rowId = $(this).attr('data-id');
+            var $input = $(this).parent().find('#input-amount');
+            var count = parseInt($input.val()) + 1;
+            $input.val(count);
+            $input.change();
+            var url = "http://127.0.0.1:8000/change-amount-cart/" + rowId;
+            console.log(url);
+            $.ajax({
+                type: 'GET',
+                dataType: "html",
+                url: url,
+                data: {
+                    count: count,
+                },
+                success: function(data) {
+                    $('.LoadAllCart').html(data);
+                    $('#dataTable').DataTable().draw();
+                },
+                error: function(jqXHR, textStatus, errorThrown, response) {
+                }
+            })
+        });
+
+    });
+ </script>

@@ -21,6 +21,8 @@ use App\Http\Controllers\AttributesController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartViewController;
 use App\Http\Controllers\ChangeAmountController;
+use App\Http\Controllers\ClientOrderController;
+use App\Http\Controllers\CustomerOrderController;
 use App\Http\Controllers\ProductsController;
 
 
@@ -127,3 +129,8 @@ Route::post('/buy-product', [CartController::class, 'buy_product']);
 
 Route::resource('/save-cart-view', CartViewController::class);
 Route::resource('/change-amount-cart', ChangeAmountController::class);
+
+
+
+//order-client
+Route::resource('/order-product', ClientOrderController::class);

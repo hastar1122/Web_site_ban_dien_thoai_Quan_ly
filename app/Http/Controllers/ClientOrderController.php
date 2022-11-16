@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Http\Request;
+use Carbon\Carbon;
 
-
-class ChangeAmountController extends Controller
+class ClientOrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class ChangeAmountController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -27,7 +26,25 @@ class ChangeAmountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $content = Cart::content();
+        $new_order = array();
+        $new_order['CustomerID'] = $request->customer_id;
+        $new_order['TotalPrice'] = Cart::total(0,'','');
+        $new_order['OrderStatusID'] = 1;
+        $new_order['OrderDate'] = Carbon::now();
+        $check_order = DB::table('order')->insertGetId($new_order);
+
+        foreach($content as $pro) {
+            $new_product = array();
+            $new_product['OrderID'] = $check_order;
+            $new_product['ProductID'] = $pro->id;
+            $new_product['Price'] = $pro->price;
+            $new_product['Amount'] = $pro->qty;
+            $new_product['TotalPrice'] = $pro->qty * $pro->price;
+            $insertproduct = DB::table('orderdetail')->insert($new_product);
+        }
+        Cart::destroy();
+        return redirect()->back('message', 'Đặt hàng thành công');
     }
 
     /**
@@ -36,10 +53,9 @@ class ChangeAmountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id, Request $request)
+    public function show($id)
     {
-        $check = Cart::update($id, $request->count);
-        return view('client.pages.table-checkout-test');
+
     }
 
     /**
