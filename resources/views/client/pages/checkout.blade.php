@@ -43,20 +43,22 @@
 								<td class="invert">
 									<div class="quantity">
 										<div class="quantity-select">
-											<div class="entry value-minus">&nbsp;</div>
+											<div data-id="{{$product_info->rowId}}" class="entry value-minus">&nbsp;</div>
 											<div class="entry value">
-												<span>{{$product_info->qty}}</span>
+                                                <input id="input-amount" style="margin-top: -10px" class="entry value" value="{{$product_info->qty}}">
 											</div>
-											<div class="entry value-plus active">&nbsp;</div>
+											<div data-id="{{$product_info->rowId}}" class="entry value-plus active">&nbsp;</div>
 										</div>
 									</div>
 								</td>
 								<td class="invert">{{$product_info->name}}</td>
 								<td class="invert">{{ number_format($product_info->price, 0, ',', '.') }} VNĐ</td>
-                                <td class="invert"><?php
-                                    $tt = $product_info->price * $product_info->qty;
-                                    echo number_format($tt, 0, ',', '.');
-                                ?> VNĐ</td>
+                                <td class="invert">
+                                    <span class="change-price"><?php
+                                        $tt = $product_info->price * $product_info->qty;
+                                        echo number_format($tt, 0, ',', '.');
+                                        ?> VNĐ</span>
+                                </td>
 								<td class="invert">
 									<div class="rem">
                                         <a class="close1" href="{{URL::to('/delete-cart/'.$product_info->rowId)}}"></a>
@@ -180,6 +182,52 @@
 	</div>
 	<!-- middle section -->
 
+    <script>
+       $(document).ready(function() {
+			$('.value-minus').click(function () {
+                var rowId = $(this).attr('data-id');
+				var $input = $(this).parent().find('#input-amount');
+				var count = parseInt($input.val()) - 1;
+				count = count < 1 ? 1 : count;
+				$input.val(count);
+				$input.change();
+                var url = "http://127.0.0.1:8000/change-amount-cart/" + rowId;
+                $.ajax({
+                    type: 'GET',
+                    dataType: "json",
+                    url: url,
+                    data: {
+                        count: count,
+                    },
+                    success: function(data) {
+                        $('').html('')
+                    },
+                    error: function(jqXHR, textStatus, errorThrown, response) {
+                    }
+                })
+            });
+            $('.value-plus').click(function () {
+                var rowId = $(this).attr('data-id');
+                var $input = $(this).parent().find('#input-amount');
+                var count = parseInt($input.val()) + 1;
+                $input.val(count);
+                $input.change();
+                var url = "http://127.0.0.1:8000/change-amount-cart/" + rowId;
+                $.ajax({
+                    type: 'GET',
+                    dataType: "json",
+                    url: url,
+                    data: {
+                        count: count,
+                    },
+                    success: function(data) {
+                    },
+                    error: function(jqXHR, textStatus, errorThrown, response) {
+                    }
+                })
+            });
+		});
+    </script>
 	<!-- for bootstrap working -->
 	<script src="{{ asset('client/js/bootstrap.js') }}"></script>
     <script src="{{ asset('client/js/minicart.js') }}"></script>

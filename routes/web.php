@@ -20,6 +20,7 @@ use App\Http\Controllers\UpdateStatusController;
 use App\Http\Controllers\AttributesController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartViewController;
+use App\Http\Controllers\ChangeAmountController;
 use App\Http\Controllers\ProductsController;
 
 
@@ -121,3 +122,4 @@ Route::post('/save-cart', [CartController::class, 'save_cart']);
 
 
 Route::resource('/save-cart-view', CartViewController::class);
+Route::resource('/change-amount-cart', ChangeAmountController::class);

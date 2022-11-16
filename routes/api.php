@@ -26,7 +26,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('Account','App\Http\Controllers\api\AccountController');
 Route::resource('Password','App\Http\Controllers\api\ChangePasswordController');
 
-
-
 //cart
 

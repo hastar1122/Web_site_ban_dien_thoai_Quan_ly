@@ -6,16 +6,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
-class CartViewController extends Controller
+
+class ChangeAmountController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-
+        //
     }
 
     /**
@@ -35,17 +36,9 @@ class CartViewController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        $product = DB::table('product')->where('ProductID', $id)->first();
-        //thêm dữ liệu vào Cart
-        $data['id'] = $id;
-        $data['name'] = $product->ProductName;
-        $data['qty'] = 1;
-        $data['price'] = $product->Price;
-        $data['weight'] = 1;
-        $data['options']['image'] = $product->Image;
-        $check = Cart::add($data);
+        Cart::update($id, $request->count);
         return response()->json(true,200);
     }
 
@@ -58,7 +51,7 @@ class CartViewController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        //
     }
 
     /**
