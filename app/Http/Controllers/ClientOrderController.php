@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ClientOrderController extends Controller
 {
@@ -27,11 +28,23 @@ class ClientOrderController extends Controller
     {
         $content = Cart::content();
         $new_order = array();
-        $new_order['CustomerID'] = $request->customerid;
-        $new_order['TotalPrice'] = Cart::total();
+        $new_order['CustomerID'] = $request->customer_id;
+        $new_order['TotalPrice'] = Cart::total(0,'','');
         $new_order['OrderStatusID'] = 1;
-        $check_order = DB::table('order')->insert($new_order);
-        return response()->json($new_order,200);
+        $new_order['OrderDate'] = Carbon::now();
+        $check_order = DB::table('order')->insertGetId($new_order);
+
+        foreach($content as $pro) {
+            $new_product = array();
+            $new_product['OrderID'] = $check_order;
+            $new_product['ProductID'] = $pro->id;
+            $new_product['Price'] = $pro->price;
+            $new_product['Amount'] = $pro->qty;
+            $new_product['TotalPrice'] = $pro->qty * $pro->price;
+            $insertproduct = DB::table('orderdetail')->insert($new_product);
+        }
+        Cart::destroy();
+        return redirect()->back('message', 'Đặt hàng thành công');
     }
 
     /**

@@ -18,13 +18,18 @@
 					<h4 class="mb-sm-4 mb-3">Thêm địa chỉ giao hàng</h4>
 					<div class="creditly-card-form agileinfo_form">
 						<div class="creditly-wrapper wthree, w3_agileits_wrapper">
-							<div class="information-wrapper">
+							<form class="information-wrapper" action="{{URL::to('/order-product')}}" method="POST">
                                 {{ csrf_field() }}
 								<div class="first-row">
 									<div class="controls form-group">
 										<input class="billing-address-name form-control" type="text" name="order-address" placeholder="Nhập địa chỉ giao hàng">
 									</div>
 								</div>
+                                <input name="customer_id" id="customer_id" hidden value="<?php
+                                    if (Auth::check() && Auth::user()->RoleID==4) {
+                                        echo Auth::user()->UserID;
+                                    }
+                                ?>">
                                 <input id="check-out" hidden value="<?php
                                     if (Auth::check() && Auth::user()->RoleID==4) {
                                         echo 1;
@@ -32,8 +37,8 @@
                                         echo 0;
                                     }
                                 ?>">
-								<button class="check_out btn btn-checkout">Đặt hàng</button>
-							</div>
+								<button type="submit" class="check_out btn btn-checkout">Đặt hàng</button>
+                                </form>
 						</div>
 					</div>
 				</div>
@@ -59,11 +64,7 @@
     ?>">
 
     {{-- check nhập đủ thông tin  --}}
-    <input id="customer-id" hidden value="<?php
-        if (Auth::check() && Auth::user()->RoleID==4) {
-            echo Auth::user()->RoleID;
-        }
-    ?>">
+
 
 	<!-- middle section -->
 	<div class="join-w3l1 py-sm-5 py-4">
@@ -131,28 +132,6 @@
                     toastr.error("Bạn chưa cập nhật thông tin", "Đặt hàng thất bại");
                     return;
                 }
-
-                //lấy mã nhân viên
-                var customerid = $('#customer-id').val();
-                console.log(customerid);
-                var url = "{{route('order-product.store')}}";
-                console.log(url);
-
-                $.ajax({
-                    type: 'POST',
-                    dataType: "json",
-                    url: url,
-                    data: {
-                        customerid: customerid,
-                    },
-                    success: function(data) {
-                        toastr.success("Đặt hàng thành công", "Thành công");
-                    },
-                    error: function(jqXHR, textStatus, errorThrown, response, data) {
-                        console.log(data);
-                        toastr.error("Đặt hàng thất bại", "Thất bại");
-                    }
-                })
             });
 
             });

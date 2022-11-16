@@ -27,5 +27,5 @@ Route::resource('Account','App\Http\Controllers\api\AccountController');
 Route::resource('Password','App\Http\Controllers\api\ChangePasswordController');
 
 //cart
-Route::resource('/order-product', ClientOrderController::class);
+
 //order-client

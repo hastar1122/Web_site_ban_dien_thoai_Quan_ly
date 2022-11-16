@@ -132,4 +132,4 @@ Route::resource('/change-amount-cart', ChangeAmountController::class);
 
 
 //order-client
-
+Route::resource('/order-product', ClientOrderController::class);
