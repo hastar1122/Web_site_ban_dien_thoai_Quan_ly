@@ -23,6 +23,7 @@ use App\Http\Controllers\CartViewController;
 use App\Http\Controllers\ChangeAmountController;
 use App\Http\Controllers\ClientOrderController;
 use App\Http\Controllers\CustomerOrderController;
+use App\Http\Controllers\HistoryOrderController;
 use App\Http\Controllers\ProductsController;
 
 
@@ -133,3 +134,6 @@ Route::resource('/change-amount-cart', ChangeAmountController::class);
 
 //order-client
 Route::resource('/order-product', ClientOrderController::class);
+
+//history
+Route::get('/view-history/{id}', [HistoryOrderController::class, 'show_history']);
