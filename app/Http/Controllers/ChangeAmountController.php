@@ -38,8 +38,8 @@ class ChangeAmountController extends Controller
      */
     public function show($id, Request $request)
     {
-        Cart::update($id, $request->count);
-        return response()->json(true,200);
+        $check = Cart::update($id, $request->count);
+        return response()->json(true, 200);
     }
 
     /**

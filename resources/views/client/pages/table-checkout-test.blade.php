@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="timetable_sub" id="table-responsive-new">
+    <table class="table table-bordered" id="dataTable">
         <thead>
             <tr>
                 <th>STT</th>
@@ -30,11 +30,11 @@
                 <td class="invert">
                     <div class="quantity">
                         <div class="quantity-select">
-                            <div data-id="{{$product_info->rowId}}" class="entry value-minus">&nbsp;</div>
+                            <div data-id="{{$product_info->rowId}}" price="{{$product_info->price}}" class="entry value-minus">&nbsp;</div>
                             <div class="entry value">
                                 <input id="input-amount" style="margin-top: -10px" class="entry value" value="{{$product_info->qty}}">
                             </div>
-                            <div data-id="{{$product_info->rowId}}" class="entry value-plus active">&nbsp;</div>
+                            <div data-id="{{$product_info->rowId}}" price="{{$product_info->price}}" sub-price="{{ Cart::priceTotal(0,'','') }}" class="entry value-plus active">&nbsp;</div>
                         </div>
                     </div>
                 </td>
@@ -48,7 +48,7 @@
                 </td>
                 <td class="invert">
                     <div class="rem">
-                        <a class="close1" href="{{URL::to('/delete-cart/'.$product_info->rowId)}}"></a>
+                        <a class="btn btn-danger btn-delete" href="{{URL::to('/delete-cart/'.$product_info->rowId)}}"><i class="fas fa-trash"></i></a>
                     </div>
                 </td>
             </tr>
@@ -62,7 +62,10 @@
             <tbody>
                 <tr class="rem1">
                     <th>Tổng tiền</th>
-                    <td class="invert">{{ Cart::priceTotal(0) }} VNĐ</td>
+                    <td class="invert">
+                        <span class="change-price-sub">{{ Cart::priceTotal(0) }} VNĐ</span>
+                        {{-- <span class="change-price-sub">{{ Cart::priceTotal(0,'','') }} VNĐ</span> --}}
+                    </td>
                 </tr>
                 <tr class="rem1">
                     <th>Giảm giá</th>
@@ -75,7 +78,9 @@
 
                 <tr class="rem1">
                     <th>Thanh toán</th>
-                    <td class="invert">{{ Cart::total(0) }} VNĐ</td>
+                    <td class="invert">
+                        <span class="change-price-total">{{ Cart::total(0) }} VNĐ</span>
+                    </td>
                 </tr>
             </tbody>
         </table>
