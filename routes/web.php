@@ -97,6 +97,7 @@ Route::get('/', [PagesController::class, 'index']);
 Route::get('/manager-order',[OrderController::class, 'manager_order']);
 Route::get('/view-order/{OrderID}',[OrderController::class, 'view_order']);
 Route::post('/update/{OrderID}',[OrderController::class, 'updatestatus']);
+Route::get('/list-order', [OrderController::class,'list_order']);
 
 
 //client login
