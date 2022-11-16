@@ -10,90 +10,8 @@
 				Giỏ hàng của bạn
 			</h3>
 			<!-- //tittle heading -->
-			<div class="checkout-right">
-				<div class="table-responsive">
-					<table class="timetable_sub">
-						<thead>
-							<tr>
-								<th>STT</th>
-								<th>Hình ảnh</th>
-								<th>Sổ lượng</th>
-								<th>Tên sản phẩm</th>
-								<th>Giá</th>
-                                <th>Tổng tiền</th>
-								<th>Thao tác</th>
-							</tr>
-						</thead>
-                        <?php
-                            $content = Cart::content();
-                            // echo '<pre>';
-                            // print_r($content);
-                            // echo '</pre>';
-                        ?>
-                        @if($content)
-                        @foreach ($content as $product_info)
-						<tbody>
-							<tr class="rem1">
-								<td class="invert">1</td>
-								<td class="invert-image">
-									<a href="single.html">
-										<img height="50" src="{{asset('imgProduct/'.$product_info->options->image)}}" alt=" " class="img-responsive">
-									</a>
-								</td>
-								<td class="invert">
-									<div class="quantity">
-										<div class="quantity-select">
-											<div data-id="{{$product_info->rowId}}" class="entry value-minus">&nbsp;</div>
-											<div class="entry value">
-                                                <input id="input-amount" style="margin-top: -10px" class="entry value" value="{{$product_info->qty}}">
-											</div>
-											<div data-id="{{$product_info->rowId}}" class="entry value-plus active">&nbsp;</div>
-										</div>
-									</div>
-								</td>
-								<td class="invert">{{$product_info->name}}</td>
-								<td class="invert">{{ number_format($product_info->price, 0, ',', '.') }} VNĐ</td>
-                                <td class="invert">
-                                    <span class="change-price"><?php
-                                        $tt = $product_info->price * $product_info->qty;
-                                        echo number_format($tt, 0, ',', '.');
-                                        ?> VNĐ</span>
-                                </td>
-								<td class="invert">
-									<div class="rem">
-                                        <a class="close1" href="{{URL::to('/delete-cart/'.$product_info->rowId)}}"></a>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-                        @endforeach
-                        @endif
-					</table>
-                    <br>
-                    <div class="table-responsive">
-                        <table class="timetable_sub1 timetable_sub">
-                            <tbody>
-                                <tr class="rem1">
-                                    <th>Tổng tiền</th>
-                                    <td class="invert">{{ Cart::priceTotal(0) }} VNĐ</td>
-                                </tr>
-                                <tr class="rem1">
-                                    <th>Giảm giá</th>
-                                    <td class="invert">{{ Cart::discount() }} VNĐ</td>
-                                </tr>
-                                <tr class="rem1">
-                                    <th>Phí ship</th>
-                                    <td class="invert">Free</td>
-                                </tr>
-
-                                <tr class="rem1">
-                                    <th>Thanh toán</th>
-                                    <td class="invert">{{ Cart::total(0) }} VNĐ</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-				</div>
+			<div class="checkout-right LoadAllCart">
+                @include('client.pages.table-checkout-test')
 			</div>
 			<div class="checkout-left">
 				<div class="address_form_agile mt-sm-5 mt-4">
@@ -185,11 +103,13 @@
     <script>
        $(document).ready(function() {
 			$('.value-minus').click(function () {
+                var price = $(this).attr('price');
                 var rowId = $(this).attr('data-id');
 				var $input = $(this).parent().find('#input-amount');
 				var count = parseInt($input.val()) - 1;
 				count = count < 1 ? 1 : count;
 				$input.val(count);
+                var tt = price * count;
 				$input.change();
                 var url = "http://127.0.0.1:8000/change-amount-cart/" + rowId;
                 $.ajax({
@@ -200,21 +120,29 @@
                         count: count,
                     },
                     success: function(data) {
-                        setTimeout(() => {
-							location.reload();
-						}, 100);
+                        $('.change-price').html(
+                            '<span class="change-price">' + new Intl.NumberFormat().format(tt) +  'VNĐ</span>'
+                        );
                     },
                     error: function(jqXHR, textStatus, errorThrown, response) {
                     }
                 })
             });
             $('.value-plus').click(function () {
+                var subtotal =  $(this).attr('sub-price');
+
+                var total =  $(this).attr('change-price-total');
                 var rowId = $(this).attr('data-id');
+                var price = $(this).attr('price');
                 var $input = $(this).parent().find('#input-amount');
                 var count = parseInt($input.val()) + 1;
                 $input.val(count);
                 $input.change();
                 var url = "http://127.0.0.1:8000/change-amount-cart/" + rowId;
+                var tt = price * count;
+                var ttsub = parseInt(subtotal) + parseInt(price);
+                console.log(subtotal);
+                console.log(ttsub);
                 $.ajax({
                     type: 'GET',
                     dataType: "json",
@@ -223,9 +151,18 @@
                         count: count,
                     },
                     success: function(data) {
-						setTimeout(() => {
-							location.reload();
-						}, 100);
+
+                        $('.change-price').html(
+                            '<span class="change-price">' + new Intl.NumberFormat().format(tt) +  'VNĐ</span>'
+                        );
+
+                        // $('.change-price-sub').html(
+                        //     '<span class="change-price-sub">' + new Intl.NumberFormat().format(ttsub) +  'VNĐ</span>'
+                        // );
+
+                        // $('.change-price-total').html(
+                        //     '<span class="change-price-total">' + new Intl.NumberFormat().format(s) +  'VNĐ</span>'
+                        // );
                     },
                     error: function(jqXHR, textStatus, errorThrown, response) {
                     }

@@ -32,6 +32,7 @@
     <!-- menu style -->
     <!-- //Custom-Files -->
 
+
     <!-- web fonts -->
     <link
         href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&amp;subset=latin-ext"
@@ -800,6 +801,11 @@
     <script src="{{ asset('client/js/bootstrap.js') }}"></script>
     <script src="{{ asset('client/js/minicart.js') }}"></script>
     <!-- //for bootstrap working -->
+    <script src="{{ asset('admin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('admin/js/demo/datatables-demo.js') }}"></script>
+    <link href="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet"
+        type="text/css">
     <!-- //js-files -->
 </body>
 
