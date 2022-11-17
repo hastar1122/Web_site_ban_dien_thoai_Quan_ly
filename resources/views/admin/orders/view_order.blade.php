@@ -174,9 +174,53 @@
     <div class="card-footer">
         <div class="d-flex justify-content-between"> 
             <h5 class="text-primary">Tổng tiền: {{ number_format($order->TotalPrice, 0, ',', '.') }}VND</h5> 
-            <button class="btn btn-primary" type="submit"><i class="far fa-save"></i> Cập nhật</button>
+            <form class="form-inline">
+                <label class="control-label mr-sm-2 text-info">Cập nhật trạng thái đơn hàng: </label>
+                <select name="OrderStatusID" data-id="{{ $order->OrderID }}" id="OrderStatusID" class="form-control">
+                    @foreach ($orderStatus as $item)
+                        <option value="{{ $item->OrderStatusID }}"  @selected($item->OrderStatusID == $order->OrderStatusID)>{{ $item->OrderStatus }}</option>
+                    @endforeach
+                </select>
+            </form>
         </div>
         
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function () {
+        $('#OrderStatusID').change(function (e) { 
+            e.preventDefault();
+            var OrderStatusID = $("#OrderStatusID").val();
+            var formData = new FormData;
+            formData.append("OrderStatusID", OrderStatusID);
+            $.ajax({
+                async: true,
+                url: 'http://127.0.0.1:8000/update-order/' + $('#OrderStatusID').attr('data-id'),
+                data: formData,
+                contentType: false,
+                processData: false,
+                dataType: 'json',
+                type: 'POST',
+                success: function (data) {
+                    if (data == true) {
+                        toastr.options.positionClass = "toast-bottom-right";
+                        toastr.success("Cập nhật đơn hàng thành công");
+                    }
+                    else {
+                        console.log(data);
+                        toastr.options.positionClass = "toast-bottom-right";
+                        toastr.warning('Cập nhật đơn hàng không thành công');
+                    }
+                },
+                error: function () {
+                    toastr.options.positionClass = "toast-bottom-right";
+                    toastr.warning('Có lỗi xảy ra');
+                }
+            });
+        });
+    }); 
+</script>
 @endsection
