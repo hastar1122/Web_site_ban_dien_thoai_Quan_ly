@@ -135,15 +135,11 @@ Route::resource('/change-amount-cart', ChangeAmountController::class);
 
 //order-client
 Route::resource('/order-product', ClientOrderController::class);
-<<<<<<< HEAD
+
 //get catergory
 // Route::get('/category/{CategoryID}', [PagesController::class, 'show']);
-=======
 
 //history
 Route::get('/view-history/{id}', [HistoryOrderController::class, 'show_history']);
-<<<<<<< HEAD
 Route::get('/view-history-detail/{id}', [HistoryOrderController::class, 'show_history_detail']);
-=======
->>>>>>> 297d61e16399fc4a08a6d06450bde8ea6fdbcb27
->>>>>>> 04916151aaa1c18e90b49ab82cfa9fea4dcf530e
+
