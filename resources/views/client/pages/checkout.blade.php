@@ -2,6 +2,9 @@
 
 @section('content')
 
+    @if (!empty($success))
+        <div class="alert alert-success"> {{ $success }}</div>
+    @endif
 	<!-- checkout page -->
 	<div class="privacy py-sm-5 py-4">
 		<div class="container py-xl-4 py-lg-2">
@@ -22,7 +25,7 @@
                                 {{ csrf_field() }}
 								<div class="first-row">
 									<div class="controls form-group">
-										<input class="billing-address-name form-control" type="text" name="order-address" placeholder="Nhập địa chỉ giao hàng">
+										<input class="billing-address-name form-control" type="text" name="orderaddress" placeholder="Nhập địa chỉ giao hàng" required>
 									</div>
 								</div>
                                 <input name="customer_id" id="customer_id" hidden value="<?php

@@ -1,6 +1,14 @@
 @extends('client.pages.cart-history')
 
 @section('history')
+    @if (!empty($message))
+        <script>
+            function showError() {
+                toastr.error("Đã hủy đơn hàng");
+            }
+            window.showError();
+        </script>
+    @endif
 <div class="table-responsive">
     <table class="table table-bordered" id="dataTable">
         <thead>
@@ -33,10 +41,15 @@
                 @endif
                 </td>
                 <td class="invert">
+                    <form action="{{URL::to('/delete-order/'.$order->OrderID)}}" method="GET">
                     <div class="rem">
-                        <?php if($order->OrderStatusID == 1)  echo '<a class="btn btn-danger btn-sm btn-delete" href=""><i class="fas fa-trash"></i></a>';?>
+                        <input hidden name="customerid" value="<?php echo Auth::user()->UserID ?>">
                         <a class="information btn btn-sm btn-primary" href="{{URL::to('/view-history-detail/'.$order->OrderID)}}" title="Xem chi tiết"><i class="fas fa-eye"></i></a>
+                        @if ($order->OrderStatusID == 1)
+                            <button type="submit" onclick="return confirm('Bạn có chắc là muốn xóa đơn hàng này không?')" class="information btn btn-sm btn-danger"  title="Xóa đơn hàng"><i class="fas fa-trash"></i></button>
+                        @endif
                     </div>
+                    </form>
                 </td>
             </tr>
         </tbody>
@@ -44,4 +57,6 @@
     </table>
     <br>
 </div>
+
+
 @endsection

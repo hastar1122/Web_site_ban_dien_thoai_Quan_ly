@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class HistoryOrderController extends Controller
 {
@@ -20,5 +21,13 @@ class HistoryOrderController extends Controller
             ->where('OrderID', $id)
             ->get();
         return view('client.pages.list-order-product')->with(compact('category', 'getOrderDetail', 'getOrder'));
+    }
+
+    public function delete_order($id, Request $request) {
+        $delOrderDetail = DB::table('orderdetail')->where('OrderID', $id)->delete();
+        $delOrder = DB::table('order')->where('OrderID', $id)->delete();
+        $check = DB::table('order')->where('CustomerID', $request->customerid)->get();
+        $cate_product = DB::table('category')->orderBy('CategoryID','DESC')->get();
+        return view('client.pages.table-cart-history')->with('content', $check)->with('category',$cate_product)->with('message', 'Đã hủy đơn hàng');
     }
 }

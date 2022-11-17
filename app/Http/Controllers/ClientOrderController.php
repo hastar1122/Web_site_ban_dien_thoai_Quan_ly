@@ -32,6 +32,7 @@ class ClientOrderController extends Controller
         $new_order['TotalPrice'] = Cart::total(0,'','');
         $new_order['OrderStatusID'] = 1;
         $new_order['OrderDate'] = Carbon::now();
+        $new_order['Address'] = $request->orderaddress;
         $check_order = DB::table('order')->insertGetId($new_order);
 
         foreach($content as $pro) {
@@ -44,7 +45,7 @@ class ClientOrderController extends Controller
             $insertproduct = DB::table('orderdetail')->insert($new_product);
         }
         Cart::destroy();
-        return redirect()->back();
+        return redirect()->back()->with('success','Đặt hàng thành công');
     }
 
     /**

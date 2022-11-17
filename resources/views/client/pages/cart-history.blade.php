@@ -7,7 +7,7 @@
 		<div class="container py-xl-4 py-lg-2">
 			<!-- tittle heading -->
 			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-				Lịch sử mua hàng
+				Lịch sử đặt hàng
 			</h3>
 			<!-- //tittle heading -->
 			<div class="checkout-right LoadAllCart">
