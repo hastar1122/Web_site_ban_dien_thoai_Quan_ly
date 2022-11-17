@@ -8,61 +8,8 @@
             <h4 class="text-info m-0">Thông tin hóa đơn</h4>
         </div>
     
-        <div class="card-body pb-0">
-            <dl class="row dl-horizontal mb-0">
-                <dt class="col-md-4">
-                    Mã hóa đơn:
-                </dt>
-    
-                <dd class="col-md-8">
-                    {{ $order->OrderCode }}
-                </dd>
-    
-                <dt class="col-md-4">
-                    Thời gian đặt:
-                </dt>
-    
-                <dd class="col-md-8">
-                    {{ $order->OrderDate }}
-                </dd>
-    
-                <dt class="col-md-4">
-                    Tổng tiền:
-                </dt>
-    
-                <dd class="col-md-8">
-                    {{ $order->TotalPrice }}
-                </dd>
-    
-                <dt class="col-md-4">
-                    Nhân viên xác nhận:
-                </dt>
-    
-                <dd class="col-md-8">
-                    @if ($employee)
-                        {{ $employee->UserName }}
-                    @endif
-                </dd>
-    
-                <dt class="col-md-4">
-                    Trạng thái:
-                </dt>
-    
-                <dd class="col-md-8">
-                    @if ($order->OrderStatusID == 1)
-                        <span class="badge badge-primary">Đang xử lý</span> 
-                    @endif     
-                    @if ($order->OrderStatusID == 2)
-                        <span class="badge badge-info">Đang giao hàng</span> 
-                    @endif 
-                    @if ($order->OrderStatusID == 3)
-                        <span class="badge badge-success">Giao hàng thành công</span> 
-                    @endif 
-                    @if ($order->OrderStatusID == 4)
-                        <span class="badge badge-danger">Đã hủy</span> 
-                    @endif  
-                </dd>
-            </dl>
+        <div class="card-body pb-0 info_order">
+            @include('admin.orders.info_order')
         </div>
     </div>
     
@@ -163,7 +110,7 @@
                         <td>{{ $product->Amount}}</td>
                         <td>{{ number_format($product->Price, 0, ',', '.') }}</td>
                         <td>
-                            {{ $product->TotalPrice }}        
+                            {{ number_format($product->TotalPrice, 0, ',', '.') }}        
                         </td>
                     </tr>
                     @endforeach
@@ -173,7 +120,7 @@
     </div>
     <div class="card-footer">
         <div class="d-flex justify-content-between"> 
-            <h5 class="text-primary">Tổng tiền: {{ number_format($order->TotalPrice, 0, ',', '.') }}VND</h5> 
+            <h5 class="text-primary">Tổng tiền: {{ number_format($order->TotalPrice, 0, ',', '.') }} VND</h5> 
             <form class="form-inline">
                 <label class="control-label mr-sm-2 text-info">Cập nhật trạng thái đơn hàng: </label>
                 <select name="OrderStatusID" data-id="{{ $order->OrderID }}" id="OrderStatusID" class="form-control">
@@ -206,11 +153,23 @@
                 type: 'POST',
                 success: function (data) {
                     if (data == true) {
+                        $('.info_order').empty();
+                        $.ajax({
+                            url: 'http://127.0.0.1:8000/info-order/' + $('#OrderStatusID').attr('data-id'),
+                            dataType: "html",
+                            type: 'GET',
+                            success: function (data) {
+                                $('.info_order').html(data);
+                            },
+                            error: function () {
+                                alert("Đã có lỗi xảy ra");
+                            }
+                        });
                         toastr.options.positionClass = "toast-bottom-right";
                         toastr.success("Cập nhật đơn hàng thành công");
                     }
                     else {
-                        console.log(data);
+                        alert(`Sản phẩm ${data.ProductName} có mã là ${data.ProductCode} chỉ còn ${data.Amount} sản phẩm`);
                         toastr.options.positionClass = "toast-bottom-right";
                         toastr.warning('Cập nhật đơn hàng không thành công');
                     }

@@ -128,4 +128,14 @@ class OrderController extends Controller
 
         return view('admin.orders.list_order')->with(compact('orders'));
     }
+
+    public function info_order ($orderid)
+    {
+        // Lấy ra thông tin hóa đơn
+        $order = DB::table('order')->join('orderstatus', 'orderstatus.OrderStatusID', '=', 'order.OrderStatusID')->where('OrderID', $orderid)->first();
+        // Lấy ra thông tin nhân viên
+        $employee = DB::table('User')->where('UserID', $order->EmployeeID)->first();
+
+        return view('admin.orders.info_order', compact('order','employee'));
+    }
 }

@@ -28,6 +28,7 @@ class ClientOrderController extends Controller
     {
         $content = Cart::content();
         $new_order = array();
+        $new_order['OrderCode'] = 'DH-'.trim(str_replace(" ", "_", Carbon::now()));
         $new_order['CustomerID'] = $request->customer_id;
         $new_order['TotalPrice'] = Cart::total(0,'','');
         $new_order['OrderStatusID'] = 1;
