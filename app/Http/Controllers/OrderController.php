@@ -23,6 +23,7 @@ class OrderController extends Controller
         // Lẩy ra danh sách sản phẩm trong hóa đơn
         $products = DB::table('product')
             ->join('orderdetail', 'product.ProductID', '=', 'orderdetail.ProductID')
+            ->where('orderdetail.OrderID', $orderid)
             ->select('orderdetail.Price','product.ProductName','product.Image','product.ProductID','orderdetail.TotalPrice','orderdetail.Amount', 'product.ProductCode')->get();
         // Lẩy ra danh sách trạng thái hóa đơn
         $orderStatus = DB::table('orderstatus')->get();

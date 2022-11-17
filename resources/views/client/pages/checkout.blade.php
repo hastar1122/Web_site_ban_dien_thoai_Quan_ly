@@ -123,7 +123,9 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            $('.btn-checkout').click(function () {
+            $('.btn-checkout').click(function (e) {
+				e.preventDefault();
+				
                 //kiểm tra đăng nhập chưa
                 var check = $('#check-out').val();
                 if (check == 0) {

@@ -39,7 +39,9 @@
                 </dt>
     
                 <dd class="col-md-8">
-                    {{ $employee->UserName }}
+                    @if ($employee)
+                        {{ $employee->UserName }}
+                    @endif
                 </dd>
     
                 <dt class="col-md-4">
