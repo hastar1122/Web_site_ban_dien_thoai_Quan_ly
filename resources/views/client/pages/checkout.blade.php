@@ -40,12 +40,11 @@
 
                                 <?php
                                     if (Auth::check() && Auth::user()->RoleID==4 && Auth::user()->Address && Auth::user()->Email && Auth::user()->PhoneNumber) {
-                                        echo '<button type="submit" class="submit check_out btn btn-checkout">Đặt hàng</button>';
+                                        echo '<button type="submit" class="submit check_out btn">Đặt hàng</button>';
                                     } else {
                                         echo '<button type="button" class="submit check_out btn btn-checkout">Đặt hàng</button>';
                                     }
                                 ?>
-
                                 </form>
 						</div>
 					</div>
@@ -125,7 +124,7 @@
             });
             $('.btn-checkout').click(function (e) {
 				e.preventDefault();
-				
+
                 //kiểm tra đăng nhập chưa
                 var check = $('#check-out').val();
                 if (check == 0) {
