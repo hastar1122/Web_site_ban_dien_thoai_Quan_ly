@@ -11,7 +11,8 @@
 			</h3>
 			<!-- //tittle heading -->
 			<div class="checkout-right LoadAllCart">
-                @include('client.pages.table-cart-history')
+                @yield('history')
+                {{-- @include('client.pages.table-cart-history') --}}
 			</div>
 		</div>
 	</div>

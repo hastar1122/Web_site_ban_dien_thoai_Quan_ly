@@ -138,3 +138,4 @@ Route::resource('/order-product', ClientOrderController::class);
 
 //history
 Route::get('/view-history/{id}', [HistoryOrderController::class, 'show_history']);
+Route::get('/view-history-detail/{id}', [HistoryOrderController::class, 'show_history_detail']);

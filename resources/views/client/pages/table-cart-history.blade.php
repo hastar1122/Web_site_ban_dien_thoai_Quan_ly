@@ -1,54 +1,47 @@
+@extends('client.pages.cart-history')
+
+@section('history')
 <div class="table-responsive">
     <table class="table table-bordered" id="dataTable">
         <thead>
             <tr>
                 <th>STT</th>
-                <th>Hình ảnh</th>
-                <th>Sổ lượng</th>
-                <th>Tên sản phẩm</th>
-                <th>Giá</th>
+                <th>Ngày đặt</th>
                 <th>Tổng tiền</th>
+                <th>Trạng thái</th>
                 <th>Thao tác</th>
             </tr>
         </thead>
-        @if($content)
-        @foreach ($content as $product_info)
+        @foreach ($content as $order)
         <tbody>
             <tr class="rem1">
                 <td class="invert">1</td>
-                <td class="invert-image">
-                    <a href="single.html">
-                        <img height="50" src="{{asset('imgProduct/'.$product_info->options->image)}}" alt=" " class="img-responsive">
-                    </a>
-                </td>
+                <td class="invert">{{$order->OrderDate}}</td>
+                <td class="invert">{{ number_format($order->TotalPrice, 0, ',', '.') }} VNĐ</td>
                 <td class="invert">
-                    <div class="quantity">
-                        <div class="quantity-select">
-                            <div data-id="{{$product_info->rowId}}" price="{{$product_info->price}}" class="entry value-minus">&nbsp;</div>
-                            <div class="entry value">
-                                <input data-id="{{$product_info->rowId}}" id="input-amount" style="margin-top: -10px" class="entry value" value="{{$product_info->qty}}">
-                            </div>
-                            <div data-id="{{$product_info->rowId}}" price="{{$product_info->price}}" sub-price="{{ Cart::priceTotal(0,'','') }}" class="entry value-plus active">&nbsp;</div>
-                        </div>
-                    </div>
-                </td>
-                <td class="invert">{{$product_info->name}}</td>
-                <td class="invert">{{ number_format($product_info->price, 0, ',', '.') }} VNĐ</td>
-                <td class="invert">
-                    <span class="change-price"><?php
-                        $tt = $product_info->price * $product_info->qty;
-                        echo number_format($tt, 0, ',', '.');
-                        ?> VNĐ</span>
+                @if ($order->OrderStatusID == 1)
+                    <span class="badge badge-primary">Đang xử lý</span>
+                @endif
+                @if ($order->OrderStatusID == 2)
+                    <span class="badge badge-info">Đang giao hàng</span>
+                @endif
+                @if ($order->OrderStatusID == 3)
+                    <span class="badge badge-success">Giao hàng thành công</span>
+                @endif
+                @if ($order->OrderStatusID == 4)
+                    <span class="badge badge-danger">Đã hủy</span>
+                @endif
                 </td>
                 <td class="invert">
                     <div class="rem">
-                        <a class="btn btn-danger btn-delete" href="{{URL::to('/delete-cart/'.$product_info->rowId)}}"><i class="fas fa-trash"></i></a>
+                        <?php if($order->OrderStatusID == 1)  echo '<a class="btn btn-danger btn-sm btn-delete" href=""><i class="fas fa-trash"></i></a>';?>
+                        <a class="information btn btn-sm btn-primary" href="{{URL::to('/view-history-detail/'.$order->OrderID)}}" title="Xem chi tiết"><i class="fas fa-eye"></i></a>
                     </div>
                 </td>
             </tr>
         </tbody>
         @endforeach
-        @endif
     </table>
     <br>
 </div>
+@endsection
