@@ -25,7 +25,7 @@
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $brand }}</div>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-university fa-3x text-gray-300"></i>
+                        <i class="far fa-copyright fa-3x text-gray-300"></i>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $category }}</div>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-school fa-3x text-gray-300"></i>
+                        <i class="fas fa-chart-pie fa-3x text-gray-300"></i>
                     </div>
                 </div>
             </div>
@@ -88,7 +88,7 @@
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $supplier }}</div>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-chalkboard-teacher fa-3x text-gray-300"></i>
+                        <i class="fas fa-truck fa-3x text-gray-300"></i>
                     </div>
                 </div>
             </div>
@@ -114,7 +114,7 @@
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $customer }}</div>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-university fa-3x text-gray-300"></i>
+                        <i class="fas fa-users fa-3x text-gray-300"></i>
                     </div>
                 </div>
             </div>
@@ -135,7 +135,7 @@
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $attribute }}</div>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-school fa-3x text-gray-300"></i>
+                        <i class="fas fa-th fa-3x text-gray-300"></i>
                     </div>
                 </div>
             </div>
@@ -156,7 +156,7 @@
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $product }}</div>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-user-tie fa-3x text-gray-300"></i>
+                        <i class="fas fa-box fa-3x text-gray-300"></i>
                     </div>
                 </div>
             </div>
@@ -177,7 +177,7 @@
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $order }}</div>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-chalkboard-teacher fa-3x text-gray-300"></i>
+                        <i class="fas fa-boxes fa-3x text-gray-300"></i>
                     </div>
                 </div>
             </div>

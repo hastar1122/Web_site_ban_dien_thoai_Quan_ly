@@ -56,10 +56,21 @@
 					</p>
 					<table class="table table-striped table-sm">
 						<tbody>
+							@php
+								$y = 0;
+							@endphp
 							@for ($i = 0; $i < count($attributes); $i++)
 								<tr>
 									<td style="border: none">{{ $attributes[$i]->AttributeName }}</td>
-									<td style="border: none">{{ $attributevalues[$i]->Value }}</td>
+									@if ($y < count($attributevalues))
+										<td style="border: none">{{ $attributevalues[$i]->Value }}</td>
+                                        @php
+                                            $y++;
+                                        @endphp
+									@else
+										<td style="border: none"></td>
+                                    @endif 
+									
 								</tr>
 							@endfor
 						</tbody>

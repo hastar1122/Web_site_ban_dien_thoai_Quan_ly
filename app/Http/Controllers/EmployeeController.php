@@ -11,8 +11,12 @@ class EmployeeController extends Controller
     public function add_employee(Request $request)
     {
         $file = $request->file('imageemployee');
-        $fileName = time() . '.' . $file->getClientOriginalExtension();
-        $file->move(public_path('admin/img'),$fileName);
+        $fileName = null;
+        if ($file) {
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('admin/img'),$fileName);
+        }
+        
         $empData = [
             'UserAccount' => $request->employee_account,
             'Password' => bcrypt(1),
@@ -23,6 +27,7 @@ class EmployeeController extends Controller
             'Image' => $fileName,
             'RoleID' => 2
         ];
+
         $check = DB::table('user')->insert($empData);
         if ($check) {
             return response()->json(null, 204);

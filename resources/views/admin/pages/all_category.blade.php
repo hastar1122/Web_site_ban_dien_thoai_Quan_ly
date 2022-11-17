@@ -65,6 +65,12 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+
+            $(".nav-1").addClass("show");
+
+            $('.nav-link-1').removeClass('collapsed');
+            
             $('.btn-add').click(function(e) {
                 var url = $(this).attr('data-url');
                 $('#modal-category-add').modal('show');

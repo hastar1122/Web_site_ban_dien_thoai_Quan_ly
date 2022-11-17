@@ -153,13 +153,21 @@
                     </div>
                 
                     <div class="card-body">
+                        @php
+                            $y = 0;
+                        @endphp
                         @for ($i = 0; $i < count($attributes); $i++)
                             <div class="form-group">
                                 <label class="control-label col-md">{{ $attributes[$i]->AttributeName }}</label>
                                 <div class="col-md">
-                                    <input @if (count($attributevalues) > 0)
-                                        value="{{$attributevalues[$i]->Value}}"
-                                    @endif class = "form-control" type="text" name="AttributeValue[]" type="text" required>
+                                    <input 
+                                    @if ($y < count($attributevalues))
+                                        value="{{$attributevalues[$y]->Value}}"
+                                        @php
+                                            $y++;
+                                        @endphp
+                                    @endif 
+                                    class = "form-control" type="text" name="AttributeValue[]" type="text" required>
                                 </div>
                             </div>
                         @endfor

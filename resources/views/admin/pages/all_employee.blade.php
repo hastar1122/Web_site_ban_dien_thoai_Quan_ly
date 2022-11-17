@@ -77,6 +77,12 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+
+            $(".nav-1").addClass("show");
+
+            $('.nav-link-1').removeClass('collapsed');
+
             $('.btn-add').click(function(e) {
                 $('#modal-employee-add').modal('show');
             });
@@ -95,13 +101,13 @@
                     contentType: false,
                     success: function(response) {
                         console.log(response);
-                        toastr.success("Thêm mới nhà cung cấp thành công!");
+                        toastr.success("Thêm mới nhân viên thành công!");
                         $("#modal-supplier-add").modal('hide');
                         location.reload();
 
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
-                        toastr.error("Thêm mới nhà cung cấp thất bại!");
+                        toastr.error("Thêm mới nhân viên thất bại!");
                     },
                 });
             });

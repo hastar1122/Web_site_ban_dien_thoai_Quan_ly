@@ -96,9 +96,9 @@ class ProductsController extends Controller
         // Lấy ra danh sách loại sản phẩm
         $categorys = DB::table('category')->get();
         if ($type == 1) {
-            return view('admin.products.create', compact('attributes','brands','categorys'));
+            return view('admin.products.create', compact('attributes','brands','categorys', 'categoryID'));
         }
-        return view('admin.products.create2', compact('attributes','brands','categorys'));
+        return view('admin.products.create2', compact('attributes','brands','categorys', 'categoryID'));
     }
 
     public function store(Request $request)
@@ -419,16 +419,32 @@ class ProductsController extends Controller
             ->select('AttributeName', 'attribute.AttributeID')
             ->get();
         
-        // Insert thông tin chi tiết của sản phẩm theo từng thuộc tính
+        // Câp nhật thông tin chi tiết của sản phẩm theo từng thuộc tính
         for ($i = 0; $i < count($attributes) ; $i++) {
-            DB::table('productattribute')
+            $productattribute = DB::table('productattribute')
             ->where('ProductID', $id)
             ->where('AttributeID', $attributes[$i]->AttributeID)
-            ->update(
-                [ 
-                    'Value' => $request->input('AttributeValue')[$i],
-                ]
-            );
+            ->first();
+            if ($productattribute) {
+                DB::table('productattribute')
+                ->where('ProductID', $id)
+                ->where('AttributeID', $attributes[$i]->AttributeID)
+                ->update(
+                    [ 
+                        'Value' => $request->input('AttributeValue')[$i],
+                    ]
+                );
+            }
+            else {
+                DB::table('productattribute')->insert(
+                    [ 
+                        'ProductID' => $id,
+                        'AttributeID' => $attributes[$i]->AttributeID,
+                        'Value' => $request->input('AttributeValue')[$i],
+                    ]
+                );
+            }
+            
         }
 
         return Redirect::to('products');
