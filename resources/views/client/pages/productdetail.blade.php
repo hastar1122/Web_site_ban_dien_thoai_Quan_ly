@@ -45,7 +45,7 @@
 					<div class="grid images_3_of_2">
 						<div class="flexslider">
 							<div class="thumb-image">
-                                <img src="{{ asset('/imgProduct/' . $product->Image) }}" data-imagezoom="true" class="img-fluid" alt=""> 
+                                <img src="{{ asset('/imgProduct/' . $product->Image) }}" data-imagezoom="true" class="img-fluid" alt="">
                             </div>
 							<div class="clearfix"></div>
 						</div>
@@ -55,7 +55,7 @@
 						<i class="fas fa-info-circle"></i> Thông tin chi tiết
 					</p>
 					<table class="table table-striped table-sm">
-						<tbody>  
+						<tbody>
 							@for ($i = 0; $i < count($attributes); $i++)
 								<tr>
 									<td style="border: none">{{ $attributes[$i]->AttributeName }}</td>
@@ -107,7 +107,7 @@
 					</div>
 					<div class="quantity">
 						<div class="quantity-select">
-							Chọn số lượng 
+							Chọn số lượng
 							<div class="entry value-minus">&nbsp;</div>
 							<div class="entry value">
 								<span class="quality">1</span>
@@ -149,7 +149,7 @@
 @section('scripts')
 <script>
 	$(document).ready(function () {
-		$('.btn-buy').click(function (e) { 
+		$('.btn-buy').click(function (e) {
 			$.ajaxSetup({
 				headers: {
 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

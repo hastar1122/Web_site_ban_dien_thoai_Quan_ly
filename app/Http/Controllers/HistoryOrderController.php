@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 class HistoryOrderController extends Controller
 {
     public function show_history($id) {
-        $check = DB::table('order')->where('CustomerID', $id)->get();
+        $check = DB::table('order')->where('CustomerID', $id)->orderBy('OrderStatusID','ASC')->get();
         $cate_product = DB::table('category')->orderBy('CategoryID','DESC')->get();
         return view('client.pages.table-cart-history')->with('content', $check)->with('category',$cate_product);
     }
@@ -20,14 +20,21 @@ class HistoryOrderController extends Controller
             ->leftJoin('product as b', 'a.ProductID', '=', 'b.ProductID')
             ->where('OrderID', $id)
             ->get();
+        //dd($getOrderDetail);
         return view('client.pages.list-order-product')->with(compact('category', 'getOrderDetail', 'getOrder'));
     }
 
     public function delete_order($id, Request $request) {
         $delOrderDetail = DB::table('orderdetail')->where('OrderID', $id)->delete();
-        $delOrder = DB::table('order')->where('OrderID', $id)->delete();
+        $delOrder = DB::table('order')->where('OrderID', $id)->where('OrderStatusID', 1)->delete();
         $check = DB::table('order')->where('CustomerID', $request->customerid)->get();
         $cate_product = DB::table('category')->orderBy('CategoryID','DESC')->get();
-        return view('client.pages.table-cart-history')->with('content', $check)->with('category',$cate_product)->with('message', 'Đã hủy đơn hàng');
+
+        if ($delOrder) {
+            $message = 1;
+        } else {
+            $message = 0;
+        }
+        return view('client.pages.table-cart-history')->with('content', $check)->with('category',$cate_product)->with('message', $message);
     }
 }

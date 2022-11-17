@@ -197,7 +197,7 @@
                                                         @foreach ($content as $product_info)
                                                             <tr class="rem1">
                                                                 <td class="invert-image1">
-                                                                    <a href="{{URL::to('/show-cart')}}">
+                                                                    <a href="../productdetail/{{ $product_info->id }}">
                                                                         <img src="{{asset('imgProduct/'.$product_info->options->image)}}" alt=" " class="img-responsive">
                                                                     </a>
                                                                 </td>
@@ -210,7 +210,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <a href="{{URL::to('/delete-all-cart')}}">Xóa hết giỏi hàng</a>
+                                        <a class="btn btn-danger btn-sm" href="{{URL::to('/delete-all-cart')}}">Xóa hết giỏi hàng</a>
                                     </div>
                                 </div>
                             </div>

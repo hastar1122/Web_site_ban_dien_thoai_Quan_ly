@@ -23,5 +23,5 @@
             </ul>
         </div>
     </div>
-    <a href="{{URL::to('/delete-all-cart')}}">Xóa hết giỏi hàng</a>
+    <a class="btn btn-danger btn-sm" href="{{URL::to('/delete-all-cart')}}">Xóa hết giỏi hàng</a>
 </div>
