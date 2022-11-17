@@ -2,12 +2,9 @@
 
 @section('history')
     @if (!empty($message))
-        <script>
-            function showError() {
-                toastr.error("Đã hủy đơn hàng");
-            }
-            window.showError();
-        </script>
+    <div class="alert alert-success">
+        <strong>Thành công!</strong> Hủy đơn hàng thành công.
+      </div>
     @endif
 <div class="table-responsive">
     <table class="table table-bordered" id="dataTable">

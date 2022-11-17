@@ -1,10 +1,6 @@
 @extends('client.layouts.app')
 
 @section('content')
-
-    @if (!empty($success))
-        <div class="alert alert-success"> {{ $success }}</div>
-    @endif
 	<!-- checkout page -->
 	<div class="privacy py-sm-5 py-4">
 		<div class="container py-xl-4 py-lg-2">
@@ -12,6 +8,11 @@
 			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
 				Giỏ hàng của bạn
 			</h3>
+            @if (session('message'))
+            <div class="alert alert-success">
+                <strong>Thành công!</strong> Đặt hàng thành công.
+            </div>
+            @endif
 			<!-- //tittle heading -->
 			<div class="checkout-right LoadAllCart">
                 @include('client.pages.table-checkout-test')
