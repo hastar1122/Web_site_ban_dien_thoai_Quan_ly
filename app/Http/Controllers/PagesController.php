@@ -159,10 +159,6 @@ class PagesController extends Controller
                 break;
         }
 
-        if ($request->Brand_Check && $request->Price_Check) {
-        } elseif ($request->Brand_Check) {
-        } elseif ($request->Price_Check) {
-            // return view('client.pages.product-by-price', compact('get_productByPrice', 'all_brand'));
-        }
+       
     }
 }
