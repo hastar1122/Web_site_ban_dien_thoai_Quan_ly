@@ -50,7 +50,7 @@
                                                 </div>
                                                 <div
                                                     class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                                    <form action="#" method="post">
+                                                    <form data-url="{{ URL::to('/save-cart/' . $product->ProductID) }}" method="post">
                                                         <fieldset>
                                                             <input type="hidden" name="cmd" value="_cart" />
                                                             <input type="hidden" name="add" value="1" />
@@ -69,8 +69,13 @@
                                                                     class="button btn btn-add-cart"
                                                                     style="background-color:red;" />
                                                             @elseif($product->Amount > 0)
+<<<<<<< HEAD
                                                                 <input data-id="{{ $product->ProductID }}" type="button"
                                                                     value="Thêm vào giỏ" class="button btn btn-add-cart" />
+=======
+                                                            <input data-id="{{ $product->ProductID }}" type="button"
+                                                                value="Thêm vào giỏ" class="button btn btn-add-cart" />
+>>>>>>> 75be42c2a7db8dbbcebe9619d21e55fadd0a2d03
                                                             @endif
                                                         </fieldset>
                                                     </form>
@@ -159,6 +164,168 @@
 
                             <button type="submit" class="btn btn-success">Lọc</button>
                         </form>
+<<<<<<< HEAD
+=======
+                        <div class="range border-bottom py-2">
+                            <h3 class="agileits-sear-head mb-3">Giá</h3>
+                            <div class="w3l-range">
+                                <ul>
+                                    <li>
+                                        <a href="/pri?price=1">Dưới 1.000.000VNĐ</a>
+                                    </li>
+                                    <li class="my-1">
+                                        <a href="?price=2">1.000.000 - 5.000.000VNĐ</a>
+                                    </li>
+                                    <li>
+                                        <a href="?price=3">5.000.000 - 10.000.000VNĐ</a>
+                                    </li>
+                                    <li class="my-1">
+                                        <a href="?price=4">10.000.000 - 15.000.000VNĐ</a>
+                                    </li>
+                                    <li>
+                                        <a href="?price=5">15.000.000 - 20.000.000VNĐ</a>
+                                    </li>
+                                    <li class="mt-1">
+                                        <a href="?price=6">Trên 20.000.000VNĐ</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- ram -->
+                        <div class="left-side border-bottom py-2">
+                            <h3 class="agileits-sear-head mb-3">Ram</h3>
+                            <ul>
+                                <li>
+                                    <input type="checkbox" class="checked">
+                                    <span class="span">Less than 512 MB</span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" class="checked">
+                                    <span class="span">512 MB - 1 GB</span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" class="checked">
+                                    <span class="span">1 GB</span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" class="checked">
+                                    <span class="span">2 GB</span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" class="checked">
+                                    <span class="span">3 GB</span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" class="checked">
+                                    <span class="span">5 GB</span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" class="checked">
+                                    <span class="span">6 GB</span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" class="checked">
+                                    <span class="span">6 GB & Above</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- //ram -->
+                        <!-- price -->
+
+                        <!-- //price -->
+                        <!-- discounts -->
+                        <div class="left-side border-bottom py-2">
+                            <h3 class="agileits-sear-head mb-3">Discount</h3>
+                            <ul>
+                                <li>
+                                    <input type="checkbox" class="checked">
+                                    <span class="span">5% or More</span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" class="checked">
+                                    <span class="span">10% or More</span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" class="checked">
+                                    <span class="span">20% or More</span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" class="checked">
+                                    <span class="span">30% or More</span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" class="checked">
+                                    <span class="span">50% or More</span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" class="checked">
+                                    <span class="span">60% or More</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- //discounts -->
+                        <!-- offers -->
+                        <div class="left-side border-bottom py-2">
+                            <h3 class="agileits-sear-head mb-3">Offers</h3>
+                            <ul>
+                                <li>
+                                    <input type="checkbox" class="checked">
+                                    <span class="span">Exchange Offer</span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" class="checked">
+                                    <span class="span">No Cost EMI</span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" class="checked">
+                                    <span class="span">Special Price</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- //offers -->
+                        <!-- delivery -->
+                        <div class="left-side border-bottom py-2">
+                            <h3 class="agileits-sear-head mb-3">Cash On Delivery</h3>
+                            <ul>
+                                <li>
+                                    <input type="checkbox" class="checked">
+                                    <span class="span">Eligible for Cash On Delivery</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- //delivery -->
+                        <!-- arrivals -->
+                        <div class="left-side border-bottom py-2">
+                            <h3 class="agileits-sear-head mb-3">New Arrivals</h3>
+                            <ul>
+                                <li>
+                                    <input type="checkbox" class="checked">
+                                    <span class="span">Last 30 days</span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" class="checked">
+                                    <span class="span">Last 90 days</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="left-side py-2">
+                            <h3 class="agileits-sear-head mb-3">Availability</h3>
+                            <ul>
+                                <li>
+                                    <input type="checkbox" class="checked">
+                                    <span class="span">Exclude Out of Stock</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- //arrivals -->
+                    </div>
+                    <!-- //product right -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //top products -->
+>>>>>>> 75be42c2a7db8dbbcebe9619d21e55fadd0a2d03
 
 
                         <!-- //product right -->
@@ -755,12 +922,77 @@
                     easingType: 'easeOutQuart'
                 });
 
+<<<<<<< HEAD
+=======
+    <!-- smooth-scrolling-of-move-up -->
+    <script>
+        $(document).ready(function() {
+            /*
+            var defaults = {
+            	containerID: 'toTop', // fading element id
+            	containerHoverID: 'toTopHover', // fading element hover id
+            	scrollSpeed: 1200,
+            	easingType: 'linear'
+            };
+            */
+            $().UItoTop({
+                easingType: 'easeOutQuart'
+>>>>>>> 75be42c2a7db8dbbcebe9619d21e55fadd0a2d03
             });
         </script>
         <!-- //smooth-scrolling-of-move-up -->
 
+<<<<<<< HEAD
         <!-- for bootstrap working -->
         <script src="js/bootstrap.js"></script>
         <!-- //for bootstrap working -->
         <!-- //js-files -->
     @endsection
+=======
+        });
+    </script>
+    <!-- //smooth-scrolling-of-move-up -->
+
+    <!-- for bootstrap working -->
+    <script src="js/bootstrap.js"></script>
+    <!-- //for bootstrap working -->
+    <!-- //js-files -->
+    <script>
+        $(document).ready(function() {
+            $('.btn-add-cart').click(function(e) {
+                var id = $(this).attr('data-id');
+                console.log(id);
+                var url = "http://127.0.0.1:8000/save-cart-view/" + id;
+                console.log(url);
+                $.ajax({
+                    type: 'GET',
+                    dataType: "json",
+                    url: url,
+                    success: function(data) {
+                        toastr.success("Thêm giỏ hàng thành công!", "Thành công");
+                        loadCart();
+                    },
+                    error: function(jqXHR, textStatus, errorThrown, response) {
+                        toastr.error("Thêm giỏ hàng không thành công!", "Thất bại");
+                    }
+                })
+            });
+
+            function loadCart() {
+                $('.dropdown-menu1').empty();
+                $.ajax({
+                    url: 'http://127.0.0.1:8000/view-cart',
+                    dataType: "html",
+                    type: 'GET',
+                    success: function(data) {
+                        $('.dropdown-menu1').html(data);
+                    },
+                    error: function() {
+                        alert("Đã có lỗi xảy ra");
+                    }
+                });
+            }
+        });
+    </script>
+@endsection
+>>>>>>> 75be42c2a7db8dbbcebe9619d21e55fadd0a2d03
