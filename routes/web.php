@@ -119,6 +119,7 @@ Route::post('/update_attribute', [AttributesController::class, 'update']);
 
 // Product customer
 Route::get('/list-products', [PagesController::class,'loadAllProduct']);
+Route::get('/search-products', [PagesController::class,'searchProduct']);
 Route::post('/list-products/filter', [PagesController::class,'filterProduct']);
 Route::post('/list-products/filter-for-price-and-brand', [PagesController::class,'filterProductForPriceAndBrand'])->name('filter-for-price-and-brand');
 Route::get('/list-products/{cate}', [PagesController::class, 'loadAllProductCate'])->name('cateAPIProduct');

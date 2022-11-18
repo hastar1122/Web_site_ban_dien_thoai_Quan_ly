@@ -15,7 +15,7 @@
         <div class="container py-xl-4 py-lg-2">
             <!-- tittle heading -->
             <h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-                Danh sách Sản Phẩm
+                Kết Quả Tìm Kiếm
             </h3>
             <!-- //tittle heading -->
             <div class="row">
@@ -25,7 +25,7 @@
                         <!-- first section -->
                         <div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
                             <div class="row">
-                                @foreach ($allproduct as $product)
+                                @foreach ($search_product as $product)
                                     <div class="col-md-4 product-men mt-5">
                                         <div class="men-pro-item simpleCart_shelfItem">
                                             <div class="men-thumb-item text-center">
@@ -91,11 +91,11 @@
                     <div class="side-bar p-sm-4 p-3">
                         <div class="search-hotel border-bottom py-2">
                             <h3 class="agileits-sear-head mb-3">Tìm Kiếm</h3>
-                            <form action="{{URL::to('/search-products')}}" method="get">
+                            <form action="{{ URL::to('/list-product/search') }}">
                                 @csrf
-								<input type="search" placeholder="Product name..." name="keywords_submit" required="">
-								<input type="submit" value=" " name="search_items">
-							</form>
+                                <input type="search" placeholder="Product name..." name="keywords_submit" required="">
+                                <input type="submit" value=" " name="search_items">
+                            </form>
                         </div>
                         <form action="{{ route('filter-for-price-and-brand') }}" method="post">
                             @csrf
