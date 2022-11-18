@@ -105,11 +105,10 @@ class PagesController extends Controller
     public function brandProduct(Request $request)
     {
         $brands = $request->brand ?? [];
-        $brand_ids = array_keys($brands); 
+        $brand_ids = array_keys($brands); dd($brand_ids);
         $get_product = DB::table('product')->get();
-        $products = $brand_ids != null ? $get_product->whereIn('product.Brand_ID', $brand_ids): $get_product;
+        $products = $brand_ids != null ? $get_product->whereIn('product.Brand_ID', $brand_ids)->get: $get_product;
         $cate_product = DB::table('category')->get();  $all_brand = DB::table('brand')->get();
-        dd($products);
         return view('client.pages.product')->with('allproduct', $products)->with('allbrand', $all_brand)->with('category', $cate_product);
     }
 }
