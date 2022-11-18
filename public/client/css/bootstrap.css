@@ -3159,6 +3159,27 @@ tbody.collapse.show {
     border:none !important;
 }
 
+.btn-cart::before{
+    display: flex;
+    width: 230px;
+    height: 20px;
+    background-color: transparent;
+    z-index: 0;
+    content: "";
+    margin-left: -75px;
+    border:none !important;
+}
+.drop-account::before{
+    display: flex;
+    width: 230px;
+    height: 20px;
+    background-color: transparent;
+    content: "";
+    border:none !important;
+    margin-top: -20px;
+}
+
+
 .dropdown-toggle:empty::after {
   margin-left: 0;
 }
@@ -4205,6 +4226,19 @@ tbody.collapse.show {
     right: 0;
     left: auto;
   }
+
+  .dropdown-menu1 {
+    width: 500px;
+  }
+
+  .dropdown-menu1::before {
+    height: 50px;
+    width: 50px;
+    background-color: #000;
+    position: absolute;
+    top: 100%;
+  }
+
   .navbar-expand-lg .navbar-nav .nav-link {
     padding-right: 0.5rem;
     padding-left: 0.5rem;
