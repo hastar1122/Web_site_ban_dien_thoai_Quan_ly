@@ -1557,7 +1557,7 @@ table.timetable_sub {
 
 .timetable_sub1 th {
     width: 200px;
-    background: #000;
+    background: #4e73df;
     color: #fff;
     font-size: 16px;
     border-right: 1px solid #ded2d2;
@@ -1596,7 +1596,6 @@ td.invert-image1 a img {
 }
 
 td.invert-image1 {
-    width: 150px;
     margin: 0;
 }
 

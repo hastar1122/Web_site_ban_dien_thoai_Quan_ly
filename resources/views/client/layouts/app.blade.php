@@ -93,6 +93,7 @@
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                     aria-labelledby="userDropdown">
+                                    <span class="drop-account"></span>
                                     <a class="dropdown-item" href="#" data-toggle="modal"
                                         data-target="#infUserModal">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -180,8 +181,10 @@
                                 <form action="{{URL::to('/show-cart')}}" method="GET">
                                     {{-- <input type="hidden" name="cmd" value="_cart">
                                     <input type="hidden" name="display" value="1"> --}}
-                                    <button onclick="redirectCart()" class="btn w3view-cart drop-no-after dropdown-toggle" type="submit" value=""  data-toggle="dropdown">
+
+                                    <button onclick="redirectCart()" class="btn w3view-cart  drop-no-after dropdown-toggle" type="submit" value=""  data-toggle="dropdown">
                                         <i class="fas fa-cart-arrow-down"></i>
+                                        <span class="btn-cart"></span>
                                     </button>
                                 </form>
                                 <div class="dropdown-menu1 dropdown-menu">
@@ -191,13 +194,13 @@
                                         ?>
                                         <h5 class="mb-3">Sản phẩm mới thêm (<span style="color: #d60404">{{Cart::count()}}</span>)</h5>
                                         <div class="row">
-                                            <div class="col-sm-8 multi-gd-img">
+                                            <div class="col-sm-9 multi-gd-img">
                                                 <ul class="multi-column-dropdown">
                                                     <table class="table-cart table-borderless table-striped">
                                                         @foreach ($content as $product_info)
                                                             <tr class="rem1">
-                                                                <td class="invert-image1">
-                                                                    <a href="{{URL::to('/show-cart')}}">
+                                                                <td width="30%" class="invert-image1">
+                                                                    <a href="../productdetail/{{ $product_info->id }}">
                                                                         <img src="{{asset('imgProduct/'.$product_info->options->image)}}" alt=" " class="img-responsive">
                                                                     </a>
                                                                 </td>
@@ -210,7 +213,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <a href="{{URL::to('/delete-all-cart')}}">Xóa hết giỏi hàng</a>
+                                        <a class="btn btn-danger btn-sm" href="{{URL::to('/delete-all-cart')}}">Xóa hết giỏi hàng</a>
                                     </div>
                                 </div>
                             </div>

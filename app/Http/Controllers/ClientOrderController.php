@@ -28,6 +28,7 @@ class ClientOrderController extends Controller
     {
         $content = Cart::content();
         $new_order = array();
+        $new_order['OrderCode'] = 'DH-'.trim(str_replace(" ", "_", Carbon::now()));
         $new_order['CustomerID'] = $request->customer_id;
         $new_order['TotalPrice'] = Cart::total(0,'','');
         $new_order['OrderStatusID'] = 1;
@@ -45,7 +46,7 @@ class ClientOrderController extends Controller
             $insertproduct = DB::table('orderdetail')->insert($new_product);
         }
         Cart::destroy();
-        return redirect()->back()->with('success','Đặt hàng thành công');
+        return redirect('show-cart')->with('message','Đặt hàng thành công');
     }
 
     /**

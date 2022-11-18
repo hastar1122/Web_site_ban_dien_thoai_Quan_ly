@@ -23,8 +23,8 @@
             <tr class="rem1">
                 <td class="invert">1</td>
                 <td class="invert-image">
-                    <a href="single.html">
-                        <img height="40" src="{{asset('imgProduct/'.$product_info->options->image)}}" alt=" " class="img-responsive">
+                    <a href="../productdetail/{{ $product_info->id }}">
+                        <img height="40"  src="{{asset('imgProduct/'.$product_info->options->image)}}" alt=" " class="img-responsive">
                     </a>
                 </td>
                 <td class="invert">

@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\DB;
 class PagesController extends Controller
 {
     public function index()
-    {
-        $cate_product = DB::table('category')->get();
-        $new_product = DB::table('product')->orderby('ProductID', 'desc')->limit(3)->get();
+    {   
+        $cate_product = DB::table('category')->orderBy('CategoryID','DESC')->get();
+        $new_product = DB::table('product')->orderby('CreatedDate', 'desc')->limit(3)->get();
         $expen_product = DB::table('product')->orderby('Price', 'desc')->limit(3)->get();
         $iphone_product = DB::table('product')->where('ProductName', 'like', '%Iphone%')->limit(3)->get();
         $best_sell = DB::table('product')

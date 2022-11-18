@@ -71,6 +71,12 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+
+            $(".nav-1").addClass("show");
+
+            $('.nav-link-1').removeClass('collapsed');
+            
             $(".btn-delete").click(function() {
                 var url = $(this).attr("data-url");
                 if (confirm("Bạn có chắc muốn xóa không?")) {

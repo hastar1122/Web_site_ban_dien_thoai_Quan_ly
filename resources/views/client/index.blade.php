@@ -107,8 +107,7 @@
                                                     style="width:200px;height:200px;object-fit:cover;">
                                                 <div class="men-cart-pro">
                                                     <div class="inner-men-cart-pro">
-                                                        <a href="../productdetail/{{ $product->ProductID }}"
-                                                            class="link-product-add-cart">Xem Chi Tiết</a>
+                                                        <a href="{{ URL::to('/productdetail/'.$product->ProductID)  }}" class="link-product-add-cart">Xem Chi Tiết</a>
                                                     </div>
                                                 </div>
                                             </div>

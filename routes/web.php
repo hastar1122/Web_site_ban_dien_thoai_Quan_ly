@@ -98,6 +98,7 @@ Route::get('/cate/{cate}', [PagesController::class, 'loadAllProductCate'])->name
 Route::get('/manager-order',[OrderController::class, 'manager_order']);
 Route::get('/view-order/{OrderID}',[OrderController::class, 'view_order']);
 Route::post('/update-order/{OrderID}',[OrderController::class, 'updatestatus']);
+Route::get('/info-order/{OrderID}', [OrderController::class, 'info_order']);
 Route::get('/list-order', [OrderController::class,'list_order']);
 
 

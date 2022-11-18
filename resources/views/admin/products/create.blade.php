@@ -51,7 +51,7 @@
                                         <div class="col-md">
                                             <select readonly name="CategoryID" class="form-control">
                                                 @foreach ($categorys as $item)
-                                                    <option value="{{ $item->CategoryID }}">{{ $item->ProductCategoryName }}</option>
+                                                    <option value="{{ $item->CategoryID }}" @selected($item->CategoryID == $categoryID)>{{ $item->ProductCategoryName }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

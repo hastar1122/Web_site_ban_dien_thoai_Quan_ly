@@ -79,10 +79,11 @@
                         <th>Thành tiền</th>
                     </tr>
                 </thead>
+                <?php $i=0 ?>
                 @foreach ($getOrderDetail as $orderdetail)
                 <tbody>
                     <tr>
-                        <td>1</td>
+                        <td>{{$i += 1}}</td>
                         <td>{{ $orderdetail->ProductID }}</td>
                         <td>{{ $orderdetail->ProductName }}</td>
                         <td> <img height="40" src="{{asset('imgProduct/'.$orderdetail->Image)}}"> </td>
