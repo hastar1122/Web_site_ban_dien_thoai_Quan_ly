@@ -25,7 +25,7 @@
                         <!-- first section -->
                         <div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
                             <div class="row">
-                                @foreach ($allproduct as $product)
+                                @foreach ($get_productByPrice as $product)
                                     <div class="col-md-4 product-men mt-5">
                                         <div class="men-pro-item simpleCart_shelfItem">
                                             <div class="men-thumb-item text-center">
@@ -104,7 +104,7 @@
                                 <h3 class="agileits-sear-head mb-3">Thương Hiệu</h3>
                                 <div class="left-side py-2">
                                     <ul>
-                                        @foreach ($allbrand as $brand)
+                                        @foreach ($all_brand as $brand)
                                             <li>
                                                 {{-- <input type="checkbox" {{(request("brand")[$brand->BrandID]??'')=='on'?'checked':''}} id="bc-{{$brand->BrandID}}" name="brand[{{$brand->BrandID}}]" class="checked " onchange="this.form.submit();" > --}}
                                                 {{-- <span class="span">{{$brand->BrandName}}</span> --}}

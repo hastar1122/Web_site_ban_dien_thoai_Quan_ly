@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\DB;
 class PagesController extends Controller
 {
     public function index()
-    {   
-        $cate_product = DB::table('category')->orderBy('CategoryID','DESC')->get();
+    {
+        $cate_product = DB::table('category')->orderBy('CategoryID', 'DESC')->get();
         $new_product = DB::table('product')->orderby('CreatedDate', 'desc')->limit(3)->get();
         $expen_product = DB::table('product')->orderby('Price', 'desc')->limit(3)->get();
         $iphone_product = DB::table('product')->where('ProductName', 'like', '%Iphone%')->limit(3)->get();
@@ -102,13 +102,67 @@ class PagesController extends Controller
         $all_brand = DB::table('brand')->get();
         return view('client.pages.searchproduct')->with('allbrand', $all_brand)->with('category', $cate_product)->with('get_product', $get_product);
     }
-    public function brandProduct(Request $request)
+    public function filterProduct(Request $request)
     {
         $brands = $request->brand ?? [];
-        $brand_ids = array_keys($brands); dd($brand_ids);
+        $brand_ids = array_keys($brands);
         $get_product = DB::table('product')->get();
-        $products = $brand_ids != null ? $get_product->whereIn('product.Brand_ID', $brand_ids)->get: $get_product;
-        $cate_product = DB::table('category')->get();  $all_brand = DB::table('brand')->get();
+        $products = $brand_ids != null ? $get_product->whereIn('product.Brand_ID', $brand_ids)->get : $get_product;
+        $cate_product = DB::table('category')->get();
+        $all_brand = DB::table('brand')->get();
         return view('client.pages.product')->with('allproduct', $products)->with('allbrand', $all_brand)->with('category', $cate_product);
+    }
+
+    public function filterProductForPriceAndBrand(Request $request)
+    {
+        // dd($request);
+
+        // if ($request->Brand_Check) {
+
+        // }
+        // $get_productBy = DB::table("product");
+        $get_productByPrice = "";
+        $all_brand = DB::table('brand')->get();
+        $category = DB::table('category')->get();
+
+
+        switch ($request->PriceCheck) {
+            case 1:
+                $get_productByPrice = DB::table("product")->whereBetween('Price', [0, 1000000])->get();
+                return view('client.pages.product-by-price', compact('get_productByPrice', 'all_brand', 'category'));
+
+                break;
+            case 2:
+                $get_productByPrice = DB::table("product")->whereBetween('Price', [1000000, 5000000])->get();
+                return view('client.pages.product-by-price', compact('get_productByPrice', 'all_brand', 'category'));
+
+                break;
+            case 3:
+                $get_productByPrice = DB::table("product")->whereBetween('Price', [5000000, 10000000])->get();
+                return view('client.pages.product-by-price', compact('get_productByPrice', 'all_brand', 'category'));
+
+                break;
+            case 4:
+                $get_productByPrice = DB::table("product")->whereBetween('Price', [10000000, 15000000])->get();
+                return view('client.pages.product-by-price', compact('get_productByPrice', 'all_brand', 'category'));
+
+                break;
+            case 5:
+                $get_productByPrice = DB::table("product")->whereBetween('Price', [15000000, 20000000])->get();
+                return view('client.pages.product-by-price', compact('get_productByPrice', 'all_brand', 'category'));
+
+                break;
+            case 6:
+                $get_productByPrice = DB::table("product")->where('Price', '>', 20000000)->get();
+                return view('client.pages.product-by-price', compact('get_productByPrice', 'all_brand', 'category'));
+
+                break;
+        }
+
+        if ($request->Brand_Check && $request->Price_Check) {
+        } elseif ($request->Brand_Check) {
+        } elseif ($request->Price_Check) {
+            // return view('client.pages.product-by-price', compact('get_productByPrice', 'all_brand'));
+        }
     }
 }
