@@ -31,7 +31,7 @@
                                             <div class="men-thumb-item text-center">
                                                 <img src="{{ asset('/imgProduct/' . $product->Image) }}" alt=""
                                                     style="width:200px;height:200px;object-fit:cover;">
-                                                <div class="men-cart-pro">  
+                                                <div class="men-cart-pro">
                                                     <div class="inner-men-cart-pro">
                                                         <a href="../productdetail/{{ $product->ProductID }}" class="link-product-add-cart">Xem Chi Tiết</a>
                                                     </div>
@@ -49,7 +49,7 @@
                                                 </div>
                                                 <div
                                                     class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                                    <form action="#" method="post">
+                                                    <form data-url="{{ URL::to('/save-cart/' . $product->ProductID) }}" method="post">
                                                         <fieldset>
                                                             <input type="hidden" name="cmd" value="_cart" />
                                                             <input type="hidden" name="add" value="1" />
@@ -66,7 +66,7 @@
                                                                  <input data-id="{{ $product->ProductID }}" type="button"  isabled
                                                                 value="Cháy hàng rồi" class="button btn btn-add-cart" style="background-color:red;"/>
                                                             @elseif($product->Amount > 0)
-                                                            <input data-id="{{ $product->ProductID }}" type="button"   
+                                                            <input data-id="{{ $product->ProductID }}" type="button"
                                                                 value="Thêm vào giỏ" class="button btn btn-add-cart" />
                                                             @endif
                                                         </fieldset>
@@ -76,7 +76,7 @@
                                         </div>
                                     </div>
                                 @endforeach
-                               
+
                             </div>
                         </div>
                         <!-- //first section -->
@@ -97,7 +97,7 @@
                         <form action="{{URL::to('/list-products/brand')}}">
                             <div class="search-hotel border-bottom py-2">
                                 <h3 class="agileits-sear-head mb-3">Thương Hiệu</h3>
-                                <div class="left-side py-2">    
+                                <div class="left-side py-2">
                                     <ul>
                                         @foreach($allbrand as $brand)
                                         <li>
@@ -174,7 +174,7 @@
                         </div>
                         <!-- //ram -->
                         <!-- price -->
-                        
+
                         <!-- //price -->
                         <!-- discounts -->
                         <div class="left-side border-bottom py-2">
@@ -848,7 +848,7 @@
             	containerID: 'toTop', // fading element id
             	containerHoverID: 'toTopHover', // fading element hover id
             	scrollSpeed: 1200,
-            	easingType: 'linear' 
+            	easingType: 'linear'
             };
             */
             $().UItoTop({
@@ -863,4 +863,41 @@
     <script src="js/bootstrap.js"></script>
     <!-- //for bootstrap working -->
     <!-- //js-files -->
+    <script>
+        $(document).ready(function() {
+            $('.btn-add-cart').click(function(e) {
+                var id = $(this).attr('data-id');
+                console.log(id);
+                var url = "http://127.0.0.1:8000/save-cart-view/" + id;
+                console.log(url);
+                $.ajax({
+                    type: 'GET',
+                    dataType: "json",
+                    url: url,
+                    success: function(data) {
+                        toastr.success("Thêm giỏ hàng thành công!", "Thành công");
+                        loadCart();
+                    },
+                    error: function(jqXHR, textStatus, errorThrown, response) {
+                        toastr.error("Thêm giỏ hàng không thành công!", "Thất bại");
+                    }
+                })
+            });
+
+            function loadCart() {
+                $('.dropdown-menu1').empty();
+                $.ajax({
+                    url: 'http://127.0.0.1:8000/view-cart',
+                    dataType: "html",
+                    type: 'GET',
+                    success: function(data) {
+                        $('.dropdown-menu1').html(data);
+                    },
+                    error: function() {
+                        alert("Đã có lỗi xảy ra");
+                    }
+                });
+            }
+        });
+    </script>
 @endsection
