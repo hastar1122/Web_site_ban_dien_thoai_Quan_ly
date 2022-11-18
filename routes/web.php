@@ -94,6 +94,7 @@ Route::resource('/variations', VariationsController::class);
 
 // gọi hàm index trong PagesController
 Route::get('/', [PagesController::class, 'index']);
+Route::get('/cate/{cate}', [PagesController::class, 'loadAllProductCate'])->name('cateAPI');
 Route::get('/manager-order',[OrderController::class, 'manager_order']);
 Route::get('/view-order/{OrderID}',[OrderController::class, 'view_order']);
 Route::post('/update-order/{OrderID}',[OrderController::class, 'updatestatus']);
@@ -117,6 +118,9 @@ Route::post('/update_attribute', [AttributesController::class, 'update']);
 
 // Product customer
 Route::get('/list-products', [PagesController::class,'loadAllProduct']);
+Route::get('/search-products', [PagesController::class,'searchProduct']);
+Route::get('/list-products/brand', [PagesController::class,'brandProduct']);
+Route::get('/list-products/{cate}', [PagesController::class, 'loadAllProductCate'])->name('cateAPIProduct');
 Route::get('/productdetail/{id}', [PagesController::class,'productdetail']);
 
 //Giỏ hàng
@@ -143,3 +147,7 @@ Route::resource('/order-product', ClientOrderController::class);
 Route::get('/view-history/{id}', [HistoryOrderController::class, 'show_history']);
 Route::get('/view-history-detail/{id}', [HistoryOrderController::class, 'show_history_detail']);
 Route::get('/delete-order/{id}', [HistoryOrderController::class, 'delete_order']);
+
+
+// API
+Route::get('/ajax-for-select/{id}',[PagesController::class,'ajaxAPICateID'])->name('ajax-for-select');

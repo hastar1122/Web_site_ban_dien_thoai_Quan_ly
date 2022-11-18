@@ -108,20 +108,21 @@
 
             $("#form-employee-edit").submit(function(e) {
                 e.preventDefault();
-                const fd = new FormData(this);
-                var url = $(this).attr("data-url");
+                var form = $('#form-employee-edit')[0]; // You need to use standard javascript object here
+                var formData = new FormData(form);
+                var url = $(this).attr("action");
                 $.ajax({
                     type: "post",
                     url: url,
-                    data: fd,
+                    data: formData,
                     cache: false,
                     processData: false,
                     contentType: false,
                     success: function(response) {
-                        // toastr.success("Cập nhật nhân viên thành công!");
-                        // $("#modal-employee-edit").modal('hide');
-                        // location.reload();
-                        console.log(res);
+                        toastr.success("Cập nhật nhân viên thành công!");
+                        $("#modal-employee-edit").modal('hide');
+                        location.reload();
+                        console.log(response);
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         toastr.error(
@@ -155,11 +156,13 @@
                     type: 'get',
                     url: url,
                     success: function(response) {
+                        $("#UserID").val(response.employee_get[0].UserID);
+
                         $("#employee-name-edit").val(response.employee_get[0].UserName);
                         $("#employee-phone-edit").val(response.employee_get[0].PhoneNumber);
                         $("#employee-address-edit").val(response.employee_get[0].Address);
                         $("#employee-email-edit").val(response.employee_get[0].Email);
-                        $("#image_preview_container1").attr('src',
+                        $("#image_preview_container1234").attr('src',
                             'http://127.0.0.1:8000/admin/img/' + response.employee_get[0]
                             .Image);
                         $("#emp_img").val(response.employee_get[0].Image);

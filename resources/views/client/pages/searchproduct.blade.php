@@ -15,7 +15,7 @@
         <div class="container py-xl-4 py-lg-2">
             <!-- tittle heading -->
             <h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-                Danh sách Sản Phẩm
+                Kết quả tìm kiếm
             </h3>
             <!-- //tittle heading -->
             <div class="row">
@@ -25,7 +25,7 @@
                         <!-- first section -->
                         <div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
                             <div class="row">
-                                @foreach ($allproduct as $product)
+                                @foreach ($search_product as $product)
                                     <div class="col-md-4 product-men mt-5">
                                         <div class="men-pro-item simpleCart_shelfItem">
                                             <div class="men-thumb-item text-center">
@@ -94,42 +94,40 @@
 								<input type="submit" value=" " name="search_items">
 							</form>
 						</div>
-                        <form action="{{URL::to('/list-products/brand')}}">
-                            <div class="search-hotel border-bottom py-2">
-                                <h3 class="agileits-sear-head mb-3">Thương Hiệu</h3>
-                                <div class="left-side py-2">    
-                                    <ul>
-                                        @foreach($allbrand as $brand)
-                                        <li>
-                                            <input type="checkbox" {{(request("brand")[$brand->BrandID]??'')=='on'?'checked':''}} id="bc-{{$brand->BrandID}}" name="brand[{{$brand->BrandID}}]" class="checked " onchange="this.form.submit();" >
-                                            <span class="span">{{$brand->BrandName}}</span>
-                                        </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
+                        <div class="search-hotel border-bottom py-2">
+                            <h3 class="agileits-sear-head mb-3">Thương Hiệu</h3>
+                            <div class="left-side py-2">
+                                <ul>
+                                    @foreach($allbrand as $brand)
+                                    <li>
+                                        <input type="checkbox" class="checked brand-filter" name="brand-filter" data-filters="brand" value="{{$brand->BrandID}}">
+                                        <span class="span">{{$brand->BrandName}}</span>
+                                    </li>
+                                    @endforeach
+                                </ul>
                             </div>
-                        </form>
+                        </div>
                         <div class="range border-bottom py-2">
                             <h3 class="agileits-sear-head mb-3">Giá</h3>
                             <div class="w3l-range">
                                 <ul>
                                     <li>
-                                        <a href="/pri?price=1">Dưới 1.000.000VNĐ</a>
+                                        <a href="#">Dưới 1.000.000VNĐ</a>
                                     </li>
                                     <li class="my-1">
-                                        <a href="?price=2">1.000.000 - 5.000.000VNĐ</a>
+                                        <a href="#">1.000.000 - 5.000.000VNĐ</a>
                                     </li>
                                     <li>
-                                        <a href="?price=3">5.000.000 - 10.000.000VNĐ</a>
+                                        <a href="#">5.000.000 - 10.000.000VNĐ</a>
                                     </li>
                                     <li class="my-1">
-                                        <a href="?price=4">10.000.000 - 15.000.000VNĐ</a>
+                                        <a href="#">10.000.000 - 15.000.000VNĐ</a>
                                     </li>
                                     <li>
-                                        <a href="?price=5">15.000.000 - 20.000.000VNĐ</a>
+                                        <a href="#">15.000.000 - 20.000.000VNĐ</a>
                                     </li>
                                     <li class="mt-1">
-                                        <a href="?price=6">Trên 20.000.000VNĐ</a>
+                                        <a href="#">Trên 20.000.000VNĐ</a>
                                     </li>
                                 </ul>
                             </div>

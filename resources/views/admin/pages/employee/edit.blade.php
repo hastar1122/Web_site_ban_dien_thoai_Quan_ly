@@ -1,14 +1,16 @@
 <div class="modal fade" id="modal-employee-edit">
     <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
         <div class="modal-content">
-            <form action="" data-url="" id="form-employee-edit" method="POST" role="form">
+            <form action="" data-url="" id="form-employee-edit" method="POST" role="form"
+                enctype="multipart/form-data">
                 @csrf
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 class="modal-title text-info">Cập nhật nhân viên</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-
+                <input type="text" name="UserID" id="UserID" type="hidden"
+                    class="form-control form-control-user" value="">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-8">
@@ -55,13 +57,15 @@
                                     <div class="card-header">Tải ảnh lên</div>
                                     <div class="card-body">
                                         <div class="text-center">
-                                            <img height="150" width="150"  style="object-fit:cover;" 
-                                                id="image_preview_container1" class="img-profile img1" alt="avatar" />
+                                            <img height="150" width="150" src="" style="object-fit:cover;"
+                                                id="image_preview_container1234" class="img-profile img1"
+                                                alt="avatar" />
                                         </div>
                                     </div>
                                     <div class="card-footer">
                                         <div class="custom-file">
-                                            <input type="file" id="imageid" name="imageemployee1" >
+                                            <input type="file" id="imageeditne" name="imageeditne"
+                                                onchange="readURLByMe(this);" accept="image/png, image/jpeg">
                                         </div>
                                     </div>
                                 </div>
@@ -86,3 +90,14 @@
         </div>
     </div>
 </div>
+<script>
+    function readURLByMe(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#image_preview_container1234').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

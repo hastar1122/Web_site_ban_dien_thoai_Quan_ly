@@ -98,7 +98,7 @@
                         <!-- first section -->
                         <div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
                             <h3 class="heading-tittle text-center font-italic">Sản Phẩm Mới</h3>
-                            <div class="row">
+                            <div class="row" id="show-san-pham-moi">
                                 @foreach ($newproduct as $product)
                                     <div class="col-md-4 product-men mt-5">
                                         <div class="men-pro-item simpleCart_shelfItem">
@@ -107,13 +107,15 @@
                                                     style="width:200px;height:200px;object-fit:cover;">
                                                 <div class="men-cart-pro">
                                                     <div class="inner-men-cart-pro">
-                                                        <a href="../productdetail/{{ $product->ProductID }}" class="link-product-add-cart">Xem Chi Tiết</a>
+                                                        <a href="../productdetail/{{ $product->ProductID }}"
+                                                            class="link-product-add-cart">Xem Chi Tiết</a>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="item-info-product text-center border-top mt-4">
                                                 <h4 class="pt-1">
-                                                    <a href="../productdetail/{{ $product->ProductID }}">{{ $product->ProductName }}</a>
+                                                    <a
+                                                        href="../productdetail/{{ $product->ProductID }}">{{ $product->ProductName }}</a>
                                                 </h4>
                                                 <div class="info-product-price my-2">
                                                     <span
@@ -121,14 +123,21 @@
                                                     <del>
                                                         {{ number_format($product->Price * 0.1 + $product->Price, 0, ',', '.') }}VNĐ</del>
                                                 </div>
-                                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                                    <form data-url="{{URL::to('/save-cart/'.$product->ProductID)}}">
+                                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out"
+                                                   >
+                                                    <form data-url="{{ URL::to('/save-cart/' . $product->ProductID) }}">
                                                         {{ csrf_field() }}
                                                         <fieldset>
-                                                            <input type="hidden" class="product_id" id="" name="product_id" value="{{ $product->ProductID }}" />
+                                                            <input type="hidden" class="product_id" id=""
+                                                                name="product_id" value="{{ $product->ProductID }}" />
                                                             <input type="hidden" name="amount" value="1" />
-                                                            <input data-id="{{$product->ProductID}}" type="button" value="Thêm vào giỏ"
-                                                                class="button btn btn-add-cart" />
+                                                            @if ($product->Amount === 0)
+                                                            <input data-id="{{ $product->ProductID }}" type="button"  disabled
+                                                           value="Cháy hàng rồi" class="button btn btn-add-cart" style="background-color:red;"/>
+                                                       @elseif($product->Amount > 0)
+                                                       <input data-id="{{ $product->ProductID }}" type="button"   
+                                                           value="Thêm vào giỏ" class="button btn btn-add-cart" />
+                                                       @endif
                                                         </fieldset>
                                                     </form>
                                                 </div>
@@ -153,14 +162,16 @@
                                                     style="width:200px;height:200px;object-fit:cover;">
                                                 <div class="men-cart-pro">
                                                     <div class="inner-men-cart-pro">
-                                                        <a href="../productdetail/{{ $product->ProductID }}" class="link-product-add-cart">Xem Chi
+                                                        <a href="../productdetail/{{ $product->ProductID }}"
+                                                            class="link-product-add-cart">Xem Chi
                                                             Tiết</a>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="item-info-product text-center border-top mt-4">
                                                 <h4 class="pt-1">
-                                                    <a href="../productdetail/{{ $product->ProductID }}">{{ $product->ProductName }}</a>
+                                                    <a
+                                                        href="../productdetail/{{ $product->ProductID }}">{{ $product->ProductName }}</a>
                                                 </h4>
                                                 <div class="info-product-price my-2">
                                                     <span
@@ -170,13 +181,22 @@
                                                 </div>
                                                 <div
                                                     class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                                    <form data-url="{{URL::to('/save-cart/'.$product->ProductID)}}">
+                                                    <form data-url="{{ URL::to('/save-cart/' . $product->ProductID) }}">
                                                         {{ csrf_field() }}
                                                         <fieldset>
-                                                            <input type="hidden" class="product_id" id="" name="product_id" value="{{ $product->ProductID }}" />
+                                                            <input type="hidden" class="product_id" id=""
+                                                                name="product_id" value="{{ $product->ProductID }}" />
                                                             <input type="hidden" name="amount" value="1" />
-                                                            <input data-id="{{$product->ProductID}}" type="button" value="Thêm vào giỏ"
-                                                                class="button btn btn-add-cart" />
+                                                            @if ($product->Amount === 0)
+                                                                <input data-id="{{ $product->ProductID }}" type="button"
+                                                                    isabled value="Cháy hàng rồi"
+                                                                    class="button btn btn-add-cart"
+                                                                    style="background-color:red;" />
+                                                            @elseif($product->Amount > 0)
+                                                                <input data-id="{{ $product->ProductID }}" type="button"
+                                                                    value="Thêm vào giỏ"
+                                                                    class="button btn btn-add-cart" />
+                                                            @endif
                                                         </fieldset>
                                                     </form>
                                                 </div>
@@ -211,14 +231,16 @@
                                                     style="width:200px;height:200px;object-fit:cover;">
                                                 <div class="men-cart-pro">
                                                     <div class="inner-men-cart-pro">
-                                                        <a href="../productdetail/{{ $product->ProductID }}" class="link-product-add-cart">Xem Chi
+                                                        <a href="../productdetail/{{ $product->ProductID }}"
+                                                            class="link-product-add-cart">Xem Chi
                                                             Tiết</a>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="item-info-product text-center border-top mt-4">
                                                 <h4 class="pt-1">
-                                                    <a href="../productdetail/{{ $product->ProductID }}">{{ $product->ProductName }}</a>
+                                                    <a
+                                                        href="../productdetail/{{ $product->ProductID }}">{{ $product->ProductName }}</a>
                                                 </h4>
                                                 <div class="info-product-price my-2">
                                                     <span
@@ -226,14 +248,24 @@
                                                     <del>
                                                         {{ number_format($product->Price * 0.1 + $product->Price, 0, ',', '.') }}VNĐ</del>
                                                 </div>
-                                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                                    <form data-url="{{URL::to('/save-cart/'.$product->ProductID)}}">
+                                                <div
+                                                    class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                                                    <form data-url="{{ URL::to('/save-cart/' . $product->ProductID) }}">
                                                         {{ csrf_field() }}
                                                         <fieldset>
-                                                            <input type="hidden" class="product_id" id="" name="product_id" value="{{ $product->ProductID }}" />
+                                                            <input type="hidden" class="product_id" id=""
+                                                                name="product_id" value="{{ $product->ProductID }}" />
                                                             <input type="hidden" name="amount" value="1" />
-                                                            <input data-id="{{$product->ProductID}}" type="button" value="Thêm vào giỏ"
-                                                                class="button btn btn-add-cart" />
+                                                            @if ($product->Amount === 0)
+                                                                <input data-id="{{ $product->ProductID }}" type="button"
+                                                                    isabled value="Cháy hàng rồi"
+                                                                    class="button btn btn-add-cart"
+                                                                    style="background-color:red;" />
+                                                            @elseif($product->Amount > 0)
+                                                                <input data-id="{{ $product->ProductID }}" type="button"
+                                                                    value="Thêm vào giỏ"
+                                                                    class="button btn btn-add-cart" />
+                                                            @endif
                                                         </fieldset>
                                                     </form>
                                                 </div>
@@ -254,7 +286,6 @@
     <!-- //top products -->
     <script>
         $(document).ready(function() {
-            //add
             $('.btn-add-cart').click(function(e) {
                 var id = $(this).attr('data-id');
                 console.log(id);
@@ -265,29 +296,29 @@
                     dataType: "json",
                     url: url,
                     success: function(data) {
-                        toastr.success("Thêm giỏ hàng thành công!","Thành công");
+                        toastr.success("Thêm giỏ hàng thành công!", "Thành công");
                         loadCart();
                     },
                     error: function(jqXHR, textStatus, errorThrown, response) {
-                        toastr.error("Thêm giỏ hàng không thành công!","Thất bại");
+                        toastr.error("Thêm giỏ hàng không thành công!", "Thất bại");
                     }
                 })
             });
 
             function loadCart() {
-			$('.dropdown-menu1').empty();
-            $.ajax({
-                url: 'http://127.0.0.1:8000/view-cart',
-                dataType: "html",
-                type: 'GET',
-                success: function (data) {
-                    $('.dropdown-menu1').html(data);
-                },
-                error: function () {
-                    alert("Đã có lỗi xảy ra");
-                }
-            });
-		}
+                $('.dropdown-menu1').empty();
+                $.ajax({
+                    url: 'http://127.0.0.1:8000/view-cart',
+                    dataType: "html",
+                    type: 'GET',
+                    success: function(data) {
+                        $('.dropdown-menu1').html(data);
+                    },
+                    error: function() {
+                        alert("Đã có lỗi xảy ra");
+                    }
+                });
+            }
         });
     </script>
 @endsection
