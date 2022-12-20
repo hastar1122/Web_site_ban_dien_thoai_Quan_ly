@@ -424,7 +424,7 @@
                     html += '<td>' + '<input type="number" name="price[]" placeholder="Giá bán" class="form-control price">' +' </td>'
                     html += '<td>' + '<input type="number" name="amount[]" placeholder="Số lượng" class="form-control amount">' +' </td>'
                     html += '<td  style="max-width: 120px;">';
-                    html += '<img src="http://127.0.0.1:8000/img/productDefaut.png" class="img-thumbnail product_img_' + index + '" alt="avatar">';            
+                    html += '<img src="http://127.0.0.1:8000/admin/img/productDefaut.png" class="img-thumbnail product_img_' + index + '" alt="avatar">';            
                     html += '<input type="file" name="ImageFiles[]" data-id="' + index + '" class="text-center center-block img-upload form-control-sm">';
                     html += '</td>';
                     html += '</tr>'
@@ -439,7 +439,7 @@
                     html += '<td>' + '<input type="number" name="price[]" placeholder="Giá bán" class="form-control price">' +' </td>'
                     html += '<td>' + '<input type="number" name="amount[]" placeholder="Số lượng" class="form-control amount">' +' </td>'
                     html += '<td  style="max-width: 120px;">';
-                    html += '<img src="http://127.0.0.1:8000/img/productDefaut.png" class="img-thumbnail product_img_' + i + '" alt="avatar">';            
+                    html += '<img src="http://127.0.0.1:8000/admin/img/productDefaut.png" class="img-thumbnail product_img_' + i + '" alt="avatar">';            
                     html += '<input type="file" name="ImageFiles[]" data-id="' + i + '" class="text-center center-block img-upload form-control-sm">';
                     html += '</td>';
                     html += '</tr>'
@@ -452,7 +452,7 @@
                     html += '<td>' + '<input type="number" name="price[]" placeholder="Giá bán" class="form-control price">' +' </td>'
                     html += '<td>' + '<input type="number" name="amount[]" placeholder="Số lượng" class="form-control amount">' +' </td>'
                     html += '<td  style="max-width: 120px;">';
-                    html += '<img src="http://127.0.0.1:8000/img/productDefaut.png" class="img-thumbnail product_img_' + i + '" alt="avatar">';            
+                    html += '<img src="http://127.0.0.1:8000/admin/img/productDefaut.png" class="img-thumbnail product_img_' + i + '" alt="avatar">';            
                     html += '<input type="file" name="ImageFiles[]" data-id="' + i + '" class="text-center center-block img-upload form-control-sm">';
                     html += '</td>';
                     html += '</tr>'

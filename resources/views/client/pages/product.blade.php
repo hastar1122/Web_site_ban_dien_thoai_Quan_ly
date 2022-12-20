@@ -40,7 +40,7 @@
                                             </div>
                                             <div class="item-info-product text-center border-top mt-4">
                                                 <h4 class="pt-1">
-                                                    <a href="single.html">{{ $product->ProductName }}</a>
+                                                    <a href="../productdetail/{{ $product->ProductID }}">{{ $product->ProductName }}</a>
                                                 </h4>
                                                 <div class="info-product-price my-2">
                                                     <span
