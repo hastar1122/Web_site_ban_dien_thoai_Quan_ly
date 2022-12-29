@@ -24,6 +24,7 @@ use App\Http\Controllers\ChangeAmountController;
 use App\Http\Controllers\ClientOrderController;
 use App\Http\Controllers\CustomerOrderController;
 use App\Http\Controllers\HistoryOrderController;
+use App\Http\Controllers\ImportBillController;
 use App\Http\Controllers\ProductsController;
 
 
@@ -111,6 +112,13 @@ Route::get('/logoutClient', [LoginController::class, 'logoutClient']);
 Route::resource('/products', ProductsController::class);
 Route::get('/loadProducts', [ProductsController::class, 'loadProducts']);
 Route::resource('/products2', ProductsController::class);
+
+// Nhập kho
+Route::resource('/importBill', ImportBillController::class);
+Route::post('/info-supplier', [ImportBillController::class, 'infoSupplier']);
+Route::post('/loadImportBills', [ImportBillController::class, 'loadImportBills']);
+Route::get('/loadProducts2', [ImportBillController::class, 'loadProducts']);
+Route::get('/addProduct/{id}',[ImportBillController::class, 'addProduct']);
 
 // Thuộc tính sản phẩm
 Route::resource('/attributes', AttributesController::class);

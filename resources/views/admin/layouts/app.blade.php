@@ -120,7 +120,7 @@
                         <a class="collapse-item" href="{{ URL::to('/attributes') }}">Danh sách thuộc tính</a>
                         <a class="collapse-item" href="{{ URL::to('/products') }}">Danh sách sản phẩm</a>
                         <a class="collapse-item" href="{{ URL::to('/show-attribute-product-all/1') }}">Quản lý thuộc tính</a>
-                        <a class="collapse-item" href="../pages/utilities-animation.php">Nhập kho</a>
+                        <a class="collapse-item" href="{{ URL::to('/importBill') }}">Nhập kho</a>
                     </div>
             </li>
 
